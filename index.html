@@ -104,7 +104,7 @@
       overflow: hidden;
       background: #fff;
       box-shadow: 0 12px 32px rgba(15,23,42,0.75);
-      display: none; /* 初期状態は閉じる */
+      display: none; /* デフォルトは閉じるが、下の style="display:block" で上書き */
       z-index: 9998;
     }
     .chatbot-panel iframe {
@@ -263,7 +263,7 @@
   </div>
 
   <!-- ===== 自作チャットUI埋め込み（右下ポップアップ） ===== -->
-  <div id="chatbotPanel" class="chatbot-panel" aria-hidden="true">
+  <div id="chatbotPanel" class="chatbot-panel" aria-hidden="false" style="display:block;">
     <iframe
       src="https://bchealthcare.click/chatbot/"
       title="DATuM IDEA チャットボット"
@@ -272,7 +272,7 @@
   </div>
 
   <button id="chatbotToggle" class="chatbot-toggle" type="button">
-    チャットで相談<span>💬</span>
+    閉じる <span>💬</span>
   </button>
 
   <script>
@@ -298,13 +298,25 @@
     const chatbotPanel  = document.getElementById('chatbotPanel');
 
     if (chatbotToggle && chatbotPanel) {
+      const setLabel = (isOpen) => {
+        chatbotToggle.innerHTML = isOpen
+          ? '閉じる <span>💬</span>'
+          : 'チャットで相談 <span>💬</span>';
+      };
+
+      // 初期状態：開いている
+      setLabel(true);
+
       chatbotToggle.addEventListener('click', () => {
         const isOpen = chatbotPanel.style.display === 'block';
-        chatbotPanel.style.display = isOpen ? 'none' : 'block';
-        chatbotPanel.setAttribute('aria-hidden', String(isOpen));
-        chatbotToggle.textContent = isOpen ? 'チャットで相談' : '閉じる';
-        if (!isOpen) {
-          chatbotToggle.insertAdjacentHTML('beforeend', '<span>💬</span>');
+        if (isOpen) {
+          chatbotPanel.style.display = 'none';
+          chatbotPanel.setAttribute('aria-hidden', 'true');
+          setLabel(false);
+        } else {
+          chatbotPanel.style.display = 'block';
+          chatbotPanel.setAttribute('aria-hidden', 'false');
+          setLabel(true);
         }
       });
     }
