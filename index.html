@@ -470,7 +470,7 @@
     チャットで相談 <span>💬</span>
   </button>
 
-  <script>
+ <script>
   // ===== モバイルナビ =====
   const menuBtn = document.getElementById('menuBtn');
   const headerNav = document.querySelector('header nav');
@@ -488,14 +488,12 @@
     });
   }
 
-  // ===== チャットポップアップ開閉（PC/スマホ共通） =====
+  // ===== チャットポップアップ開閉（PC/スマホで初期状態を分ける） =====
   const chatbotPanel = document.getElementById('chatbotPanel');
   const chatbotToggle = document.getElementById('chatbotToggle');
 
   if (chatbotPanel && chatbotToggle) {
-    // 念のため、初期状態を明示的にそろえる
-    chatbotPanel.classList.add('hidden');
-    chatbotPanel.setAttribute('aria-hidden', 'true');
+    const isMobile = window.matchMedia("(max-width: 768px)").matches;
 
     const setButtonLabel = (isHidden) => {
       // 隠れているとき：チャットで相談 + アイコン
@@ -505,8 +503,18 @@
         : '閉じる';
     };
 
-    // 初期ラベル
-    setButtonLabel(true);
+    // ▼ 初期状態を端末で分ける
+    if (isMobile) {
+      // スマホ：最初は非表示＋「チャットで相談」
+      chatbotPanel.classList.add('hidden');
+      chatbotPanel.setAttribute('aria-hidden', 'true');
+      setButtonLabel(true);
+    } else {
+      // PC：最初からパネル表示＋ボタンは「閉じる」
+      chatbotPanel.classList.remove('hidden');
+      chatbotPanel.setAttribute('aria-hidden', 'false');
+      setButtonLabel(false);
+    }
 
     // ボタン押下でトグル
     chatbotToggle.addEventListener('click', () => {
@@ -515,7 +523,8 @@
       setButtonLabel(isHidden);
     });
   }
-  </script>
+</script>
 
 </body>
 </html>
+
