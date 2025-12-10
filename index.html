@@ -3,56 +3,136 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>DATuM IDEA — サンプル（疑似サイト＋自作チャットUI）</title>
-  <meta name="description" content="DATuM IDEA風のサンプルページ — 自作チャットUI埋め込み版テンプレート">
+  <title>DATuM IDEA — サンプル（ライトテーマ版）</title>
+  <meta name="description" content="DATuM IDEA風のサンプルページ（ライトテーマ）。自作チャットUI埋め込み版。">
   <link rel="icon" href="/assets/favicon.png">
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;700&display=swap" rel="stylesheet">
+
   <style>
     :root{
-      --bg:#0f1724; /* dark navy */
-      --card:#0b1220;
-      --muted:#9aa4b2;
-      --accent:#26a69a; /* teal */
-      --glass: rgba(255,255,255,0.04);
+      --bg:#f3f4f8;              /* ページ全体の背景（ライト） */
+      --card:#ffffff;            /* カード背景（白） */
+      --muted:#6b7280;           /* 説明文用グレー */
+      --accent:#0ea5e9;          /* メインカラー（水系ブルー） */
+      --accent-dark:#0284c7;
+      --border:#e5e7eb;          /* 枠線 */
       --maxw:1100px;
-      color-scheme: dark;
     }
-    *{box-sizing:border-box}
+
+    *{box-sizing:border-box;}
     html,body{height:100%}
     body{
       margin:0;
-      font-family:'Noto Sans JP', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-      background: linear-gradient(180deg, #071022 0%, #071625 60%);
-      color:#e6eef6;
+      font-family:'Noto Sans JP', system-ui;
+      background: linear-gradient(180deg, #eef2ff 0%, #f9fafb 60%);
+      color:#111827; /* 黒系 */
       -webkit-font-smoothing:antialiased;
-      -moz-osx-font-smoothing:grayscale;
-      line-height:1.5;
+      line-height:1.6;
     }
+
     .wrap{max-width:var(--maxw);margin:0 auto;padding:24px}
-    header{display:flex;align-items:center;justify-content:space-between;padding:12px 0}
-    .brand{display:flex;gap:12px;align-items:center}
-    .logo{width:44px;height:44px;background:linear-gradient(135deg,var(--accent),#2dd4bf);border-radius:8px;display:flex;align-items:center;justify-content:center;font-weight:700;color:#052025}
+
+    /* header */
+    header{
+      display:flex;align-items:center;justify-content:space-between;
+      padding:12px 0;
+    }
+    .brand{
+      display:flex;align-items:center;gap:12px;
+    }
+    .logo{
+      width:44px;height:44px;
+      background:linear-gradient(135deg,#38bdf8,#0ea5e9);
+      border-radius:8px;
+      display:flex;align-items:center;justify-content:center;
+      color:white;font-weight:700;
+    }
+
     nav{display:flex;gap:20px;align-items:center}
-    nav a{color:var(--muted);text-decoration:none;font-weight:500}
-    .cta{background:var(--accent);color:#022; padding:8px 12px;border-radius:10px;text-decoration:none;font-weight:700}
+    nav a{
+      color:#374151;
+      text-decoration:none;
+      font-weight:500;
+    }
+    nav a:hover{
+      color:var(--accent);
+    }
+
+    .cta{
+      background:var(--accent);
+      color:#ffffff;
+      padding:8px 12px;
+      border-radius:10px;
+      text-decoration:none;
+      font-weight:700;
+    }
+    .cta:hover{
+      background:var(--accent-dark);
+    }
 
     /* hero */
-    .hero{padding:56px 0;display:grid;grid-template-columns:1fr 420px;gap:36px;align-items:center}
-    .hero .eyebrow{color:var(--accent);font-weight:700;letter-spacing:0.06em}
-    .hero h1{margin:10px 0 8px;font-size:clamp(26px,4.2vw,40px)}
-    .hero p{color:var(--muted);max-width:56ch}
-    .card{background:linear-gradient(180deg, rgba(255,255,255,0.02), var(--glass));padding:22px;border-radius:12px;box-shadow:0 6px 20px rgba(2,6,23,0.6)}
-    .features{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:18px}
-    .feature{padding:14px;border-radius:10px;background:rgba(255,255,255,0.01);border:1px solid rgba(255,255,255,0.02)}
-    .feature h4{margin:8px 0 6px}
-    .muted{color:var(--muted)}
+    .hero{
+      padding:56px 0;
+      display:grid;
+      grid-template-columns:1fr 420px;
+      gap:36px;
+      align-items:center;
+    }
+    .hero .eyebrow{
+      color:var(--accent);
+      font-weight:700;
+      letter-spacing:0.06em;
+    }
+    .hero h1{
+      margin:10px 0 8px;
+      font-size:clamp(28px,4.2vw,40px);
+      color:#1e293b;
+    }
+    .hero p{
+      color:var(--muted);
+      max-width:56ch;
+    }
+
+    .card{
+      background:var(--card);
+      border:1px solid var(--border);
+      padding:22px;
+      border-radius:12px;
+      box-shadow:0 6px 20px rgba(0,0,0,0.06);
+    }
+
+    .features{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:18px;
+      margin-top:18px;
+    }
+    .feature{
+      padding:14px;
+      border-radius:10px;
+      background:#f9fafb;
+      border:1px solid #e2e8f0;
+    }
 
     /* sections */
     section{padding:48px 0}
-    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:20px;
+    }
     .large{grid-column:span 2}
 
-    footer{padding:28px 0;border-top:1px solid rgba(255,255,255,0.03);color:var(--muted)}
+    footer{
+      padding:28px 0;
+      border-top:1px solid #e5e7eb;
+      color:var(--muted);
+      margin-top:40px;
+    }
+
+    .links{
+      display:flex;gap:12px;flex-wrap:wrap;
+    }
 
     /* responsive */
     @media (max-width:900px){
@@ -66,13 +146,7 @@
       .features{grid-template-columns:1fr}
     }
 
-    /* simple footer links */
-    .links{display:flex;gap:12px;flex-wrap:wrap}
-
-    /* small utilities */
-    .kbd{background:rgba(0,0,0,0.25);padding:4px 8px;border-radius:6px;font-weight:700}
-
-    /* ===== 自作チャットUIウィジェット用スタイル ===== */
+    /* ===== チャットUI ===== */
     .chatbot-toggle {
       position: fixed;
       right: 24px;
@@ -83,15 +157,12 @@
       padding: 10px 18px;
       font-size: 14px;
       font-weight: 700;
-      background: #1C64F2;
+      background: var(--accent);
       color: #fff;
-      box-shadow: 0 8px 20px rgba(15,23,42,0.5);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
       cursor: pointer;
     }
-    .chatbot-toggle span {
-      margin-left: 4px;
-      font-size: 16px;
-    }
+
     .chatbot-panel {
       position: fixed;
       right: 24px;
@@ -102,170 +173,172 @@
       max-height: calc(100vh - 120px);
       border-radius: 16px;
       overflow: hidden;
-      background: #fff;
-      box-shadow: 0 12px 32px rgba(15,23,42,0.75);
-      display: none; /* デフォルトは閉じるが、下の style="display:block" で上書き */
+      background: #ffffff;
+      border:1px solid var(--border);
+      box-shadow: 0 12px 32px rgba(0,0,0,0.15);
+      display: none;
       z-index: 9998;
     }
-    .chatbot-panel iframe {
-      border: none;
-      width: 100%;
-      height: 100%;
+    .chatbot-panel iframe{
+      width:100%;height:100%;border:none;
     }
 
     @media (max-width:600px){
-      .chatbot-panel {
-        right: 10px;
-        bottom: 74px;
-        width: calc(100vw - 20px);
-        height: calc(100vh - 120px);
+      .chatbot-panel{
+        right:10px;
+        bottom:74px;
+        width:calc(100vw - 20px);
       }
     }
   </style>
 </head>
+
 <body>
   <div class="wrap">
-   <header>
-  <div class="brand">
-    <div class="logo">DI</div>
-    <div>
-      <div style="font-weight:700">DATuM IDEA — Sample</div>
-      <div class="muted" style="font-size:13px">疑似サイトテンプレート</div>
-    </div>
-  </div>
 
-  <nav>
-    <a href="index.html">Home</a>
-    <a href="about.html">DATuM IDEAについて</a>
-    <a href="service.html">提供サービス一覧</a>
-    <a href="portal.html">ファーマベース</a>
-    <a href="news.html">お知らせ</a>
-    <a href="download.html">資料DL</a>
-    <a href="faq.html">FAQ</a>
-    <a href="contact.html" class="cta">お問い合わせ</a>
-  </nav>
+    <!-- header -->
+    <header>
+      <div class="brand">
+        <div class="logo">DI</div>
+        <div>
+          <div style="font-weight:700;font-size:15px">DATuM IDEA — Sample</div>
+          <div style="font-size:13px;color:var(--muted)">疑似サイトテンプレート</div>
+        </div>
+      </div>
 
-  <div class="mobile-nav" style="display:none">
-    <button id="menuBtn" aria-expanded="false" aria-controls="mnav"
-      style="background:none;border:1px solid rgba(255,255,255,0.04);padding:8px;border-radius:8px;color:var(--muted)">
-      Menu
-    </button>
-  </div>
-</header>
-
+      <nav>
+        <a href="#about">About</a>
+        <a href="#services">Services</a>
+        <a href="#works">Works</a>
+        <a href="#contact" class="cta">Contact</a>
+      </nav>
 
       <div class="mobile-nav" style="display:none">
-        <button id="menuBtn" aria-expanded="false" aria-controls="mnav" style="background:none;border:1px solid rgba(255,255,255,0.04);padding:8px;border-radius:8px;color:var(--muted)">Menu</button>
+        <button 
+          id="menuBtn"
+          style="background:white;border:1px solid #d1d5db;padding:8px;border-radius:8px;color:#374151">
+          Menu
+        </button>
       </div>
     </header>
 
+    <!-- hero -->
     <main>
       <section class="hero">
         <div>
           <div class="eyebrow">Design • Data • Strategy</div>
           <h1>人に寄り添うデータデザインとプロダクト開発</h1>
-          <p class="muted">DATuM IDEAをイメージしたダミーページです。ここに短い説明文を入れて、提供サービスや事業の要点を明確に伝えます。GitHub Pagesへのデプロイに最適な1ファイルテンプレート。</p>
+          <p>DATuM IDEAをイメージしたダミーページ。説明文を入れて事業概要を伝えます。</p>
 
           <div style="margin-top:20px;display:flex;gap:12px;align-items:center">
             <a href="#contact" class="cta">案件の相談</a>
-            <a href="#works" class="muted" style="text-decoration:underline">制作実績を見る</a>
+            <a href="#works" style="color:var(--accent);text-decoration:underline">制作実績を見る</a>
           </div>
 
+          <!-- Hero card -->
           <div class="card" style="margin-top:20px">
             <div style="display:flex;justify-content:space-between;align-items:center">
               <div>
                 <div style="font-weight:700">最新のプロジェクト</div>
                 <div class="muted" style="font-size:13px">データ可視化とUXの刷新</div>
               </div>
-              <div class="kbd">Case Study</div>
+              <div style="padding:4px 10px;background:#e0f2fe;color:#0369a1;border-radius:6px;font-weight:700">
+                Case Study
+              </div>
             </div>
 
             <div class="features">
               <div class="feature">
-                <div style="font-weight:700">データ設計</div>
+                <div style="font-weight:700;color:#1e293b">データ設計</div>
                 <div class="muted" style="font-size:13px">収集・整形・利活用の基盤設計</div>
               </div>
               <div class="feature">
-                <div style="font-weight:700">UI/UX</div>
-                <div class="muted" style="font-size:13px">ユーザー中心のインターフェース設計</div>
+                <div style="font-weight:700;color:#1e293b">UI/UX</div>
+                <div class="muted" style="font-size:13px">ユーザー中心のデザイン</div>
               </div>
               <div class="feature">
-                <div style="font-weight:700">プロトタイピング</div>
-                <div class="muted" style="font-size:13px">迅速な試作で価値を検証</div>
+                <div style="font-weight:700;color:#1e293b">プロトタイピング</div>
+                <div class="muted" style="font-size:13px">高速に価値を検証</div>
               </div>
             </div>
           </div>
         </div>
 
-        <aside class="card" aria-hidden="true">
-          <!-- Hero 画像差し替え用 -->
-          <div style="height:260px;display:flex;align-items:center;justify-content:center;border-radius:8px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.12));">
-            <div style="text-align:center">
-              <div style="font-weight:700;font-size:18px">Hero Image</div>
-              <div class="muted" style="font-size:13px">ここに画像を差し替えてください</div>
+        <!-- hero-side -->
+        <aside class="card">
+          <div style="height:260px;border-radius:8px;background:#f1f5f9;display:flex;align-items:center;justify-content:center;">
+            <div style="text-align:center;color:#475569">
+              <div style="font-weight:700;font-size:18px;color:#1e293b">Hero Image</div>
+              <div style="font-size:13px">画像差し替え用スペース</div>
             </div>
           </div>
-
-          <div style="margin-top:14px;color:var(--muted);font-size:13px">簡単な概要やクレジットを表示できます。</div>
         </aside>
       </section>
 
+      <!-- About -->
       <section id="about">
-        <div class="wrap card">
-          <h2>私たちについて</h2>
-          <p class="muted">データとデザインを組み合わせ、ビジネスの意思決定を支えるプロダクトを作ります。プロジェクトは小規模なPoCから大規模な組織横断の導入まで対応。</p>
+        <div class="card">
+          <h2 style="color:#1e293b">私たちについて</h2>
+          <p class="muted">データとデザインを組み合わせ、ビジネスの意思決定を支えるプロダクトを作ります。</p>
 
           <div class="grid" style="margin-top:18px">
             <div class="large card">
-              <h3>アプローチ</h3>
-              <p class="muted">ユーザーリサーチを起点に、データパイプラインの設計、ダッシュボードやプロダクトの構築、そして運用フェーズまで伴走します。</p>
+              <h3 style="color:#1e293b">アプローチ</h3>
+              <p class="muted">ユーザーリサーチを起点に、データ設計からUI/UX、運用まで伴走します。</p>
             </div>
+
             <div class="card">
-              <h3>主要領域</h3>
+              <h3 style="color:#1e293b">主要領域</h3>
               <ul class="muted">
                 <li>データ可視化</li>
                 <li>UXデザイン</li>
                 <li>プロダクト開発</li>
               </ul>
             </div>
+
             <div class="card">
-              <h3>採用・協業</h3>
-              <p class="muted">外部パートナーと連携したプロジェクトも歓迎します。</p>
+              <h3 style="color:#1e293b">採用・協業</h3>
+              <p class="muted">外部パートナーとの協業も歓迎します。</p>
             </div>
           </div>
         </div>
       </section>
 
+      <!-- Works -->
       <section id="works">
-        <h2>制作実績</h2>
+        <h2 style="color:#1e293b">制作実績</h2>
         <div class="grid">
           <div class="card">
-            <h4>ダッシュボード刷新</h4>
-            <p class="muted">KPIを明確にするための情報設計とインタラクション設計。</p>
+            <h4 style="color:#1e293b">ダッシュボード刷新</h4>
+            <p class="muted">KPIを明確にする情報設計。</p>
           </div>
           <div class="card">
-            <h4>モバイルアプリ設計</h4>
-            <p class="muted">ユーザー行動を元にしたUX改善。</p>
+            <h4 style="color:#1e293b">モバイルアプリ設計</h4>
+            <p class="muted">行動データに基づくUX改善。</p>
           </div>
           <div class="card">
-            <h4>データパイプライン導入</h4>
+            <h4 style="color:#1e293b">データパイプライン導入</h4>
             <p class="muted">スケーラブルなデータ統合基盤を構築。</p>
           </div>
         </div>
       </section>
 
+      <!-- Contact -->
       <section id="contact">
         <div class="card">
-          <h2>お問い合わせ</h2>
+          <h2 style="color:#1e293b">お問い合わせ</h2>
           <p class="muted">案件のご相談は以下のメールアドレスまで（ダミー）</p>
-          <p style="margin-top:12px"><a href="mailto:hello@example.com" class="cta">hello@example.com</a></p>
+          <p style="margin-top:12px">
+            <a href="mailto:hello@example.com" class="cta">hello@example.com</a>
+          </p>
         </div>
       </section>
 
     </main>
 
+    <!-- footer -->
     <footer>
-      <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap">
+      <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap">
         <div class="muted">© DATuM IDEA — Sample Template</div>
         <div class="links">
           <a class="muted" href="#">Privacy</a>
@@ -273,69 +346,27 @@
         </div>
       </div>
     </footer>
+
   </div>
 
-  <!-- ===== 自作チャットUI埋め込み（右下ポップアップ） ===== -->
- <div id="chatbotPanel" class="chatbot-panel" aria-hidden="false" style="display:block;">
-  <iframe
-    src="https://bchealthcare.click/custom-chatbot/"
-    title="DATuM IDEA チャットボット"
-    loading="lazy"
-  ></iframe>
-</div>
+  <!-- ===== チャットUI ===== -->
+  <div id="chatbotPanel" class="chatbot-panel">
+    <iframe src="https://bchealthcare.click/chatbot/" title="DATuM IDEA チャットボット"></iframe>
+  </div>
 
-
-  <button id="chatbotToggle" class="chatbot-toggle" type="button">
-    閉じる <span>💬</span>
-  </button>
+  <button id="chatbotToggle" class="chatbot-toggle">チャットで相談 💬</button>
 
   <script>
-    // Mobile menu simple toggle（元コード）
-    const menuBtn = document.getElementById('menuBtn')
-    if(menuBtn){
-      menuBtn.addEventListener('click',()=>{
-        const expanded = menuBtn.getAttribute('aria-expanded') === 'true'
-        menuBtn.setAttribute('aria-expanded', String(!expanded))
-        const items = ['About','Services','Works','Contact']
-        const choice = prompt('Navigate to: (type) ' + items.join(' / '))
-        if(choice){
-          const key = choice.toLowerCase()
-          if(key.includes('about')) location.hash = '#about'
-          if(key.includes('work')) location.hash = '#works'
-          if(key.includes('contact')) location.hash = '#contact'
-        }
-      })
-    }
+    // チャット開閉
+    const toggle = document.getElementById('chatbotToggle');
+    const panel  = document.getElementById('chatbotPanel');
 
-    // 自作チャットUIの開閉
-    const chatbotToggle = document.getElementById('chatbotToggle');
-    const chatbotPanel  = document.getElementById('chatbotPanel');
-
-    if (chatbotToggle && chatbotPanel) {
-      const setLabel = (isOpen) => {
-        chatbotToggle.innerHTML = isOpen
-          ? '閉じる <span>💬</span>'
-          : 'チャットで相談 <span>💬</span>';
-      };
-
-      // 初期状態：開いている
-      setLabel(true);
-
-      chatbotToggle.addEventListener('click', () => {
-        const isOpen = chatbotPanel.style.display === 'block';
-        if (isOpen) {
-          chatbotPanel.style.display = 'none';
-          chatbotPanel.setAttribute('aria-hidden', 'true');
-          setLabel(false);
-        } else {
-          chatbotPanel.style.display = 'block';
-          chatbotPanel.setAttribute('aria-hidden', 'false');
-          setLabel(true);
-        }
-      });
-    }
+    toggle.onclick = () => {
+      const open = panel.style.display === 'block';
+      panel.style.display = open ? 'none' : 'block';
+      toggle.textContent = open ? 'チャットで相談 💬' : '閉じる';
+    };
   </script>
+
 </body>
 </html>
-
-
