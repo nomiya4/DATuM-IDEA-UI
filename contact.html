@@ -4,403 +4,272 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>お問い合わせ | DATuM IDEA サンプル</title>
-  <meta name="description" content="DATuM IDEA風の疑似サイト — サービスに関するお問い合わせフォームのページ。">
+  <meta name="description" content="DATuM IDEA風の疑似サイト — お問い合わせページ（ダミー）。">
   <link rel="icon" href="/assets/favicon.png">
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;700&display=swap" rel="stylesheet">
   <style>
     :root{
-      --bg:#0f1724;
-      --card:#0b1220;
-      --muted:#9aa4b2;
-      --accent:#26a69a;
-      --glass: rgba(255,255,255,0.04);
-      --maxw:1100px;
-      color-scheme: dark;
+      --bg:#e0f2fe;
+      --bg-soft:#eff6ff;
+      --card:#ffffff;
+      --muted:#6b7280;
+      --accent:#0ea5e9;
+      --accent-dark:#0284c7;
+      --border:#e5e7eb;
+      --shadow:0 10px 30px rgba(148,163,184,0.35);
+      --maxw:900px;
     }
-    *{box-sizing:border-box}
-    html,body{height:100%}
+    *{box-sizing:border-box;}
+    html,body{height:100%;}
     body{
       margin:0;
-      font-family:'Noto Sans JP', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-      background: linear-gradient(180deg, #071022 0%, #071625 60%);
-      color:#e6eef6;
+      font-family:'Noto Sans JP', system-ui, -apple-system, "Segoe UI", sans-serif;
+      background:linear-gradient(180deg,var(--bg) 0%,var(--bg-soft) 55%,#f9fafb 100%);
+      color:#111827;
       -webkit-font-smoothing:antialiased;
-      -moz-osx-font-smoothing:grayscale;
-      line-height:1.5;
+      line-height:1.6;
     }
+    .wrap{max-width:var(--maxw);margin:0 auto;padding:24px;}
 
-    .wrap{max-width:var(--maxw);margin:0 auto;padding:24px}
-    header{display:flex;align-items:center;justify-content:space-between;padding:12px 0}
-    .brand{display:flex;gap:12px;align-items:center}
+    header{
+      max-width:1100px;
+      margin:0 auto;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+      padding:12px 0 4px;
+    }
+    .brand-link{text-decoration:none;color:inherit;}
+    .brand{display:flex;align-items:center;gap:12px;}
     .logo{
       width:44px;height:44px;
-      background:linear-gradient(135deg,var(--accent),#2dd4bf);
-      border-radius:8px;
+      background:linear-gradient(135deg,#0ea5e9,#38bdf8);
+      border-radius:12px;
       display:flex;align-items:center;justify-content:center;
-      font-weight:700;color:#052025;
+      color:#f9fafb;font-weight:700;
+      box-shadow:0 10px 25px rgba(59,130,246,0.5);
+      flex-shrink:0;
     }
-    nav{display:flex;gap:20px;align-items:center;font-size:14px}
-    nav a{color:var(--muted);text-decoration:none;font-weight:500}
-    nav a:hover{color:#e5e7eb}
-    .cta{
-      background:var(--accent);
-      color:#022;
-      padding:8px 12px;
-      border-radius:10px;
-      text-decoration:none;
-      font-weight:700;
-    }
-    .mobile-nav{display:none}
+    .brand-title{font-weight:700;font-size:15px;}
+    .brand-sub{font-size:12px;color:var(--muted);}
 
-    section{padding:32px 0}
-    .page-hero{padding:40px 0 16px}
-    .pill{
-      display:inline-flex;align-items:center;gap:8px;
-      border-radius:999px;
-      padding:4px 12px;
-      background:rgba(148,163,184,0.12);
-      font-size:12px;color:var(--muted);
+    nav{
+      display:flex;
+      flex-wrap:wrap;
+      gap:14px;
+      align-items:center;
+      font-size:13px;
+      justify-content:flex-end;
     }
-    .pill-dot{width:8px;height:8px;border-radius:999px;background:var(--accent)}
-    .page-hero h1{margin:10px 0 8px;font-size:clamp(26px,4vw,34px)}
-    .page-hero p{color:var(--muted);max-width:60ch}
+    nav a{
+      text-decoration:none;
+      color:#1f2937;
+      font-weight:500;
+      padding:4px 0;
+    }
+    nav a:hover{color:var(--accent-dark);}
+    nav a.cta-nav{
+      padding:6px 14px;
+      border-radius:999px;
+      background:var(--accent);
+      color:#f9fafb;
+      box-shadow:0 6px 16px rgba(59,130,246,0.5);
+      font-size:13px;
+    }
+    nav a.cta-nav:hover{background:var(--accent-dark);}
+    .mobile-nav{display:none;}
+
+    section{padding:24px 0;}
+    .page-hero{padding:24px 0 8px;}
+    .section-title{
+      font-size:20px;
+      margin-bottom:6px;
+      color:#0f172a;
+    }
+    .section-lead{
+      font-size:14px;
+      color:var(--muted);
+      max-width:70ch;
+    }
 
     .card{
-      background:linear-gradient(180deg, rgba(255,255,255,0.02), var(--glass));
-      padding:22px;
-      border-radius:12px;
-      box-shadow:0 6px 20px rgba(2,6,23,0.6);
+      background:var(--card);
+      border-radius:16px;
+      padding:18px 20px;
+      box-shadow:var(--shadow);
+      border:1px solid rgba(148,163,184,0.35);
     }
-    .muted{color:var(--muted)}
-    .section-title{font-size:20px;margin-bottom:6px}
-    .section-lead{color:var(--muted);max-width:60ch}
+    .muted{color:var(--muted);font-size:13px;}
 
     form{
-      margin-top:20px;
+      margin-top:12px;
       display:grid;
-      grid-template-columns:repeat(2,1fr);
-      gap:18px 20px;
+      gap:14px;
     }
-    .form-full{
-      grid-column:1 / -1;
-    }
-
     label{
-      display:block;
       font-size:13px;
+      font-weight:600;
+      display:block;
       margin-bottom:4px;
     }
-    label span.required{
-      color:#fca5a5;
+    .required{
+      color:#dc2626;
       margin-left:4px;
       font-size:11px;
     }
-
-    input[type="text"],
-    input[type="email"],
-    input[type="tel"],
-    select,
-    textarea{
+    input,textarea,select{
       width:100%;
       padding:8px 10px;
       border-radius:8px;
-      border:1px solid rgba(148,163,184,0.5);
-      background:rgba(15,23,42,0.9);
-      color:#e5e7eb;
-      font-size:13px;
-    }
-    textarea{
-      min-height:140px;
-      resize:vertical;
-    }
-    input::placeholder,
-    textarea::placeholder{
-      color:#64748b;
-    }
-    input:focus,
-    textarea:focus,
-    select:focus{
-      outline:none;
-      border-color:var(--accent);
-      box-shadow:0 0 0 1px rgba(45,212,191,0.4);
-    }
-
-    .help{
-      font-size:11px;
-      color:var(--muted);
-      margin-top:2px;
-    }
-
-    .checkbox-row{
-      display:flex;
-      align-items:flex-start;
-      gap:8px;
-      font-size:12px;
-      color:var(--muted);
-    }
-    .checkbox-row input[type="checkbox"]{
-      margin-top:3px;
-      accent-color:var(--accent);
-    }
-
-    .form-actions{
-      margin-top:10px;
-      display:flex;
-      flex-wrap:wrap;
-      gap:10px;
-      align-items:center;
-    }
-    .submit-btn{
-      border:none;
-      border-radius:999px;
-      padding:10px 20px;
+      border:1px solid var(--border);
+      font-family:inherit;
       font-size:14px;
-      cursor:pointer;
-      background:var(--accent);
-      color:#022;
-      font-weight:700;
     }
-    .reset-btn{
+    textarea{min-height:120px;resize:vertical;}
+    .hint{font-size:12px;color:var(--muted);margin-top:2px;}
+
+    .btn-submit{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding:10px 18px;
       border-radius:999px;
-      padding:8px 16px;
-      font-size:12px;
+      border:none;
+      background:var(--accent);
+      color:#ffffff;
+      font-size:14px;
+      font-weight:700;
       cursor:pointer;
-      background:transparent;
-      border:1px solid rgba(148,163,184,0.7);
+      margin-top:6px;
+    }
+    .btn-submit:hover{background:var(--accent-dark);}
+
+    footer{
+      max-width:1100px;
+      margin:0 auto;
+      padding:24px 24px 8px;
+      border-top:1px solid var(--border);
+      font-size:12px;
       color:var(--muted);
     }
-
-    .note{
-      margin-top:8px;
-      font-size:11px;
+    footer .links a{
+      font-size:12px;
       color:var(--muted);
+      text-decoration:none;
     }
-
-    footer{padding:28px 0;border-top:1px solid rgba(255,255,255,0.03);color:var(--muted)}
-    .links{display:flex;gap:12px;flex-wrap:wrap}
+    footer .links a:hover{text-decoration:underline;}
 
     @media (max-width:900px){
-      nav{display:none}
-      .mobile-nav{display:flex}
-      form{grid-template-columns:1fr}
+      header{flex-direction:column;align-items:flex-start;}
+    }
+    @media (max-width:720px){
+      nav{display:none;}
+      .mobile-nav{display:flex;}
     }
   </style>
 </head>
 <body>
-  <div class="wrap">
-    <!-- 共通ヘッダー -->
-    <header>
+  <header>
+    <a href="index.html" class="brand-link">
       <div class="brand">
         <div class="logo">DI</div>
         <div>
-          <div style="font-weight:700">DATuM IDEA — Sample</div>
-          <div class="muted" style="font-size:13px">疑似サイトテンプレート</div>
+          <div class="brand-title">DATuM IDEA — Sample</div>
+          <div class="brand-sub">医療データ活用サービスの疑似サイト</div>
         </div>
       </div>
+    </a>
 
-      <nav>
-  <a href="index.html">Home</a>
-  <a href="about.html">DATuM IDEAについて</a>
-  <a href="service.html">提供サービス一覧</a>
-  <a href="medicalservice.html">製薬企業向けサービス</a>
-  <a href="academia.html">アカデミア・医療機関向けサービス</a>
-  <a href="database.html">データベースについて</a>
-  <a href="medicaldata.html">医療データについて</a>
-  <a href="webtool.html">Webツール</a>
-  <a href="report.html">解析・レポート</a>
-  <a href="dataset.html">データセット提供</a>
-  <a href="portal.html">ファーマベース</a>
-  <a href="pb_ma_kpi.html">基礎知識（MA KPI）</a>
-  <a href="news.html">お知らせ</a>
-  <a href="download.html">資料DL</a>
-  <a href="faq.html">FAQ</a>
-  <a href="contact.html" class="cta">お問い合わせ</a>
-</nav>
+    <nav>
+      <a href="about.html">DATuM IDEAについて</a>
+      <a href="service.html">提供サービス一覧</a>
+      <a href="portal.html">ファーマベース</a>
+      <a href="news.html">お知らせ</a>
+      <a href="download.html">資料ダウンロード</a>
+      <a href="faq.html">よくあるご質問</a>
+      <a href="contact.html" class="cta-nav">お問い合わせ</a>
+    </nav>
 
+    <div class="mobile-nav">
+      <button id="menuBtn"
+        style="background:#ffffff;border:1px solid var(--border);padding:6px 12px;border-radius:999px;font-size:13px;color:#374151">
+        Menu
+      </button>
+    </div>
+  </header>
 
-      <div class="mobile-nav">
-        <button id="menuBtn" aria-expanded="false" aria-controls="mnav"
-          style="background:none;border:1px solid rgba(255,255,255,0.04);padding:8px;border-radius:8px;color:var(--muted);font-size:13px">
-          Menu
-        </button>
-      </div>
-    </header>
-
+  <div class="wrap">
     <main>
-      <!-- ページヒーロー -->
       <section class="page-hero">
-        <div class="pill">
-          <span class="pill-dot"></span>
-          <span>Contact</span>
-        </div>
-        <h1>お問い合わせ</h1>
-        <p>
-          DATuM IDEAに関するご質問・ご相談、資料請求やオンラインミーティングのご希望などがある場合は、
-          下記フォームからお問い合わせいただく想定のページです。（本疑似サイトでは送信は行われません）
+        <h1 class="section-title">お問い合わせ</h1>
+        <p class="section-lead">
+          サービスの詳細やデータベースに関するご質問、共同研究のご相談などを想定したお問い合わせフォームです。
+          このページは疑似フォームのため、送信ボタンを押しても実際には送信されません。
         </p>
       </section>
 
-      <!-- フォーム -->
       <section>
         <div class="card">
-          <h2 class="section-title">お問い合わせフォーム（ダミー）</h2>
-          <p class="section-lead">
-            必須項目をご入力のうえ、「入力内容を送信」ボタンをクリックしてください。
-            実際の運用では、送信内容が担当窓口にメールで通知されるイメージです。
-          </p>
-
-          <form action="#" method="post" novalidate>
-            <!-- 会社・組織名 -->
+          <form>
             <div>
-              <label for="company">
-                会社名・ご所属<span class="required">必須</span>
-              </label>
-              <input type="text" id="company" name="company" placeholder="例）〇〇製薬株式会社 メディカルアフェアーズ部" required>
+              <label for="company">企業・ご所属<span class="required">必須</span></label>
+              <input id="company" name="company" type="text" placeholder="例）〇〇製薬株式会社 / △△大学医学部 など">
             </div>
 
-            <!-- 部署・役職 -->
             <div>
-              <label for="dept">
-                部署・役職
-              </label>
-              <input type="text" id="dept" name="dept" placeholder="例）メディカルアフェアーズ部 グループマネージャー">
+              <label for="name">お名前<span class="required">必須</span></label>
+              <input id="name" name="name" type="text" placeholder="例）医療 太郎">
             </div>
 
-            <!-- お名前 -->
             <div>
-              <label for="name">
-                お名前<span class="required">必須</span>
-              </label>
-              <input type="text" id="name" name="name" placeholder="例）データム 太郎" required>
+              <label for="email">メールアドレス<span class="required">必須</span></label>
+              <input id="email" name="email" type="email" placeholder="example@example.com">
+              <div class="hint">※ ご連絡可能なメールアドレスをご入力ください。</div>
             </div>
 
-            <!-- フリガナ -->
             <div>
-              <label for="kana">
-                フリガナ
-              </label>
-              <input type="text" id="kana" name="kana" placeholder="例）データム タロウ">
-            </div>
-
-            <!-- メール -->
-            <div>
-              <label for="email">
-                メールアドレス<span class="required">必須</span>
-              </label>
-              <input type="email" id="email" name="email" placeholder="例）example@example.co.jp" required>
-              <div class="help">※ 半角英数字でご入力ください。</div>
-            </div>
-
-            <!-- 電話 -->
-            <div>
-              <label for="tel">
-                お電話番号
-              </label>
-              <input type="tel" id="tel" name="tel" placeholder="例）03-1234-5678">
-              <div class="help">※ 日中ご連絡が取りやすい番号があればご入力ください。</div>
-            </div>
-
-            <!-- 区分 -->
-            <div>
-              <label for="type">
-                ご所属区分<span class="required">必須</span>
-              </label>
-              <select id="type" name="type" required>
+              <label for="type">お問い合わせ種別</label>
+              <select id="type" name="type">
                 <option value="">選択してください</option>
-                <option value="pharma">製薬企業</option>
-                <option value="academia">大学・研究機関</option>
-                <option value="hospital">医療機関</option>
-                <option value="other">その他</option>
+                <option>サービス全般について</option>
+                <option>データベースに関するご相談</option>
+                <option>共同研究・学会発表に関するご相談</option>
+                <option>その他</option>
               </select>
             </div>
 
-            <!-- お問い合わせ種別 -->
             <div>
-              <label for="category">
-                お問い合わせ種別<span class="required">必須</span>
-              </label>
-              <select id="category" name="category" required>
-                <option value="">選択してください</option>
-                <option value="service_overview">サービス全般について</option>
-                <option value="webtool">Webツールについて</option>
-                <option value="analysis">解析・レポートについて</option>
-                <option value="dataset">データセット提供について</option>
-                <option value="academia">アカデミア・医療機関向けサービスについて</option>
-                <option value="other">その他</option>
-              </select>
+              <label for="message">お問い合わせ内容<span class="required">必須</span></label>
+              <textarea id="message" name="message" placeholder="具体的なご相談内容やご質問事項をご記入ください。"></textarea>
             </div>
 
-            <!-- 希望内容（チェックボックスでもいいが簡単に） -->
-            <div class="form-full">
-              <label for="detail">
-                お問い合わせ内容<span class="required">必須</span>
-              </label>
-              <textarea id="detail" name="detail" required
-                placeholder="ご関心の背景や、検討されているプロジェクトの概要などをご記載ください。&#10;（例）乳がん領域での製販後DB調査の実施可能性について相談したい など">
-              </textarea>
-            </div>
-
-            <!-- オンラインミーティング希望 -->
-            <div class="form-full">
-              <label for="meeting">
-                オンラインミーティングのご希望
-              </label>
-              <textarea id="meeting" name="meeting"
-                placeholder="オンラインでのご説明をご希望の場合は、候補日時や使用ツール（Teams / Zoom など）をご記載ください。">
-              </textarea>
-            </div>
-
-            <!-- 同意 -->
-            <div class="form-full">
-              <div class="checkbox-row">
-                <input type="checkbox" id="agree" name="agree" required>
-                <label for="agree">
-                  個人情報の取扱いおよびお問い合わせに関する注意事項（ダミー）に同意します。<span class="required">必須</span>
-                  <div class="help">
-                    ※ 実際のサイトでは、プライバシーポリシーや利用規約ページへのリンクを設置する想定です。
-                  </div>
-                </label>
-              </div>
-            </div>
-
-            <!-- ボタン -->
-            <div class="form-full form-actions">
-              <button type="submit" class="submit-btn">入力内容を送信（ダミー）</button>
-              <button type="reset" class="reset-btn">入力内容をクリア</button>
-              <div class="note">
-                ※ 本疑似サイトでは送信処理は実装されていません。ボタンクリック時の挙動はダミーです。
-              </div>
-            </div>
+            <button type="button" class="btn-submit">送信（ダミー）</button>
+            <div class="hint">※ このフォームはデモ用のため、実際には送信されません。</div>
           </form>
         </div>
       </section>
     </main>
-
-    <footer>
-      <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap">
-        <div class="muted">© DATuM IDEA — Sample Template</div>
-        <div class="links">
-          <a class="muted" href="#">匿名加工医療情報の取扱い（ダミー）</a>
-          <a class="muted" href="#">個人情報の取扱い（ダミー）</a>
-          <a class="muted" href="#">Cookieポリシー（ダミー）</a>
-        </div>
-      </div>
-    </footer>
   </div>
 
+  <footer>
+    <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap">
+      <div class="muted">© DATuM IDEA — Sample Template</div>
+      <div class="links">
+        <a href="#" class="muted">匿名加工医療情報の取扱い（ダミー）</a>
+        <a href="#" class="muted">個人情報の取扱い（ダミー）</a>
+      </div>
+    </div>
+  </footer>
+
   <script>
-    // Mobile menu simple toggle
     const menuBtn = document.getElementById('menuBtn');
     if(menuBtn){
-      menuBtn.addEventListener('click',()=>{
-        const expanded = menuBtn.getAttribute('aria-expanded') === 'true';
-        menuBtn.setAttribute('aria-expanded', String(!expanded));
-
+      menuBtn.addEventListener('click', () => {
         const items = [
-          {label:'Home', href:'index.html'},
           {label:'About', href:'about.html'},
           {label:'Service', href:'service.html'},
-          {label:'Pharma Base', href:'portal.html'},
+          {label:'Portal', href:'portal.html'},
           {label:'News', href:'news.html'},
           {label:'Download', href:'download.html'},
           {label:'FAQ', href:'faq.html'},
@@ -416,4 +285,3 @@
   </script>
 </body>
 </html>
-
