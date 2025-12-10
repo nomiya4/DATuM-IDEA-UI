@@ -49,26 +49,32 @@
       box-shadow:0 8px 20px rgba(37,99,235,0.25);
     }
 
-    nav{display:flex;gap:18px;align-items:center;font-size:14px}
+    nav{
+      display:flex;
+      gap:18px;
+      align-items:center;
+      font-size:14px;
+    }
     nav a{
       color:#1f2937;
       text-decoration:none;
       font-weight:500;
+      white-space:nowrap;
     }
     nav a:hover{
       color:var(--accent);
     }
 
-    .cta{
+    .cta-nav{
       background:var(--accent);
-      color:#ffffff;
+      color:#ffffff !important;
       padding:8px 16px;
       border-radius:999px;
       text-decoration:none;
       font-weight:700;
       box-shadow:0 8px 18px rgba(14,165,233,0.35);
     }
-    .cta:hover{
+    .cta-nav:hover{
       background:var(--accent-dark);
     }
 
@@ -139,12 +145,15 @@
     }
 
     /* responsive */
+    @media (max-width:980px){
+      nav{display:none}
+      .mobile-nav{display:flex}
+    }
     @media (max-width:900px){
       .hero{grid-template-columns:1fr;}
       .features{grid-template-columns:repeat(2,1fr)}
       .grid{grid-template-columns:1fr}
-      nav{display:none}
-      .mobile-nav{display:flex}
+      .large{grid-column:span 1}
     }
     @media (max-width:520px){
       .features{grid-template-columns:1fr}
@@ -203,35 +212,27 @@
     <!-- header -->
     <header>
       <div class="brand">
-        <div class="logo">DI</div>
-        <div>
-          <div style="font-weight:700;font-size:15px">DATuM IDEA — Sample</div>
-          <div style="font-size:13px;color:var(--muted)">疑似サイトテンプレート</div>
-        </div>
+        <a href="index.html" style="text-decoration:none;display:flex;align-items:center;gap:12px;color:inherit">
+          <div class="logo">DI</div>
+          <div>
+            <div style="font-weight:700;font-size:15px">DATuM IDEA — Sample</div>
+            <div style="font-size:13px;color:var(--muted)">疑似サイトテンプレート</div>
+          </div>
+        </a>
       </div>
 
-      <!-- ★ ここを全ページ共通ナビに -->
+      <!-- ★本番サイトと同じ構成のナビ（項目を限定） -->
       <nav>
-     <nav>
-  <a href="index.html">Home</a>
-  <a href="about.html">DATuM IDEAについて</a>
-  <a href="service.html">提供サービス一覧</a>
-  <a href="medicalservice.html">製薬企業向けサービス</a>
-  <a href="academia.html">アカデミア・医療機関向けサービス</a>
-  <a href="database.html">データベースについて</a>
-  <a href="medicaldata.html">医療データについて</a>
-  <a href="webtool.html">Webツール</a>
-  <a href="report.html">解析・レポート</a>
-  <a href="dataset.html">データセット提供</a>
-  <a href="portal.html">ファーマベース</a>
-  <a href="pb_ma_kpi.html">基礎知識（MA KPI）</a>
-  <a href="news.html">お知らせ</a>
-  <a href="download.html">資料DL</a>
-  <a href="faq.html">FAQ</a>
-  <a href="contact.html" class="cta">お問い合わせ</a>
-</nav>
+        <a href="about.html">DATuM IDEAについて</a>
+        <a href="service.html">提供サービス一覧</a>
+        <a href="portal.html">ファーマベース</a>
+        <a href="news.html">お知らせ</a>
+        <a href="download.html">資料ダウンロード</a>
+        <a href="faq.html">よくあるご質問</a>
+        <a href="contact.html" class="cta-nav">お問い合わせ</a>
+      </nav>
 
-
+      <!-- モバイル用は簡易ボタンだけ（必要なら後でちゃんと実装） -->
       <div class="mobile-nav">
         <button 
           id="menuBtn"
@@ -250,7 +251,7 @@
           <p>DATuM IDEAをイメージしたダミーページ。説明文を入れて事業概要を伝えます。</p>
 
           <div style="margin-top:20px;display:flex;gap:12px;align-items:center">
-            <a href="contact.html" class="cta">案件の相談</a>
+            <a href="contact.html" class="cta-nav" style="box-shadow:none;">案件の相談</a>
             <a href="service.html" style="color:var(--accent);text-decoration:underline">提供サービスを見る</a>
           </div>
 
@@ -294,7 +295,7 @@
         </aside>
       </section>
 
-      <!-- About（トップ内の簡易説明。詳細は about.html に誘導）-->
+      <!-- About（トップ内の簡易説明）-->
       <section>
         <div class="card">
           <h2 style="color:#0f172a">私たちについて</h2>
@@ -354,7 +355,7 @@
           <h2 style="color:#0f172a">お問い合わせ</h2>
           <p class="muted">案件のご相談は以下のメールアドレスまで（ダミー）</p>
           <p style="margin-top:12px">
-            <a href="mailto:hello@example.com" class="cta">hello@example.com</a>
+            <a href="mailto:hello@example.com" class="cta-nav" style="box-shadow:none;">hello@example.com</a>
           </p>
         </div>
       </section>
@@ -399,4 +400,3 @@
 
 </body>
 </html>
-
