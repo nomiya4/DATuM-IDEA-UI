@@ -4,46 +4,219 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>データベースについて | DATuM IDEA サンプル</title>
-  <meta name="description" content="DATuM IDEA風の疑似サイト — データベース概要（ライトテーマ）。">
+  <meta name="description" content="DATuM IDEA風の疑似サイト — データベースについて（ライトテーマ版・デモ用）。">
   <link rel="icon" href="/assets/favicon.png">
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;700&display=swap" rel="stylesheet">
   <style>
-    :root{--bg:#e0f2fe;--bg-soft:#eff6ff;--card:#ffffff;--muted:#6b7280;--accent:#0ea5e9;--accent-dark:#0284c7;--border:#e5e7eb;--shadow:0 10px 30px rgba(148,163,184,0.35);--maxw:1100px;}
+    :root{
+      --bg:#e0f2fe;
+      --bg-soft:#eff6ff;
+      --card:#ffffff;
+      --muted:#6b7280;
+      --accent:#0ea5e9;
+      --accent-dark:#0284c7;
+      --border:#e5e7eb;
+      --shadow:0 10px 30px rgba(148,163,184,0.35);
+      --maxw:1100px;
+    }
     *{box-sizing:border-box;}
     html,body{height:100%;}
-    body{margin:0;font-family:'Noto Sans JP',system-ui,-apple-system,"Segoe UI",sans-serif;background:linear-gradient(180deg,var(--bg) 0%,var(--bg-soft) 55%,#f9fafb 100%);color:#111827;-webkit-font-smoothing:antialiased;line-height:1.6;}
+    body{
+      margin:0;
+      font-family:'Noto Sans JP',system-ui,-apple-system,"Segoe UI",sans-serif;
+      background:linear-gradient(180deg,var(--bg) 0%,var(--bg-soft) 55%,#f9fafb 100%);
+      color:#111827;
+      -webkit-font-smoothing:antialiased;
+      line-height:1.6;
+    }
     .wrap{max-width:var(--maxw);margin:0 auto;padding:24px;}
-    header{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:12px 0;}
+
+    /* ===== Header / Nav ===== */
+    header{
+      display:flex;align-items:center;justify-content:space-between;
+      gap:16px;padding:12px 0;
+    }
     .brand-link{text-decoration:none;color:inherit;}
     .brand{display:flex;align-items:center;gap:12px;}
-    .logo{width:44px;height:44px;border-radius:12px;background:linear-gradient(135deg,#0ea5e9,#38bdf8);display:flex;align-items:center;justify-content:center;color:#f9fafb;font-weight:700;box-shadow:0 10px 25px rgba(59,130,246,0.5);flex-shrink:0;}
+    .logo{
+      width:44px;height:44px;border-radius:12px;
+      background:linear-gradient(135deg,#0ea5e9,#38bdf8);
+      display:flex;align-items:center;justify-content:center;
+      color:#f9fafb;font-weight:700;
+      box-shadow:0 10px 25px rgba(59,130,246,0.5);
+      flex-shrink:0;
+    }
     .brand-title{font-weight:700;font-size:15px;}
     .brand-sub{font-size:12px;color:var(--muted);}
-    nav{display:flex;flex-wrap:wrap;gap:14px;align-items:center;font-size:13px;justify-content:flex-end;}
-    nav a{text-decoration:none;color:#1f2937;font-weight:500;padding:4px 0;}
+
+    nav{
+      display:flex;flex-wrap:wrap;gap:14px;
+      align-items:center;font-size:13px;justify-content:flex-end;
+    }
+    nav a{
+      text-decoration:none;color:#1f2937;font-weight:500;padding:4px 0;
+    }
     nav a:hover{color:var(--accent-dark);}
-    nav a.cta-nav{padding:6px 14px;border-radius:999px;background:var(--accent);color:#f9fafb;box-shadow:0 6px 16px rgba(59,130,246,0.5);font-size:13px;}
+    nav a.cta-nav{
+      padding:6px 14px;border-radius:999px;
+      background:var(--accent);color:#f9fafb;
+      box-shadow:0 6px 16px rgba(59,130,246,0.5);
+      font-size:13px;
+    }
     nav a.cta-nav:hover{background:var(--accent-dark);}
     .mobile-nav{display:none;}
 
+    /* ===== Layout ===== */
     section{padding:24px 0;}
     .page-hero{padding:40px 0 16px;}
+    .pill{
+      display:inline-flex;align-items:center;gap:8px;
+      padding:4px 12px;border-radius:999px;
+      background:#dbeafe;color:#1d4ed8;
+      font-size:11px;font-weight:600;letter-spacing:.06em;
+      text-transform:uppercase;
+    }
+    .pill-dot{width:8px;height:8px;border-radius:999px;background:#1d4ed8;}
+    .page-hero h1{
+      margin:16px 0 10px;font-size:clamp(26px,4vw,34px);
+    }
+    .page-hero p{
+      margin:0;color:var(--muted);max-width:60ch;font-size:14px;
+    }
+
     .section-title{font-size:18px;margin-bottom:6px;color:#0f172a;}
     .section-lead{font-size:14px;color:var(--muted);max-width:70ch;}
-    .card{background:var(--card);border-radius:16px;padding:18px 20px;box-shadow:var(--shadow);border:1px solid rgba(148,163,184,0.35);}
+    .card{
+      background:var(--card);border-radius:16px;
+      padding:18px 20px;box-shadow:var(--shadow);
+      border:1px solid rgba(148,163,184,0.35);
+    }
+    .card-soft{
+      background:rgba(255,255,255,0.75);
+      border-radius:14px;
+      padding:16px 18px;
+      border:1px dashed rgba(148,163,184,0.6);
+    }
     .muted{color:var(--muted);font-size:13px;}
 
-    .grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;}
-    .grid-2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;}
+    .grid-2{display:grid;grid-template-columns:1.1fr 0.9fr;gap:18px;}
+    .grid-3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;}
+    .badge{
+      display:inline-flex;align-items:center;gap:6px;
+      padding:3px 10px;border-radius:999px;
+      background:#e0f2fe;color:#0369a1;
+      font-size:11px;font-weight:600;
+    }
 
-    ul{margin:8px 0 0;padding-left:18px;font-size:13px;color:var(--muted);}
+    /* 「情報ボックス」エリア */
+    .info-table{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:10px 24px;
+      margin-top:12px;
+      font-size:13px;
+    }
+    .info-label{color:var(--muted);}
+    .info-value{font-weight:600;}
 
-    footer{padding:24px 0 8px;border-top:1px solid var(--border);margin-top:16px;font-size:12px;color:var(--muted);}
-    footer .links a{font-size:12px;color:var(--muted);text-decoration:none;}
+    /* 図のプレースホルダ */
+    .figure-box{
+      margin-top:10px;
+      border-radius:14px;
+      padding:14px;
+      background:linear-gradient(135deg,#eff6ff,#e0f2fe);
+      border:1px solid rgba(148,163,184,0.6);
+      box-shadow:0 8px 18px rgba(148,163,184,0.45);
+      font-size:12px;
+      color:#1f2937;
+    }
+    .figure-tag{
+      display:inline-block;
+      padding:2px 8px;
+      border-radius:999px;
+      background:#bfdbfe;
+      font-size:11px;
+      margin-bottom:6px;
+    }
+    .figure-graph{
+      margin-top:8px;
+      height:120px;
+      border-radius:10px;
+      background:repeating-linear-gradient(
+        to right,
+        rgba(148,163,184,0.3) 0,
+        rgba(148,163,184,0.3) 1px,
+        transparent 1px,
+        transparent 10px
+      );
+      position:relative;
+      overflow:hidden;
+    }
+    .figure-bar{
+      position:absolute;
+      bottom:0;
+      width:14px;
+      border-radius:6px 6px 0 0;
+      background:rgba(59,130,246,0.7);
+    }
+
+    /* レセプト項目例 */
+    .item-example{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:18px;
+      margin-top:14px;
+      font-size:13px;
+    }
+    .item-example h4{margin:0 0 4px;font-size:14px;}
+    .item-example ul{margin:0;padding-left:18px;}
+    .item-example li{margin-bottom:3px;}
+
+    /* チャットボット用カード */
+    .chat-section{
+      margin-top:24px;
+    }
+    .chat-card-title{
+      display:flex;align-items:center;gap:8px;
+      font-size:15px;font-weight:600;margin-bottom:4px;
+    }
+    .chat-dot{
+      width:8px;height:8px;border-radius:999px;background:#22c55e;
+      box-shadow:0 0 0 4px rgba(34,197,94,0.25);
+    }
+    .chat-iframe-wrap{
+      margin-top:12px;
+      border-radius:14px;
+      overflow:hidden;
+      border:1px solid rgba(148,163,184,0.8);
+      box-shadow:0 12px 28px rgba(15,23,42,0.55);
+      background:#020617;
+    }
+    .chat-iframe{
+      width:100%;
+      height:430px;
+      border:0;
+      display:block;
+    }
+
+    footer{
+      padding:24px 0 8px;border-top:1px solid var(--border);
+      margin-top:16px;font-size:12px;color:var(--muted);
+    }
+    footer .links a{
+      font-size:12px;color:var(--muted);text-decoration:none;
+    }
     footer .links a:hover{text-decoration:underline;}
 
-    @media (max-width:960px){.grid,.grid-2{grid-template-columns:1fr;}}
-    @media (max-width:720px){nav{display:none;}.mobile-nav{display:flex;}header{align-items:flex-start;}}
+    @media (max-width:960px){
+      .grid-2{grid-template-columns:1fr;}
+      .grid-3{grid-template-columns:1fr;}
+    }
+    @media (max-width:720px){
+      nav{display:none;}
+      .mobile-nav{display:flex;}
+      header{align-items:flex-start;}
+    }
   </style>
 </head>
 <body>
@@ -78,89 +251,153 @@
     </header>
 
     <main>
+      <!-- Hero -->
       <section class="page-hero">
-        <h1 class="section-title">データベースについて</h1>
-        <p class="section-lead">
-          DATuM IDEA が想定する医療データベースの、構成イメージやカバレッジを説明するためのダミーページです。
+        <div class="pill">
+          <span class="pill-dot"></span><span>Database</span>
+        </div>
+        <h1>データベースについて</h1>
+        <p>
+          DATuM IDEA が想定している医療データベースのイメージを、本番サイトに近い構成で説明するページです。
+          電子カルテデータと医科レセプトデータを組み合わせて、治療実態を時系列で把握できる世界観を再現しています。
         </p>
       </section>
 
+      <!-- About Our Database + 情報ボックス -->
       <section>
         <div class="card">
-          <h2 class="section-title">データソースのイメージ</h2>
-          <div class="grid" style="margin-top:18px">
-            <div class="card">
-              <h3>電子カルテデータ</h3>
-              <p class="muted">
-                診療行為・オーダ・検査値・バイタルなど、診療録由来の情報を収集する想定です。
-              </p>
-            </div>
-            <div class="card">
-              <h3>医科レセプトデータ</h3>
-              <p class="muted">
-                診療報酬請求に基づく診療情報を組み合わせ、医療資源の利用状況を把握する世界観です。
-              </p>
-            </div>
-            <div class="card">
-              <h3>その他連結情報</h3>
-              <p class="muted">
-                施設属性や地域情報など、解析の文脈を補う情報を組み合わせることを想定しています。
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section>
-        <div class="card">
-          <h2 class="section-title">代表的なデータ項目（例）</h2>
-          <div class="grid-2" style="margin-top:12px">
-            <div>
-              <h3 style="font-size:15px;margin-bottom:4px;">患者背景</h3>
-              <ul>
-                <li>年齢・性別</li>
-                <li>診療科・施設区分</li>
-                <li>併存疾患（Charlsonなど）</li>
-              </ul>
-            </div>
-            <div>
-              <h3 style="font-size:15px;margin-bottom:4px;">治療情報</h3>
-              <ul>
-                <li>投薬開始・終了日</li>
-                <li>投与量・投与経路</li>
-                <li>併用薬・前治療歴</li>
-              </ul>
-            </div>
-            <div>
-              <h3 style="font-size:15px;margin-bottom:4px;">検査・バイタル</h3>
-              <ul>
-                <li>主要ラボ値（Hb, Cr, AST/ALT など）</li>
-                <li>画像検査の実施有無</li>
-                <li>バイタル（血圧・体重 など）</li>
-              </ul>
-            </div>
-            <div>
-              <h3 style="font-size:15px;margin-bottom:4px;">アウトカム</h3>
-              <ul>
-                <li>イベント発生（入院、救急受診など）</li>
-                <li>治療中止理由（想定）</li>
-                <li>フォローアップ期間</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section>
-        <div class="card">
-          <h2 class="section-title">関連ページ</h2>
+          <div class="badge">About Our Database</div>
+          <h2 class="section-title" style="margin-top:10px;">DATuM IDEA のデータベース</h2>
           <p class="section-lead">
-            より具体的な利用イメージは、以下のページから確認できます。
+            匿名加工医療情報をもとに、製薬企業・アカデミア・医療機関向けのサービスを提供するためのデータベースを想定しています。
+            データソースや規模感などは、本番サイトの情報構成を参考にしたサンプルです。
           </p>
-          <div class="links">
-            <a href="medicaldata.html" class="link-pill">医療データについて</a>
-            <a href="dataset.html" class="link-pill">データセット提供</a>
-            <a href="report.html" class="link-pill">解析・レポート</a>
+
+          <p class="muted" style="margin-top:8px;">※本情報はデモ用のサンプルであり、実際の数値とは異なる可能性があります。</p>
+
+          <div class="info-table">
+            <div class="info-label">データソース</div>
+            <div class="info-value">電子カルテデータ／医科レセプトデータ</div>
+
+            <div class="info-label">対象施設</div>
+            <div class="info-value">57施設（うち国立病院機構が大部分を占める想定）</div>
+
+            <div class="info-label">登録患者数</div>
+            <div class="info-value">約150万人規模</div>
+
+            <div class="info-label">データ収集開始</div>
+            <div class="info-value">2020年4月（想定）</div>
+
+            <div class="info-label">データ期間</div>
+            <div class="info-value">2019年1月〜2025年3月ごろまで</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Features: 4つの特徴 + 図っぽい枠 -->
+      <section>
+        <h2 class="section-title">データベースの特徴（イメージ）</h2>
+        <div class="grid-2" style="margin-top:14px;">
+          <!-- 左：特徴カード群 -->
+          <div class="card">
+            <h3 style="margin:0 0 6px;">網羅性の高いデータ</h3>
+            <p class="muted">
+              日本各地の医療機関からデータを収集している想定です。地域分布・年齢分布ともに偏りを抑え、
+              高齢者の治療実態も含めて把握しやすい構成をイメージしています。
+            </p>
+
+            <div class="figure-box">
+              <div class="figure-tag">図：地域・年齢分布（イメージ）</div>
+              <div class="figure-graph">
+                <div class="figure-bar" style="left:10%;height:40%;"></div>
+                <div class="figure-bar" style="left:25%;height:60%;"></div>
+                <div class="figure-bar" style="left:40%;height:80%;"></div>
+                <div class="figure-bar" style="left:55%;height:65%;"></div>
+                <div class="figure-bar" style="left:70%;height:45%;"></div>
+              </div>
+              <p class="muted" style="margin-top:6px;">
+                実サイトの折れ線・棒グラフを、シンプルな棒グラフ風のプレースホルダで再現しています。
+              </p>
+            </div>
+          </div>
+
+          <!-- 右：その他3つの特徴 -->
+          <div class="card-soft">
+            <h3 style="margin-top:0;font-size:15px;">実態に即した疾患・検査情報</h3>
+            <p class="muted">
+              電子カルテごとに表記ゆれのある病名や検査値の単位を、分析しやすいように標準化する世界観です。
+              合成傷病名の整理や、検査値単位の統一などを行っているイメージでまとめています。
+            </p>
+
+            <h4 style="margin:12px 0 4px;font-size:14px;">専門性の高い検査情報</h4>
+            <p class="muted">
+              腫瘍マーカーや内分泌関連検査など、一般的な項目に加えて専門的な検査も多数含まれている想定です。
+              3,000項目以上の検査をカバーするイメージで記載しています。
+            </p>
+
+            <h4 style="margin:12px 0 4px;font-size:14px;">データソースの連結</h4>
+            <p class="muted">
+              電子カルテと医科レセプトを連結することで、傷病・薬剤・検査に加え、手術や処置の履歴も
+              時系列で追跡できる構成をイメージしています。
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- 医科レセプトデータの項目例 -->
+      <section id="receipt-example">
+        <div class="card">
+          <h2 class="section-title">医科レセプトデータの項目例</h2>
+          <p class="section-lead">
+            電子カルテ側の情報に加えて、医科レセプトデータからは手術・処置・コストなどの情報が得られる想定です。
+            ここでは項目の一例だけを抜粋して掲載しています（実際の提供内容とは異なる場合があります）。
+          </p>
+
+          <div class="item-example">
+            <div>
+              <h4>手術の例</h4>
+              <ul>
+                <li>脳腫瘍に対する生検手術</li>
+                <li>白内障に対する水晶体再建術・緑内障手術</li>
+                <li>人工内耳の植込みや扁桃摘出など耳鼻科領域の手術</li>
+                <li>肺・胃・大腸・腎・前立腺・子宮などの悪性腫瘍手術</li>
+                <li>人工関節置換術や骨移植術、血管バイパス術など整形外科・血管外科手術</li>
+              </ul>
+            </div>
+            <div>
+              <h4>処置の例</h4>
+              <ul>
+                <li>酸素投与や創傷処置、熱傷に対する処置</li>
+                <li>気管切開後のカニューレ管理、眼科・耳鼻科処置</li>
+                <li>消炎鎮痛処置や重度褥瘡に対する処置</li>
+                <li>ストーマ管理、慢性維持透析などの人工腎臓治療　ほか</li>
+              </ul>
+            </div>
+          </div>
+
+          <p class="muted" style="margin-top:10px;">
+            ※アカデミア・医療機関向けのサービスでは、項目構成や内容が一部異なる想定です。
+            詳細はお問い合わせページから個別に確認いただくイメージです。
+          </p>
+        </div>
+
+        <!-- ▼ この直下に「コンテンツ型チャットボット」を埋め込み ▼ -->
+        <div class="card chat-section">
+          <div class="chat-card-title">
+            <span class="chat-dot"></span>
+            <span>チャットボットでデータベースについて相談（デモ）</span>
+          </div>
+          <p class="muted">
+            医科レセプトを含むデータベースの使い方や、どのサービスと組み合わせると良いかなどを想定した
+            Q&A を、チャット形式で疑似的に体験できるデモ用コンテンツです。
+          </p>
+          <div class="chat-iframe-wrap">
+            <iframe
+              class="chat-iframe"
+              src="https://bchealthcare.click/custom-chatbot/"
+              title="DATuM IDEA デモ用チャットボット（データベース）"
+              loading="lazy"
+            ></iframe>
           </div>
         </div>
       </section>
@@ -190,7 +427,8 @@
           {label:'FAQ',href:'faq.html'},
           {label:'Contact',href:'contact.html'},
         ];
-        const choice = prompt('Navigate to: '+items.map(i=>i.label).join(' / '));
+        const label = 'Navigate to: '+items.map(i=>i.label).join(' / ');
+        const choice = prompt(label);
         if(!choice) return;
         const key = choice.toLowerCase();
         const hit = items.find(i=>key.includes(i.label.toLowerCase()));
