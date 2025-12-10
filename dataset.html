@@ -4,42 +4,246 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>データセット提供 | DATuM IDEA サンプル</title>
-  <meta name="description" content="DATuM IDEA風の疑似サイト — データセット提供サービスのイメージページ（ライトテーマ）。">
+  <meta name="description" content="DATuM IDEA風の疑似サイト — 製薬企業向けデータセット提供のデモページ（ライトテーマ版）。">
   <link rel="icon" href="/assets/favicon.png">
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;700&display=swap" rel="stylesheet">
   <style>
-    :root{--bg:#e0f2fe;--bg-soft:#eff6ff;--card:#ffffff;--muted:#6b7280;--accent:#0ea5e9;--accent-dark:#0284c7;--border:#e5e7eb;--shadow:0 10px 30px rgba(148,163,184,0.35);--maxw:1100px;}
+    :root{
+      --bg:#e0f2fe;
+      --bg-soft:#eff6ff;
+      --card:#ffffff;
+      --muted:#6b7280;
+      --accent:#0ea5e9;
+      --accent-dark:#0284c7;
+      --border:#e5e7eb;
+      --shadow:0 10px 30px rgba(148,163,184,0.35);
+      --maxw:1100px;
+    }
     *{box-sizing:border-box;}
     html,body{height:100%;}
-    body{margin:0;font-family:'Noto Sans JP',system-ui,-apple-system,"Segoe UI",sans-serif;background:linear-gradient(180deg,var(--bg) 0%,var(--bg-soft) 55%,#f9fafb 100%);color:#111827;-webkit-font-smoothing:antialiased;line-height:1.6;}
+    body{
+      margin:0;
+      font-family:'Noto Sans JP',system-ui,-apple-system,"Segoe UI",sans-serif;
+      background:linear-gradient(180deg,var(--bg) 0%,var(--bg-soft) 55%,#f9fafb 100%);
+      color:#111827;
+      -webkit-font-smoothing:antialiased;
+      line-height:1.6;
+    }
     .wrap{max-width:var(--maxw);margin:0 auto;padding:24px;}
-    header{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:12px 0;}
+
+    /* header/nav 共通 */
+    header{
+      display:flex;align-items:center;justify-content:space-between;
+      gap:16px;padding:12px 0;
+    }
     .brand-link{text-decoration:none;color:inherit;}
     .brand{display:flex;align-items:center;gap:12px;}
-    .logo{width:44px;height:44px;border-radius:12px;background:linear-gradient(135deg,#0ea5e9,#38bdf8);display:flex;align-items:center;justify-content:center;color:#f9fafb;font-weight:700;box-shadow:0 10px 25px rgba(59,130,246,0.5);flex-shrink:0;}
+    .logo{
+      width:44px;height:44px;border-radius:12px;
+      background:linear-gradient(135deg,#0ea5e9,#38bdf8);
+      display:flex;align-items:center;justify-content:center;
+      color:#f9fafb;font-weight:700;
+      box-shadow:0 10px 25px rgba(59,130,246,0.5);
+      flex-shrink:0;
+    }
     .brand-title{font-weight:700;font-size:15px;}
     .brand-sub{font-size:12px;color:var(--muted);}
-    nav{display:flex;flex-wrap:wrap;gap:14px;align-items:center;font-size:13px;justify-content:flex-end;}
-    nav a{text-decoration:none;color:#1f2937;font-weight:500;padding:4px 0;}
+    nav{
+      display:flex;flex-wrap:wrap;gap:14px;
+      align-items:center;font-size:13px;justify-content:flex-end;
+    }
+    nav a{
+      text-decoration:none;color:#1f2937;font-weight:500;padding:4px 0;
+    }
     nav a:hover{color:var(--accent-dark);}
-    nav a.cta-nav{padding:6px 14px;border-radius:999px;background:var(--accent);color:#f9fafb;box-shadow:0 6px 16px rgba(59,130,246,0.5);font-size:13px;}
+    nav a.cta-nav{
+      padding:6px 14px;border-radius:999px;
+      background:var(--accent);color:#f9fafb;
+      box-shadow:0 6px 16px rgba(59,130,246,0.5);
+      font-size:13px;
+    }
     nav a.cta-nav:hover{background:var(--accent-dark);}
     .mobile-nav{display:none;}
 
     section{padding:24px 0;}
     .page-hero{padding:40px 0 16px;}
+    .pill{
+      display:inline-flex;align-items:center;gap:8px;
+      padding:4px 12px;border-radius:999px;
+      background:#dbeafe;color:#1d4ed8;
+      font-size:11px;font-weight:600;letter-spacing:.06em;
+      text-transform:uppercase;
+    }
+    .pill-dot{width:8px;height:8px;border-radius:999px;background:#1d4ed8;}
+    .page-hero h1{
+      margin:16px 0 10px;font-size:clamp(26px,4vw,34px);
+    }
+    .page-hero p{
+      margin:0;color:var(--muted);max-width:60ch;font-size:14px;
+    }
+
     .section-title{font-size:18px;margin-bottom:6px;color:#0f172a;}
     .section-lead{font-size:14px;color:var(--muted);max-width:70ch;}
-    .card{background:var(--card);border-radius:16px;padding:18px 20px;box-shadow:var(--shadow);border:1px solid rgba(148,163,184,0.35);}
+    .card{
+      background:var(--card);border-radius:16px;
+      padding:18px 20px;box-shadow:var(--shadow);
+      border:1px solid rgba(148,163,184,0.35);
+    }
     .muted{color:var(--muted);font-size:13px;}
-    .grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;}
 
-    footer{padding:24px 0 8px;border-top:1px solid var(--border);margin-top:16px;font-size:12px;color:var(--muted);}
-    footer .links a{font-size:12px;color:var(--muted);text-decoration:none;}
+    .grid-2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;}
+    .badge{
+      display:inline-flex;align-items:center;gap:6px;
+      padding:3px 10px;border-radius:999px;
+      background:#e0f2fe;color:#0369a1;
+      font-size:11px;font-weight:600;
+    }
+
+    /* Feature 図プレースホルダ */
+    .figure-box{
+      margin-top:12px;
+      border-radius:14px;
+      padding:14px;
+      background:linear-gradient(135deg,#eff6ff,#dbeafe);
+      border:1px solid rgba(148,163,184,0.7);
+      box-shadow:0 8px 20px rgba(148,163,184,0.5);
+      font-size:12px;
+    }
+    .figure-tag{
+      display:inline-block;
+      padding:2px 8px;
+      border-radius:999px;
+      background:#bfdbfe;
+      font-size:11px;
+      margin-bottom:6px;
+    }
+    .figure-diagram{
+      height:120px;
+      border-radius:10px;
+      background:repeating-linear-gradient(
+        135deg,
+        rgba(148,163,184,0.3) 0,
+        rgba(148,163,184,0.3) 1px,
+        transparent 1px,
+        transparent 8px
+      );
+      position:relative;
+      overflow:hidden;
+    }
+    .bubble{
+      position:absolute;
+      border-radius:999px;
+      border:1px solid rgba(59,130,246,0.7);
+      background:rgba(191,219,254,0.9);
+      padding:6px 10px;
+      font-size:11px;
+      white-space:nowrap;
+    }
+
+    /* データセットカラム例（青枠） */
+    .column-section{margin-top:18px;}
+    .column-header{
+      border-radius:10px 10px 0 0;
+      padding:10px 12px;
+      background:#dbeafe;
+      border:1px solid #93c5fd;
+      font-size:12px;
+      font-weight:600;
+      display:flex;
+      flex-wrap:wrap;
+      gap:6px 12px;
+    }
+    .column-tag{
+      padding:3px 8px;border-radius:999px;
+      background:#eff6ff;border:1px solid #93c5fd;
+      font-size:11px;
+    }
+    .column-body{
+      border-radius:0 0 10px 10px;
+      border:1px solid #93c5fd;
+      border-top:none;
+      padding:14px 14px 12px;
+      background:#f9fbff;
+    }
+    .column-grid{
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:12px 24px;
+      font-size:12px;
+    }
+    .column-block h4{margin:0 0 4px;font-size:13px;}
+    .column-block ul{margin:0;padding-left:18px;}
+    .column-block li{margin-bottom:2px;}
+
+    /* チャットカード共通 */
+    .chat-section{
+      margin-top:20px;
+    }
+    .chat-card-title{
+      display:flex;align-items:center;gap:8px;
+      font-size:15px;font-weight:600;margin-bottom:4px;
+    }
+    .chat-dot{
+      width:8px;height:8px;border-radius:999px;background:#22c55e;
+      box-shadow:0 0 0 4px rgba(34,197,94,0.25);
+    }
+    .chat-iframe-wrap{
+      margin-top:12px;
+      border-radius:14px;
+      overflow:hidden;
+      border:1px solid rgba(148,163,184,0.8);
+      box-shadow:0 12px 28px rgba(15,23,42,0.55);
+      background:#020617;
+    }
+    .chat-iframe{
+      width:100%;
+      height:430px;
+      border:0;
+      display:block;
+    }
+
+    /* 提供プロセス図っぽい枠 */
+    .process-flow{
+      margin-top:16px;
+      border-radius:14px;
+      padding:14px;
+      border:1px dashed rgba(148,163,184,0.9);
+      background:#f9fafb;
+      font-size:12px;
+    }
+    .process-steps{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+      margin-top:8px;
+      font-size:12px;
+    }
+    .step{
+      flex:1 1 140px;
+      background:#e5f2ff;
+      border-radius:999px;
+      padding:6px 10px;
+      text-align:center;
+    }
+
+    footer{
+      padding:24px 0 8px;border-top:1px solid var(--border);
+      margin-top:16px;font-size:12px;color:var(--muted);
+    }
+    footer .links a{
+      font-size:12px;color:var(--muted);text-decoration:none;
+    }
     footer .links a:hover{text-decoration:underline;}
 
-    @media (max-width:960px){.grid{grid-template-columns:1fr;}}
-    @media (max-width:720px){nav{display:none;}.mobile-nav{display:flex;}header{align-items:flex-start;}}
+    @media (max-width:960px){
+      .grid-2{grid-template-columns:1fr;}
+      .column-grid{grid-template-columns:1fr;}
+    }
+    @media (max-width:720px){
+      nav{display:none;}
+      .mobile-nav{display:flex;}
+      header{align-items:flex-start;}
+    }
   </style>
 </head>
 <body>
@@ -74,35 +278,219 @@
     </header>
 
     <main>
+      <!-- Hero -->
       <section class="page-hero">
-        <h1 class="section-title">データセット提供</h1>
-        <p class="section-lead">
-          解析用に加工済みのデータセットを提供することを想定したサービス紹介ページです。
+        <div class="pill">
+          <span class="pill-dot"></span><span>Service / Pharma</span>
+        </div>
+        <h1>データセット提供</h1>
+        <p>
+          製薬企業向けに、匿名加工済みの医療データを研究テーマごとに抽出し、
+          分析しやすいテーブル構成で提供するサービスをイメージしたページです。
+          OMOP CDM に準拠したテーブル構造や、カラム例の雰囲気を本番サイトに近い形で再現しています。
         </p>
       </section>
 
+      <!-- Features -->
       <section>
-        <div class="grid">
+        <h2 class="section-title">特徴（Features）</h2>
+        <div class="grid-2" style="margin-top:14px;">
           <div class="card">
-            <h2 class="section-title">ベースラインデータセット</h2>
+            <div class="badge">Feature 1</div>
+            <h3 style="margin:10px 0 6px;">OMOP CDM に準拠した構造</h3>
             <p class="muted">
-              指定疾患における患者背景や治療概要を把握するための、
-              比較的軽量なデータセットをイメージしています。
+              国際的に標準化された OMOP CDM に準拠したテーブル構成を想定しています。
+              既存の解析ツールやパッケージとの相性が良く、リアルワールドデータ研究の再利用性を高めるイメージです。
+            </p>
+            <div class="figure-box">
+              <div class="figure-tag">図：OMOP 風テーブル構成（イメージ）</div>
+              <div class="figure-diagram">
+                <div class="bubble" style="top:16px;left:14px;">基本情報</div>
+                <div class="bubble" style="top:48px;left:90px;">観察期間</div>
+                <div class="bubble" style="top:26px;right:24px;">受診情報</div>
+                <div class="bubble" style="bottom:20px;left:30px;">傷病情報</div>
+                <div class="bubble" style="bottom:16px;right:40px;">医薬品情報</div>
+              </div>
+              <p class="muted" style="margin-top:6px;">
+                本番サイトの図の代わりに、テーブル同士の関係をシンプルな吹き出しで表現しています。
+              </p>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="badge">Feature 2</div>
+            <h3 style="margin:10px 0 6px;">リサーチニーズに応じた抽出</h3>
+            <p class="muted">
+              対象疾患や観察期間、使用薬剤、検査値などの条件に応じて、
+              解析で使いやすい形に整えたデータセットを抽出することを想定しています。
+            </p>
+            <div class="figure-box">
+              <div class="figure-tag">図：抽出のイメージ</div>
+              <div class="figure-diagram">
+                <div class="bubble" style="top:18px;left:14px;">条件A：疾患</div>
+                <div class="bubble" style="top:52px;left:24px;">条件B：薬剤</div>
+                <div class="bubble" style="bottom:18px;left:40px;">条件C：検査値</div>
+                <div class="bubble" style="top:32px;right:24px;">抽出結果テーブル</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- データセットカラム例 + チャットボット（1つ目） -->
+      <section id="dataset-columns">
+        <div class="card">
+          <h2 class="section-title">データセットカラム例</h2>
+          <p class="section-lead">
+            実際のデータ提供をイメージしやすいように、テーブル構成とカラム名の一例を概念的にまとめたエリアです。
+            本番サイトでは青枠の図で表現されている部分を、CSS で再現しています。
+          </p>
+
+          <!-- 青枠ヘッダー部分 -->
+          <div class="column-section">
+            <div class="column-header">
+              <span>テーブル例：</span>
+              <span class="column-tag">基本情報</span>
+              <span class="column-tag">観察期間</span>
+              <span class="column-tag">受診情報</span>
+              <span class="column-tag">傷病情報</span>
+              <span class="column-tag">傷病情報 詳細</span>
+              <span class="column-tag">医薬品 使用情報</span>
+              <span class="column-tag">配合剤 成分量</span>
+              <span class="column-tag">医薬品 対応表・辞書</span>
+              <span class="column-tag">検査／検体／死亡／イベント など</span>
+            </div>
+
+            <!-- カラム例本体 -->
+            <div class="column-body">
+              <div class="column-grid">
+                <div class="column-block">
+                  <h4>基本情報テーブル例</h4>
+                  <ul>
+                    <li>患者ID</li>
+                    <li>性別</li>
+                    <li>生年／生年月</li>
+                    <li>施設ID など</li>
+                  </ul>
+                </div>
+                <div class="column-block">
+                  <h4>観察期間テーブル例</h4>
+                  <ul>
+                    <li>レコードID</li>
+                    <li>患者ID</li>
+                    <li>観察開始日</li>
+                    <li>観察終了日 など</li>
+                  </ul>
+                </div>
+                <div class="column-block">
+                  <h4>受診情報テーブル例</h4>
+                  <ul>
+                    <li>レコードID</li>
+                    <li>患者ID</li>
+                    <li>入院・外来区分</li>
+                    <li>受診日・入院日・退院日 など</li>
+                  </ul>
+                </div>
+                <div class="column-block">
+                  <h4>傷病情報テーブル例</h4>
+                  <ul>
+                    <li>レコードID</li>
+                    <li>患者ID</li>
+                    <li>病名管理番号</li>
+                    <li>傷病名／ICD10 コード など</li>
+                  </ul>
+                </div>
+                <div class="column-block">
+                  <h4>医薬品使用テーブル例</h4>
+                  <ul>
+                    <li>レコードID</li>
+                    <li>患者ID</li>
+                    <li>YJ コード／一般名</li>
+                    <li>投与開始日・終了日 など</li>
+                  </ul>
+                </div>
+                <div class="column-block">
+                  <h4>検査・検体テーブル例</h4>
+                  <ul>
+                    <li>レコードID</li>
+                    <li>患者ID</li>
+                    <li>JLAC10 コード・検査項目名</li>
+                    <li>検査値・単位・検体種別 など</li>
+                  </ul>
+                </div>
+              </div>
+
+              <p class="muted" style="margin-top:10px;">
+                実際にはこのほかにも、死亡情報やイベント情報、成分量や配合剤区分などを扱うテーブルが存在する想定です。
+              </p>
+            </div>
+          </div>
+
+          <!-- ▼ カラム例のすぐ下：コンテンツ型チャットボット（1つ目） ▼ -->
+          <div class="card chat-section" style="margin-top:18px;">
+            <div class="chat-card-title">
+              <span class="chat-dot"></span>
+              <span>カラム仕様についてチャットで確認（デモ）</span>
+            </div>
+            <p class="muted">
+              「どのテーブルにどの項目が入る想定か」「この研究ならどのカラムが必要か」などの相談を、
+              チャット形式で疑似的に確認するデモ用コンテンツです。
+            </p>
+            <div class="chat-iframe-wrap">
+              <iframe
+                class="chat-iframe"
+                src="https://bchealthcare.click/custom-chatbot/"
+                title="DATuM IDEA デモ用チャットボット（カラム例）"
+                loading="lazy"
+              ></iframe>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 提供プロセス -->
+      <section>
+        <div class="card">
+          <h2 class="section-title">提供プロセス（イメージ）</h2>
+          <p class="section-lead">
+            お問い合わせからデータセットの納品までの流れを、シンプルなフローチャートとしてまとめています。
+            本番サイトの図を参考にしたサマリーです。
+          </p>
+          <div class="process-flow">
+            <div class="muted">ステップの例：</div>
+            <div class="process-steps">
+              <div class="step">1. お問い合わせ</div>
+              <div class="step">2. 要件定義・打合せ</div>
+              <div class="step">3. 認定事業者による審査</div>
+              <div class="step">4. 契約手続き</div>
+              <div class="step">5. データセット納品</div>
+            </div>
+            <p class="muted" style="margin-top:8px;">
+              実際のフローでは、審査期間や見積・契約プロセスなどが案件ごとに異なる想定です。
             </p>
           </div>
-          <div class="card">
-            <h2 class="section-title">アウトカムフォーカスデータセット</h2>
-            <p class="muted">
-              イベント情報やフォローアップ情報を詳細に含む、
-              アウトカム解析向けデータセットを想定しています。
-            </p>
+        </div>
+      </section>
+
+      <!-- ページ最下部：独立したチャットボット（2つ目） -->
+      <section>
+        <div class="card chat-section">
+          <div class="chat-card-title">
+            <span class="chat-dot"></span>
+            <span>データセット提供についてチャットで相談（デモ）</span>
           </div>
-          <div class="card">
-            <h2 class="section-title">カスタムデータセット</h2>
-            <p class="muted">
-              研究目的や解析手法に応じて変数定義・集計単位を調整した、
-              個別設計のデータセットをイメージしたメニューです。
-            </p>
+          <p class="muted">
+            クライアント向けデモでは、このエリアを使って
+            「研究テーマの整理」や「Webツール・解析サービスとの組み合わせ方」などを説明しながら、
+            チャットボットの動きを見せる想定です。
+          </p>
+          <div class="chat-iframe-wrap">
+            <iframe
+              class="chat-iframe"
+              src="https://bchealthcare.click/custom-chatbot/"
+              title="DATuM IDEA デモ用チャットボット（データセット提供）"
+              loading="lazy"
+            ></iframe>
           </div>
         </div>
       </section>
@@ -132,7 +520,8 @@
           {label:'FAQ',href:'faq.html'},
           {label:'Contact',href:'contact.html'},
         ];
-        const choice = prompt('Navigate to: '+items.map(i=>i.label).join(' / '));
+        const label = 'Navigate to: '+items.map(i=>i.label).join(' / ');
+        const choice = prompt(label);
         if(!choice) return;
         const key = choice.toLowerCase();
         const hit = items.find(i=>key.includes(i.label.toLowerCase()));
