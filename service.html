@@ -4,155 +4,216 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>提供サービス一覧 | DATuM IDEA サンプル</title>
-  <meta name="description" content="DATuM IDEA風の疑似サイト — 製薬企業向け・アカデミア／医療機関向けの提供サービス一覧ページ。">
+  <meta name="description" content="DATuM IDEA風の疑似サイト — 提供サービス一覧（ライトテーマ）。">
   <link rel="icon" href="/assets/favicon.png">
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;700&display=swap" rel="stylesheet">
   <style>
     :root{
-      --bg:#0f1724;
-      --card:#0b1220;
-      --muted:#9aa4b2;
-      --accent:#26a69a;
-      --glass: rgba(255,255,255,0.04);
+      --bg:#e0f2fe;
+      --bg-soft:#eff6ff;
+      --card:#ffffff;
+      --muted:#6b7280;
+      --accent:#0ea5e9;
+      --accent-dark:#0284c7;
+      --border:#e5e7eb;
+      --shadow:0 10px 30px rgba(148,163,184,0.35);
       --maxw:1100px;
-      color-scheme: dark;
     }
-    *{box-sizing:border-box}
-    html,body{height:100%}
+    *{box-sizing:border-box;}
+    html,body{height:100%;}
     body{
       margin:0;
-      font-family:'Noto Sans JP', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-      background: linear-gradient(180deg, #071022 0%, #071625 60%);
-      color:#e6eef6;
+      font-family:'Noto Sans JP', system-ui, -apple-system, "Segoe UI", sans-serif;
+      background:linear-gradient(180deg,var(--bg) 0%,var(--bg-soft) 55%,#f9fafb 100%);
+      color:#111827;
       -webkit-font-smoothing:antialiased;
-      -moz-osx-font-smoothing:grayscale;
-      line-height:1.5;
+      line-height:1.6;
     }
+    .wrap{max-width:var(--maxw);margin:0 auto;padding:24px;}
 
-    .wrap{max-width:var(--maxw);margin:0 auto;padding:24px}
-    header{display:flex;align-items:center;justify-content:space-between;padding:12px 0}
-    .brand{display:flex;gap:12px;align-items:center}
+    header{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+      padding:12px 0;
+    }
+    .brand-link{text-decoration:none;color:inherit;}
+    .brand{display:flex;align-items:center;gap:12px;}
     .logo{
       width:44px;height:44px;
-      background:linear-gradient(135deg,var(--accent),#2dd4bf);
-      border-radius:8px;
-      display:flex;align-items:center;justify-content:center;
-      font-weight:700;color:#052025;
-    }
-    nav{display:flex;gap:20px;align-items:center;font-size:14px}
-    nav a{color:var(--muted);text-decoration:none;font-weight:500}
-    nav a:hover{color:#e5e7eb}
-    .cta{
-      background:var(--accent);
-      color:#022;
-      padding:8px 12px;
-      border-radius:10px;
-      text-decoration:none;
-      font-weight:700;
-    }
-    .mobile-nav{display:none}
-
-    section{padding:32px 0}
-    .page-hero{padding:40px 0 16px}
-    .pill{
-      display:inline-flex;align-items:center;gap:8px;
-      border-radius:999px;
-      padding:4px 12px;
-      background:rgba(148,163,184,0.12);
-      font-size:12px;color:var(--muted);
-    }
-    .pill-dot{width:8px;height:8px;border-radius:999px;background:var(--accent)}
-    .page-hero h1{margin:10px 0 8px;font-size:clamp(26px,4vw,34px)}
-    .page-hero p{color:var(--muted);max-width:60ch}
-
-    .card{
-      background:linear-gradient(180deg, rgba(255,255,255,0.02), var(--glass));
-      padding:22px;
+      background:linear-gradient(135deg,#0ea5e9,#38bdf8);
       border-radius:12px;
-      box-shadow:0 6px 20px rgba(2,6,23,0.6);
+      display:flex;align-items:center;justify-content:center;
+      color:#f9fafb;font-weight:700;
+      box-shadow:0 10px 25px rgba(59,130,246,0.5);
+      flex-shrink:0;
     }
-    .muted{color:var(--muted)}
+    .brand-title{font-weight:700;font-size:15px;}
+    .brand-sub{font-size:12px;color:var(--muted);}
 
-    .section-title{font-size:20px;margin-bottom:6px}
-    .section-lead{color:var(--muted);max-width:60ch}
-
-    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
-    .grid-2{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
-    .large{grid-column:span 2}
-
-    .tag-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
-    .tag{
-      font-size:11px;
-      padding:4px 10px;
+    nav{
+      display:flex;
+      flex-wrap:wrap;
+      gap:14px;
+      align-items:center;
+      font-size:13px;
+      justify-content:flex-end;
+    }
+    nav a{
+      text-decoration:none;
+      color:#1f2937;
+      font-weight:500;
+      padding:4px 0;
+    }
+    nav a:hover{color:var(--accent-dark);}
+    nav a.cta-nav{
+      padding:6px 14px;
       border-radius:999px;
-      border:1px solid rgba(148,163,184,0.4);
-      color:var(--muted);
-      background:rgba(15,23,42,0.6);
+      background:var(--accent);
+      color:#f9fafb;
+      box-shadow:0 6px 16px rgba(59,130,246,0.5);
+      font-size:13px;
     }
+    nav a.cta-nav:hover{background:var(--accent-dark);}
+    .mobile-nav{display:none;}
 
-    .link-list{display:flex;flex-direction:column;gap:10px;margin-top:12px}
-    .link-item{
-      display:flex;justify-content:space-between;align-items:center;
-      padding:10px 12px;border-radius:10px;
-      background:rgba(15,23,42,0.8);
-      border:1px solid rgba(148,163,184,0.3);
+    section{padding:24px 0;}
+    .page-hero{padding:40px 0 16px;}
+    .pill{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:4px 12px;
+      border-radius:999px;
+      background:#dbeafe;
+      color:#1d4ed8;
+      font-size:11px;
+      font-weight:600;
+      letter-spacing:.06em;
+      text-transform:uppercase;
+    }
+    .pill-dot{width:8px;height:8px;border-radius:999px;background:#1d4ed8;}
+    .page-hero h1{
+      margin:16px 0 10px;
+      font-size:clamp(26px,4vw,34px);
+    }
+    .page-hero p{
+      margin:0;
+      color:var(--muted);
+      max-width:60ch;
       font-size:14px;
     }
-    .link-item span{color:var(--muted);font-size:12px}
 
-    footer{padding:28px 0;border-top:1px solid rgba(255,255,255,0.03);color:var(--muted)}
-    .links{display:flex;gap:12px;flex-wrap:wrap}
+    .section-title{
+      font-size:18px;
+      margin-bottom:6px;
+      color:#0f172a;
+    }
+    .section-lead{
+      font-size:14px;
+      color:var(--muted);
+      max-width:70ch;
+    }
+    .card{
+      background:var(--card);
+      border-radius:16px;
+      padding:18px 20px;
+      box-shadow:var(--shadow);
+      border:1px solid rgba(148,163,184,0.35);
+    }
+    .muted{color:var(--muted);font-size:13px;}
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(3,minmax(0,1fr));
+      gap:18px;
+    }
+    .grid-2{
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:18px;
+    }
 
-    @media (max-width:900px){
-      nav{display:none}
-      .mobile-nav{display:flex}
-      .grid,.grid-2{grid-template-columns:1fr}
-      .large{grid-column:span 1}
+    .links{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-top:12px;
+    }
+    .link-pill{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding:7px 14px;
+      border-radius:999px;
+      border:1px solid rgba(148,163,184,0.8);
+      background:#ffffff;
+      font-size:13px;
+      color:#111827;
+      text-decoration:none;
+    }
+    .link-pill:hover{
+      border-color:var(--accent);
+      color:var(--accent-dark);
+    }
+
+    footer{
+      padding:24px 0 8px;
+      border-top:1px solid var(--border);
+      margin-top:16px;
+      font-size:12px;
+      color:var(--muted);
+    }
+    footer .links a{
+      font-size:12px;
+      color:var(--muted);
+      text-decoration:none;
+    }
+    footer .links a:hover{text-decoration:underline;}
+
+    @media (max-width:960px){
+      .grid{grid-template-columns:1fr;}
+      .grid-2{grid-template-columns:1fr;}
+    }
+    @media (max-width:720px){
+      nav{display:none;}
+      .mobile-nav{display:flex;}
+      header{align-items:flex-start;}
     }
   </style>
 </head>
 <body>
   <div class="wrap">
-    <!-- 共通ヘッダー -->
     <header>
-      <div class="brand">
-        <div class="logo">DI</div>
-        <div>
-          <div style="font-weight:700">DATuM IDEA — Sample</div>
-          <div class="muted" style="font-size:13px">疑似サイトテンプレート</div>
+      <a href="index.html" class="brand-link">
+        <div class="brand">
+          <div class="logo">DI</div>
+          <div>
+            <div class="brand-title">DATuM IDEA — Sample</div>
+            <div class="brand-sub">医療データ活用サービスの疑似サイト</div>
+          </div>
         </div>
-      </div>
+      </a>
 
       <nav>
-  <a href="index.html">Home</a>
-  <a href="about.html">DATuM IDEAについて</a>
-  <a href="service.html">提供サービス一覧</a>
-  <a href="medicalservice.html">製薬企業向けサービス</a>
-  <a href="academia.html">アカデミア・医療機関向けサービス</a>
-  <a href="database.html">データベースについて</a>
-  <a href="medicaldata.html">医療データについて</a>
-  <a href="webtool.html">Webツール</a>
-  <a href="report.html">解析・レポート</a>
-  <a href="dataset.html">データセット提供</a>
-  <a href="portal.html">ファーマベース</a>
-  <a href="pb_ma_kpi.html">基礎知識（MA KPI）</a>
-  <a href="news.html">お知らせ</a>
-  <a href="download.html">資料DL</a>
-  <a href="faq.html">FAQ</a>
-  <a href="contact.html" class="cta">お問い合わせ</a>
-</nav>
-
+        <a href="about.html">DATuM IDEAについて</a>
+        <a href="service.html">提供サービス一覧</a>
+        <a href="portal.html">ファーマベース</a>
+        <a href="news.html">お知らせ</a>
+        <a href="download.html">資料ダウンロード</a>
+        <a href="faq.html">よくあるご質問</a>
+        <a href="contact.html" class="cta-nav">お問い合わせ</a>
+      </nav>
 
       <div class="mobile-nav">
-        <button id="menuBtn" aria-expanded="false" aria-controls="mnav"
-          style="background:none;border:1px solid rgba(255,255,255,0.04);padding:8px;border-radius:8px;color:var(--muted);font-size:13px">
+        <button id="menuBtn"
+          style="background:#ffffff;border:1px solid var(--border);padding:6px 12px;border-radius:999px;font-size:13px;color:#374151">
           Menu
         </button>
       </div>
     </header>
 
     <main>
-      <!-- ページヒーロー -->
       <section class="page-hero">
         <div class="pill">
           <span class="pill-dot"></span>
@@ -160,123 +221,84 @@
         </div>
         <h1>提供サービス一覧</h1>
         <p>
-          DATuM IDEAでは、医療現場から得られるリアルワールドデータを活用し、
-          製薬企業向け・アカデミア／医療機関向けに、複数のサービスメニューを提供しています。
-          このページは、その全体像を把握するためのハブページです。
+          DATuM IDEA が想定しているサービス領域を、
+          「製薬企業向け」と「アカデミア・医療機関向け」の2つの視点から整理しています。
+          実サービスではなく、構成イメージを掴むためのダミーページです。
         </p>
       </section>
 
-      <!-- サービス全体像 -->
       <section>
         <div class="card">
-          <h2 class="section-title">サービスの全体像</h2>
+          <h2 class="section-title">サービス全体像（イメージ）</h2>
           <p class="section-lead">
-            次世代医療基盤法に基づき収集された電子カルテデータ・医科レセプトデータなどを基盤として、
-            「データベース」「データ」「製薬企業向けサービス」「アカデミア・医療機関向けサービス」といった
-            レイヤーでサービスを構成しています。
+            どのサービスも「医療現場由来のリアルワールドデータを、意思決定に使える形に整える」という軸で統一されています。
           </p>
-          <div class="grid-2" style="margin-top:18px">
+
+          <div class="grid" style="margin-top:20px">
             <div class="card">
-              <h3>データベースについて</h3>
+              <h3>製薬企業向けサービス</h3>
               <p class="muted">
-                どのような医療機関から、どのようなデータが収集されているのか、
-                データベースの構成やカバレッジの概要を説明するページへの導線です。（ダミー）
+                市場性評価やフィジビリティ調査、アウトカム分析など、
+                開発・市販後のあらゆるフェーズでデータを活用するユースケースを想定しています。
               </p>
-              <a href="database.html" class="cta" style="margin-top:8px;display:inline-block">データベースについて（ダミー）</a>
+              <a href="portal.html" class="link-pill" style="margin-top:10px;">ファーマベースを見る</a>
             </div>
+
             <div class="card">
-              <h3>データについて</h3>
+              <h3>アカデミア・医療機関向けサービス</h3>
               <p class="muted">
-                傷病・薬剤・検査などの項目がどのようなテーブル構造で管理されているか、
-                データの仕様やコード体系の概要を紹介するページへの導線です。（ダミー）
+                研究テーマに応じた患者抽出や、共同研究でのデータ解析支援など、
+                臨床研究・トランスレーショナルリサーチでの活用をイメージしています。
               </p>
-              <a href="data.html" class="cta" style="margin-top:8px;display:inline-block">データについて（ダミー）</a>
+              <a href="contact.html" class="link-pill" style="margin-top:10px;">研究相談（お問い合わせへ）</a>
+            </div>
+
+            <div class="card">
+              <h3>データベース・ツール提供</h3>
+              <p class="muted">
+                ダッシュボード、レポートテンプレート、解析用データセットなど、
+                手を動かしやすくするためのツール群を前提としています。
+              </p>
+              <a href="download.html" class="link-pill" style="margin-top:10px;">資料ダウンロードへ</a>
             </div>
           </div>
         </div>
       </section>
 
-      <!-- 2つの提供サービス -->
       <section>
-        <h2 class="section-title">提供サービスの種類</h2>
-        <p class="section-lead">
-          利用者の立場に応じて、「製薬企業向け」と「アカデミア・医療機関向け」の2種類の提供サービスを展開しています。
-        </p>
-
-        <div class="grid" style="margin-top:20px">
+        <h2 class="section-title">主な利用シーン</h2>
+        <div class="grid" style="margin-top:18px">
           <div class="card">
-            <h3>製薬企業向け提供サービス</h3>
+            <h3>フィジビリティ調査</h3>
             <p class="muted">
-              製薬企業のニーズに応じて、専門性の高いリアルワールドデータを
-              「Webツール」「解析・レポート」「データセット提供」の3つの形でご利用いただけるサービス群です。
+              試験デザイン検討前に、対象患者数や治療状況を把握し、
+              妥当な組み入れ条件や観察期間を検討するシーンを想定しています。
             </p>
-            <div class="tag-row">
-              <span class="tag">Webツール</span>
-              <span class="tag">解析・レポート</span>
-              <span class="tag">データセット提供</span>
-            </div>
-            <a href="pharma.html" class="cta" style="margin-top:10px;display:inline-block">製薬企業向けサービスの詳細へ</a>
           </div>
-
           <div class="card">
-            <h3>アカデミア・医療機関向け提供サービス</h3>
+            <h3>治療アウトカム分析</h3>
             <p class="muted">
-              研究対象となる患者集団を、全国のデータから探索できるツールや、
-              研究・論文発表に役立つデータ分析を支援するサービス群です。
+              検査値・投薬・イベント発生状況などを時系列で追い、
+              実臨床下での有効性や安全性を評価するための解析イメージです。
             </p>
-            <div class="tag-row">
-              <span class="tag">研究シーズ探索</span>
-              <span class="tag">アウトカム分析</span>
-              <span class="tag">論文化支援</span>
-            </div>
-            <a href="medical.html" class="cta" style="margin-top:10px;display:inline-block">アカデミア・医療機関向けサービスの詳細へ</a>
           </div>
-
           <div class="card">
-            <h3>資料ダウンロード・お問い合わせ</h3>
+            <h3>疾患領域のインサイト探索</h3>
             <p class="muted">
-              各サービスの詳細資料や活用事例は、資料ダウンロードページからお申し込みいただけます。
-              具体的なご相談やお見積もりは、お問い合わせページより承ります。
+              併存疾患や併用薬、診療科の違いなどを含めた分析を通じて、
+              まだ十分に可視化されていない医療ニーズを把握することを想定しています。
             </p>
-            <div class="tag-row">
-              <span class="tag">資料ダウンロード</span>
-              <span class="tag">お問い合わせ</span>
-            </div>
-            <div style="margin-top:10px;display:flex;flex-wrap:wrap;gap:8px">
-              <a href="download.html" class="cta" style="background:transparent;border:1px solid rgba(148,163,184,0.6);color:var(--muted);padding-inline:14px">
-                資料DLページへ
-              </a>
-              <a href="contact.html" class="cta">お問い合わせへ</a>
-            </div>
           </div>
         </div>
       </section>
 
-      <!-- クイックリンク -->
       <section>
         <div class="card">
-          <h2 class="section-title">クイックリンク</h2>
-          <p class="section-lead">
-            実際のサイトでは、サイドバーや下層ページのメニューとして、
-            以下のようなリンク構造を持たせることを想定しています。（ダミーリンク）
-          </p>
-          <div class="link-list">
-            <div class="link-item">
-              <div>データベースについて</div>
-              <span>database.html</span>
-            </div>
-            <div class="link-item">
-              <div>データについて</div>
-              <span>data.html</span>
-            </div>
-            <div class="link-item">
-              <div>製薬企業向け提供サービス</div>
-              <span>pharma.html</span>
-            </div>
-            <div class="link-item">
-              <div>アカデミア・医療機関向け提供サービス</div>
-              <span>medical.html</span>
-            </div>
+          <h2 class="section-title">関連するページ</h2>
+          <div class="links">
+            <a href="portal.html" class="link-pill">ファーマベース（メディカルポータル）</a>
+            <a href="faq.html" class="link-pill">よくあるご質問</a>
+            <a href="contact.html" class="link-pill">お問い合わせ</a>
           </div>
         </div>
       </section>
@@ -286,38 +308,33 @@
       <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap">
         <div class="muted">© DATuM IDEA — Sample Template</div>
         <div class="links">
-          <a class="muted" href="#">匿名加工医療情報の取扱い（ダミー）</a>
-          <a class="muted" href="#">個人情報の取扱い（ダミー）</a>
-          <a class="muted" href="#">Cookieポリシー（ダミー）</a>
+          <a href="#" class="muted">匿名加工医療情報の取扱い（ダミー）</a>
+          <a href="#" class="muted">個人情報の取扱い（ダミー）</a>
         </div>
       </div>
     </footer>
   </div>
 
   <script>
-    // Mobile menu simple toggle
-    const menuBtn = document.getElementById('menuBtn')
+    const menuBtn = document.getElementById('menuBtn');
     if(menuBtn){
-      menuBtn.addEventListener('click',()=>{
-        const expanded = menuBtn.getAttribute('aria-expanded') === 'true'
-        menuBtn.setAttribute('aria-expanded', String(!expanded))
-
+      menuBtn.addEventListener('click', () => {
         const items = [
-          {label:'Home', href:'index.html'},
           {label:'About', href:'about.html'},
           {label:'Service', href:'service.html'},
-          {label:'Pharma Base', href:'portal.html'},
+          {label:'Portal', href:'portal.html'},
+          {label:'News', href:'news.html'},
+          {label:'Download', href:'download.html'},
           {label:'FAQ', href:'faq.html'},
           {label:'Contact', href:'contact.html'},
-        ]
-        const choice = prompt('Navigate to: ' + items.map(i=>i.label).join(' / '))
-        if(!choice) return
-        const key = choice.toLowerCase()
-        const hit = items.find(i => key.includes(i.label.toLowerCase()))
-        if(hit) location.href = hit.href
-      })
+        ];
+        const choice = prompt('Navigate to: ' + items.map(i=>i.label).join(' / '));
+        if(!choice) return;
+        const key = choice.toLowerCase();
+        const hit = items.find(i => key.includes(i.label.toLowerCase()));
+        if(hit) location.href = hit.href;
+      });
     }
   </script>
 </body>
 </html>
-
