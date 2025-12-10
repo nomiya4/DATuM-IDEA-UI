@@ -172,16 +172,23 @@
     .item-example ul{margin:0;padding-left:18px;}
     .item-example li{margin-bottom:3px;}
 
-    /* ===== チャットボット用カード（強調版） ===== */
+    /* ===== チャットボット用カード ===== */
     .chat-section{
       margin-top:32px;
-      /* card の上書き：少し存在感を強める */
       background:linear-gradient(135deg,#f9fafb,#eff6ff);
       border-radius:22px;
       box-shadow:
         0 16px 34px rgba(15,23,42,0.18),
         0 0 0 2px rgba(37,99,235,0.14);
       border:none;
+      transition: transform 0.25s ease-out, box-shadow 0.25s ease-out;
+    }
+    /* スクロール時にふわっと浮く状態 */
+    .chat-section.floating{
+      transform: translateY(-4px);
+      box-shadow:
+        0 18px 40px rgba(0,0,0,0.18),
+        0 0 0 2px rgba(37,99,235,0.22);
     }
 
     .chat-card-title{
@@ -201,9 +208,7 @@
       align-items:center;
       gap:4px;
     }
-    .chat-card-title span.chat-label-text::before{
-      content:"💬";
-    }
+    /* 雲っぽいアイコンは削除（疑似要素なし） */
 
     .chat-dot{
       width:8px;height:8px;border-radius:999px;background:#22c55e;
@@ -216,7 +221,7 @@
       margin-bottom:10px;
     }
 
-    /* iframeまわり：カードの中でフラットに表示 */
+    /* iframeまわり */
     .chat-iframe-wrap{
       margin-top:12px;
       border-radius:18px;
@@ -496,6 +501,24 @@
       a.addEventListener('click', () => {
         headerNav.classList.remove('open');
       });
+    });
+  }
+
+  // チャットカードをスクロール時に軽く浮かせる
+  const chatCard = document.querySelector('.chat-section');
+  if (chatCard) {
+    window.addEventListener('scroll', () => {
+      const isMobile = window.matchMedia('(max-width: 720px)').matches;
+      if (isMobile) {
+        chatCard.classList.remove('floating');
+        return;
+      }
+      const y = window.scrollY || window.pageYOffset;
+      if (y > 200) {
+        chatCard.classList.add('floating');
+      } else {
+        chatCard.classList.remove('floating');
+      }
     });
   }
   </script>
