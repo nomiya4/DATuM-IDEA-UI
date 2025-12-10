@@ -175,7 +175,7 @@
       header{align-items:flex-start;}
     }
 
-    /* ===== チャットUI ===== */
+    /* ===== チャットUI（faq/indexと同じ挙動） ===== */
     .chatbot-toggle {
       position: fixed;
       right: 24px;
@@ -207,8 +207,11 @@
       overflow: hidden;
       background: #ffffff;
       box-shadow: 0 12px 32px rgba(15,23,42,0.65);
-      display: block;
+      border:1px solid var(--border);
       z-index: 9998;
+    }
+    .chatbot-panel.hidden{
+      display:none;
     }
     .chatbot-panel iframe{
       border:none;
@@ -223,65 +226,60 @@
         height:calc(100vh - 120px);
       }
     }
-    /* ===== チャットUI終わり ===== */
-    /* === チャットポップアップ調整用 ===================== */
 
-/* ポップアップのパネル全体を縦に並べる */
-.chat-panel,
-.chat-popup-panel {
-  display: flex;
-  flex-direction: column;
-  height: min(80vh, 720px);  /* お好みで調整 */
-}
+    /* === チャットポップアップ調整用（iframe高さ100%） ===== */
+    .chat-panel,
+    .chat-popup-panel {
+      display: flex;
+      flex-direction: column;
+      height: min(80vh, 720px);
+    }
+    .chat-panel-body,
+    .chat-popup-body {
+      flex: 1;
+      min-height: 0;
+      padding: 0;
+      background: transparent;
+    }
+    .chat-panel-body iframe,
+    .chat-popup-body iframe,
+    iframe[src*="custom-chatbot"] {
+      width: 100%;
+      height: 100%;
+      border: 0;
+      display: block;
+    }
 
-/* iframe を入れている「中身」の部分（class 名は実ファイルに合わせてOK） */
-.chat-panel-body,
-.chat-popup-body {
-  flex: 1;
-  min-height: 0;
-  padding: 0;              /* 余白をゼロにして iframe にぴったりくっつける */
-  background: transparent;
-}
+    /* === モバイル用ナビゲーション ==================== */
+    @media (max-width: 720px) {
+      header {
+        position: relative;
+      }
 
-/* 中の iframe を「高さ100%・枠なし」にする */
-.chat-panel-body iframe,
-.chat-popup-body iframe,
-iframe[src*="custom-chatbot"] {
-  width: 100%;
-  height: 100%;
-  border: 0;
-  display: block;
-}
-/* === モバイル用ナビゲーション ==================== */
-@media (max-width: 720px) {
-  header {
-    position: relative;
-  }
+      header nav {
+        display: none;                  /* 初期は非表示 */
+        position: absolute;
+        top: 52px;
+        right: 16px;
+        left: 16px;
+        padding: 12px 16px;
+        border-radius: 14px;
+        background: #ffffff;
+        flex-direction: column;
+        gap: 10px;
+        box-shadow: 0 18px 40px rgba(15, 23, 42, 0.35);
+        border: 1px solid rgba(148, 163, 184, 0.35);
+        z-index: 40;
+      }
 
-  header nav {
-    display: none;                  /* 初期は非表示 */
-    position: absolute;
-    top: 52px;
-    right: 16px;
-    left: 16px;
-    padding: 12px 16px;
-    border-radius: 14px;
-    background: #ffffff;
-    flex-direction: column;
-    gap: 10px;
-    box-shadow: 0 18px 40px rgba(15, 23, 42, 0.35);
-    border: 1px solid rgba(148, 163, 184, 0.35);
-    z-index: 40;
-  }
+      header nav a {
+        padding: 4px 0;
+      }
 
-  header nav a {
-    padding: 4px 0;
-  }
-
-  header nav.open {
-    display: flex;                  /* menu ボタンで open を付ける */
-  }
-}
+      header nav.open {
+        display: flex;                  /* menu ボタンで open を付ける */
+      }
+    }
 
   </style>
 </head>
@@ -434,7 +432,7 @@ iframe[src*="custom-chatbot"] {
   </div>
 
   <!-- チャットボット -->
-  <div id="chatbotPanel" class="chatbot-panel" aria-hidden="false">
+  <div id="chatbotPanel" class="chatbot-panel hidden" aria-hidden="true">
     <iframe
       src="https://bchealthcare.click/custom-chatbot/"
       title="DATuM IDEA チャットボット"
@@ -443,10 +441,11 @@ iframe[src*="custom-chatbot"] {
   </div>
 
   <button id="chatbotToggle" class="chatbot-toggle" type="button">
-    閉じる <span>💬</span>
+    チャットで相談 <span>💬</span>
   </button>
 
   <script>
+  // ===== モバイルナビ =====
   const menuBtn = document.getElementById('menuBtn');
   const headerNav = document.querySelector('header nav');
 
@@ -462,10 +461,33 @@ iframe[src*="custom-chatbot"] {
       });
     });
   }
-</script>
+
+  // ===== チャットポップアップ開閉（PC/スマホ共通） =====
+  const chatbotPanel = document.getElementById('chatbotPanel');
+  const chatbotToggle = document.getElementById('chatbotToggle');
+
+  if (chatbotPanel && chatbotToggle) {
+    // 念のため、初期状態を明示しておく
+    chatbotPanel.classList.add('hidden');
+    chatbotPanel.setAttribute('aria-hidden', 'true');
+
+    const setButtonLabel = (isHidden) => {
+      chatbotToggle.innerHTML = isHidden
+        ? 'チャットで相談 <span>💬</span>'
+        : '閉じる';
+    };
+
+    // 初期ラベル
+    setButtonLabel(true);
+
+    // ボタンクリックでトグル
+    chatbotToggle.addEventListener('click', () => {
+      const isHidden = chatbotPanel.classList.toggle('hidden');
+      chatbotPanel.setAttribute('aria-hidden', isHidden ? 'true' : 'false');
+      setButtonLabel(isHidden);
+    });
+  }
+  </script>
 
 </body>
 </html>
-
-
-
