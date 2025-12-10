@@ -4,107 +4,213 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>よくあるご質問 | DATuM IDEA サンプル</title>
-  <meta name="description" content="DATuM IDEA よくあるご質問ページの疑似版。サービス・メール会員に関するFAQのサンプルです。">
+  <meta name="description" content="DATuM IDEA風の疑似サイト — よくあるご質問ページ（ライトテーマ・チャットボットUI付き）。">
   <link rel="icon" href="/assets/favicon.png">
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;700&display=swap" rel="stylesheet">
   <style>
     :root{
-      --bg:#0f1724;
-      --card:#0b1220;
-      --muted:#9aa4b2;
-      --accent:#26a69a;
-      --glass: rgba(255,255,255,0.04);
+      --bg:#e0f2fe;
+      --bg-soft:#eff6ff;
+      --card:#ffffff;
+      --muted:#6b7280;
+      --accent:#0ea5e9;
+      --accent-dark:#0284c7;
+      --border:#e5e7eb;
+      --shadow:0 10px 30px rgba(148,163,184,0.35);
       --maxw:1100px;
-      color-scheme: dark;
     }
-    *{box-sizing:border-box}
-    html,body{height:100%}
+    *{box-sizing:border-box;}
+    html,body{height:100%;}
     body{
       margin:0;
-      font-family:'Noto Sans JP', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-      background: linear-gradient(180deg, #071022 0%, #071625 60%);
-      color:#e6eef6;
+      font-family:'Noto Sans JP', system-ui, -apple-system, "Segoe UI", sans-serif;
+      background:linear-gradient(180deg,var(--bg) 0%,var(--bg-soft) 55%,#f9fafb 100%);
+      color:#111827;
       -webkit-font-smoothing:antialiased;
-      -moz-osx-font-smoothing:grayscale;
-      line-height:1.5;
+      line-height:1.6;
     }
+    .wrap{max-width:var(--maxw);margin:0 auto;padding:24px;}
 
-    .wrap{max-width:var(--maxw);margin:0 auto;padding:24px}
-    header{display:flex;align-items:center;justify-content:space-between;padding:12px 0}
-    .brand{display:flex;gap:12px;align-items:center}
+    header{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+      padding:12px 0;
+    }
+    .brand-link{text-decoration:none;color:inherit;}
+    .brand{display:flex;align-items:center;gap:12px;}
     .logo{
       width:44px;height:44px;
-      background:linear-gradient(135deg,var(--accent),#2dd4bf);
-      border-radius:8px;
-      display:flex;align-items:center;justify-content:center;
-      font-weight:700;color:#052025;
-    }
-    nav{display:flex;gap:20px;align-items:center;font-size:14px}
-    nav a{color:var(--muted);text-decoration:none;font-weight:500}
-    nav a:hover{color:#e5e7eb}
-    .cta{
-      background:var(--accent);
-      color:#022;
-      padding:8px 12px;
-      border-radius:10px;
-      text-decoration:none;
-      font-weight:700;
-    }
-    .mobile-nav{display:none}
-
-    section{padding:32px 0}
-    .page-hero{padding:40px 0 16px}
-    .page-hero h1{margin:10px 0 8px;font-size:clamp(26px,4vw,34px)}
-    .page-hero p{color:var(--muted);max-width:60ch}
-    .pill{
-      display:inline-flex;align-items:center;gap:8px;
-      border-radius:999px;
-      padding:4px 12px;
-      background:rgba(148,163,184,0.12);
-      font-size:12px;color:var(--muted);
-    }
-    .pill-dot{width:8px;height:8px;border-radius:999px;background:var(--accent)}
-
-    .section-title{font-size:20px;margin-bottom:6px}
-    .section-lead{color:var(--muted);max-width:60ch}
-
-    .card{
-      background:linear-gradient(180deg, rgba(255,255,255,0.02), var(--glass));
-      padding:22px;
+      background:linear-gradient(135deg,#0ea5e9,#38bdf8);
       border-radius:12px;
-      box-shadow:0 6px 20px rgba(2,6,23,0.6);
+      display:flex;align-items:center;justify-content:center;
+      color:#f9fafb;font-weight:700;
+      box-shadow:0 10px 25px rgba(59,130,246,0.5);
+      flex-shrink:0;
+    }
+    .brand-title{font-weight:700;font-size:15px;}
+    .brand-sub{font-size:12px;color:var(--muted);}
+
+    nav{
+      display:flex;
+      flex-wrap:wrap;
+      gap:14px;
+      align-items:center;
+      font-size:13px;
+      justify-content:flex-end;
+    }
+    nav a{
+      text-decoration:none;
+      color:#1f2937;
+      font-weight:500;
+      padding:4px 0;
+    }
+    nav a:hover{color:var(--accent-dark);}
+    nav a.cta-nav{
+      padding:6px 14px;
+      border-radius:999px;
+      background:var(--accent);
+      color:#f9fafb;
+      box-shadow:0 6px 16px rgba(59,130,246,0.5);
+      font-size:13px;
+    }
+    nav a.cta-nav:hover{background:var(--accent-dark);}
+    .mobile-nav{display:none;}
+
+    section{padding:24px 0;}
+    .page-hero{padding:40px 0 16px;}
+    .pill{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:4px 12px;
+      border-radius:999px;
+      background:#dbeafe;
+      color:#1d4ed8;
+      font-size:11px;
+      font-weight:600;
+      letter-spacing:.06em;
+      text-transform:uppercase;
+    }
+    .pill-dot{width:8px;height:8px;border-radius:999px;background:#1d4ed8;}
+    .page-hero h1{
+      margin:16px 0 10px;
+      font-size:clamp(26px,4vw,34px);
+    }
+    .page-hero p{
+      margin:0;
+      color:var(--muted);
+      max-width:60ch;
+      font-size:14px;
     }
 
-    .faq-section{margin-top:12px;display:flex;flex-direction:column;gap:10px}
+    .section-title{
+      font-size:18px;
+      margin-bottom:6px;
+      color:#0f172a;
+    }
+    .section-lead{
+      font-size:14px;
+      color:var(--muted);
+      max-width:70ch;
+    }
+    .card{
+      background:var(--card);
+      border-radius:16px;
+      padding:18px 20px;
+      box-shadow:var(--shadow);
+      border:1px solid rgba(148,163,184,0.35);
+    }
+    .muted{color:var(--muted);font-size:13px;}
+
+    .faq-section{
+      margin-top:16px;
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:16px;
+    }
     details{
-      background:rgba(15,23,42,0.8);
-      border-radius:10px;
-      border:1px solid rgba(148,163,184,0.4);
+      border-radius:12px;
+      border:1px solid var(--border);
+      background:#ffffff;
       padding:10px 12px;
+      font-size:13px;
     }
     summary{
       cursor:pointer;
-      list-style:none;
       font-weight:600;
-      font-size:14px;
+      list-style:none;
     }
-    summary::-webkit-details-marker{display:none}
-    details[open]{background:rgba(15,23,42,0.9)}
-    .faq-answer{
-      margin-top:10px;
-      font-size:13px;
+    summary::-webkit-details-marker{display:none;}
+    summary::before{
+      content:"Q";
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      width:20px;height:20px;
+      margin-right:8px;
+      border-radius:999px;
+      background:#dbeafe;
+      color:#1d4ed8;
+      font-size:12px;
+    }
+    details[open] summary::before{
+      background:#1d4ed8;
+      color:#ffffff;
+    }
+    details p{
+      margin:8px 0 0;
       color:var(--muted);
     }
 
-    footer{padding:28px 0;border-top:1px solid rgba(255,255,255,0.03);color:var(--muted)}
-    .links{display:flex;gap:12px;flex-wrap:wrap}
-
-    @media (max-width:900px){
-      nav{display:none}
-      .mobile-nav{display:flex}
+    .links{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-top:12px;
+    }
+    .link-pill{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding:7px 14px;
+      border-radius:999px;
+      border:1px solid rgba(148,163,184,0.8);
+      background:#ffffff;
+      font-size:13px;
+      color:#111827;
+      text-decoration:none;
+    }
+    .link-pill:hover{
+      border-color:var(--accent);
+      color:var(--accent-dark);
     }
 
-    /* ===== 自作チャットUIウィジェット用スタイル ===== */
+    footer{
+      padding:24px 0 8px;
+      border-top:1px solid var(--border);
+      margin-top:16px;
+      font-size:12px;
+      color:var(--muted);
+    }
+    footer .links a{
+      font-size:12px;
+      color:var(--muted);
+      text-decoration:none;
+    }
+    footer .links a:hover{text-decoration:underline;}
+
+    @media (max-width:900px){
+      .faq-section{grid-template-columns:1fr;}
+    }
+    @media (max-width:720px){
+      nav{display:none;}
+      .mobile-nav{display:flex;}
+      header{align-items:flex-start;}
+    }
+
+    /* ===== チャットUI（このページとポータルのみ） ===== */
     .chatbot-toggle {
       position: fixed;
       right: 24px;
@@ -117,86 +223,76 @@
       font-weight: 700;
       background: #1C64F2;
       color: #fff;
-      box-shadow: 0 8px 20px rgba(15,23,42,0.5);
+      box-shadow: 0 8px 20px rgba(15,23,42,0.4);
       cursor: pointer;
     }
-    .chatbot-toggle span {
-      margin-left: 4px;
-      font-size: 16px;
+    .chatbot-toggle span{
+      margin-left:4px;
+      font-size:16px;
     }
-    .chatbot-panel {
+    .chatbot-panel{
       position: fixed;
       right: 24px;
       bottom: 72px;
       width: 24rem;
       max-width: calc(100vw - 40px);
-      height: 40rem;
+      height: 38rem;
       max-height: calc(100vh - 120px);
       border-radius: 16px;
       overflow: hidden;
-      background: #fff;
-      box-shadow: 0 12px 32px rgba(15,23,42,0.75);
-      display: none;
+      background: #ffffff;
+      box-shadow: 0 12px 32px rgba(15,23,42,0.65);
+      display: block;
       z-index: 9998;
     }
-    .chatbot-panel iframe {
-      border: none;
-      width: 100%;
-      height: 100%;
+    .chatbot-panel iframe{
+      border:none;
+      width:100%;
+      height:100%;
     }
     @media (max-width:600px){
-      .chatbot-panel {
-        right: 10px;
-        bottom: 74px;
-        width: calc(100vw - 20px);
-        height: calc(100vh - 120px);
+      .chatbot-panel{
+        right:10px;
+        bottom:74px;
+        width:calc(100vw - 20px);
+        height:calc(100vh - 120px);
       }
     }
-    /* ===== 自作チャットUIウィジェット用スタイル 終わり ===== */
+    /* ===== チャットUI終わり ===== */
   </style>
 </head>
 <body>
   <div class="wrap">
-    <!-- 共通ヘッダー -->
     <header>
-      <div class="brand">
-        <div class="logo">DI</div>
-        <div>
-          <div style="font-weight:700">DATuM IDEA — Sample</div>
-          <div class="muted" style="font-size:13px">疑似サイトテンプレート</div>
+      <a href="index.html" class="brand-link">
+        <div class="brand">
+          <div class="logo">DI</div>
+          <div>
+            <div class="brand-title">DATuM IDEA — Sample</div>
+            <div class="brand-sub">医療データ活用サービスの疑似サイト</div>
+          </div>
         </div>
-      </div>
+      </a>
 
       <nav>
-  <a href="index.html">Home</a>
-  <a href="about.html">DATuM IDEAについて</a>
-  <a href="service.html">提供サービス一覧</a>
-  <a href="medicalservice.html">製薬企業向けサービス</a>
-  <a href="academia.html">アカデミア・医療機関向けサービス</a>
-  <a href="database.html">データベースについて</a>
-  <a href="medicaldata.html">医療データについて</a>
-  <a href="webtool.html">Webツール</a>
-  <a href="report.html">解析・レポート</a>
-  <a href="dataset.html">データセット提供</a>
-  <a href="portal.html">ファーマベース</a>
-  <a href="pb_ma_kpi.html">基礎知識（MA KPI）</a>
-  <a href="news.html">お知らせ</a>
-  <a href="download.html">資料DL</a>
-  <a href="faq.html">FAQ</a>
-  <a href="contact.html" class="cta">お問い合わせ</a>
-</nav>
-
+        <a href="about.html">DATuM IDEAについて</a>
+        <a href="service.html">提供サービス一覧</a>
+        <a href="portal.html">ファーマベース</a>
+        <a href="news.html">お知らせ</a>
+        <a href="download.html">資料ダウンロード</a>
+        <a href="faq.html">よくあるご質問</a>
+        <a href="contact.html" class="cta-nav">お問い合わせ</a>
+      </nav>
 
       <div class="mobile-nav">
-        <button id="menuBtn" aria-expanded="false" aria-controls="mnav"
-          style="background:none;border:1px solid rgba(255,255,255,0.04);padding:8px;border-radius:8px;color:var(--muted);font-size:13px">
+        <button id="menuBtn"
+          style="background:#ffffff;border:1px solid var(--border);padding:6px 12px;border-radius:999px;font-size:13px;color:#374151">
           Menu
         </button>
       </div>
     </header>
 
     <main>
-      <!-- ページヒーロー -->
       <section class="page-hero">
         <div class="pill">
           <span class="pill-dot"></span>
@@ -205,113 +301,94 @@
         <h1>よくあるご質問</h1>
         <p>
           DATuM IDEA のサービスやメール会員に関して、
-          よくお寄せいただくご質問をまとめました。
-          ご不明点が解決しない場合は、お問い合わせフォームよりご連絡ください。
+          よくお寄せいただきそうなご質問をまとめたダミーページです。
+          実際の運用では、ここから詳細ページやお問い合わせにつながる想定です。
         </p>
       </section>
 
-      <!-- サービスに関するFAQ -->
       <section>
         <div class="card">
-          <h2 class="section-title">サービスに関するよくあるご質問</h2>
+          <h2 class="section-title">サービス全般について</h2>
           <p class="section-lead">
-            製薬企業向け・アカデミア／医療機関向けサービスに共通するご質問と、
-            それぞれのサービス特有のご質問を掲載する想定のブロックです。:contentReference[oaicite:4]{index=4}
+            サービスの対象者や利用条件など、共通してよく確認されるポイントを想定したQ&Aです。
           </p>
 
           <div class="faq-section">
             <details>
-              <summary>Q. DATuM IDEA ではどのようなデータを利用できますか？</summary>
-              <div class="faq-answer">
-                A. 次世代医療基盤法に基づき、認定事業者から収集された
-                匿名加工済みの電子カルテデータや医科レセプトデータなどを取り扱います。
-                データソースや収集体制の詳細は「データベースについて」でご案内しています。:contentReference[oaicite:5]{index=5}
-              </div>
+              <summary>サービスの対象となるお客さまを教えてください。</summary>
+              <p>
+                本サンプルでは、製薬企業、アカデミア、医療機関の3つを主な利用者像として想定しています。
+                実際には、プロジェクト単位で個別にご相談いただく形になります。
+              </p>
             </details>
-
             <details>
-              <summary>Q. 製薬企業向けとアカデミア・医療機関向けのサービスの違いは何ですか？</summary>
-              <div class="faq-answer">
-                A. いずれも同じデータベースをベースとしていますが、
-                製薬企業向けは開発・市販後のエビデンス創出やフィジビリティ評価、
-                アカデミア・医療機関向けは臨床研究・学会発表などでの活用を想定したメニュー構成になっています。:contentReference[oaicite:6]{index=6}
-              </div>
+              <summary>個人情報の取り扱いはどのようになっていますか？</summary>
+              <p>
+                実サービスでは、匿名加工医療情報として適切なルールに従って取り扱う想定です。
+                このページでは構成イメージのみを表現しており、実データは扱っていません。
+              </p>
             </details>
-
             <details>
-              <summary>Q. サービスの利用料金について教えてください。</summary>
-              <div class="faq-answer">
-                A. ご利用範囲（対象疾患、期間、利用メニューなど）によって料金が異なります。
-                個別のお見積もりとなりますので、「お問い合わせ」ページからご相談ください。:contentReference[oaicite:7]{index=7}
-              </div>
+              <summary>トライアル利用やデモは可能ですか？</summary>
+              <p>
+                実際のサービスでは、プロジェクト内容に応じて個別に検討する想定です。
+                詳細はお問い合わせページからご相談いただく形になります。
+              </p>
             </details>
-
             <details>
-              <summary>Q. トライアル利用は可能ですか？</summary>
-              <div class="faq-answer">
-                A. 一定期間のトライアルプランや、デモ環境を用いたご説明を
-                ご案内できる場合があります。詳細は営業担当もしくはお問い合わせ窓口までご相談ください。:contentReference[oaicite:8]{index=8}
-              </div>
+              <summary>費用感について教えてください。</summary>
+              <p>
+                利用するデータ量や分析内容に応じて変動するため、ここでは具体的な金額は記載していません。
+                おおまかなイメージを知りたい場合も、まずはお問い合わせいただく前提です。
+              </p>
             </details>
           </div>
         </div>
       </section>
 
-      <!-- メール会員に関するFAQ -->
       <section>
         <div class="card">
-          <h2 class="section-title">メール会員に関するよくあるご質問</h2>
-          <p class="section-lead">
-            サービスの最新情報やセミナー情報などをお届けする
-            「DATuM IDEA メール会員」に関するご質問を想定したブロックです。:contentReference[oaicite:9]{index=9}
-          </p>
-
+          <h2 class="section-title">データ・解析に関するご質問</h2>
           <div class="faq-section">
             <details>
-              <summary>Q. メール会員に登録すると、どのような情報が届きますか？</summary>
-              <div class="faq-answer">
-                A. DATuM IDEA のサービスアップデート情報、各種セミナーやイベントのご案内、
-                コンテンツ更新情報などを不定期にお届けします。
-              </div>
+              <summary>どのようなデータソースを利用していますか？</summary>
+              <p>
+                電子カルテデータや医科レセプトデータなど、医療機関由来のリアルワールドデータを想定しています。
+                実際の構成は、認定事業者や参加施設によって異なります。
+              </p>
             </details>
-
             <details>
-              <summary>Q. メール会員登録は有料ですか？</summary>
-              <div class="faq-answer">
-                A. メール会員登録は無料です。
-                ただし、サービス本体の利用には別途契約が必要となります。
-              </div>
+              <summary>どの程度の期間データを遡って分析できますか？</summary>
+              <p>
+                施設やデータ提供スキームによって異なりますが、数年〜10年程度のタイムラインを想定したUI構成にしています。
+              </p>
             </details>
-
             <details>
-              <summary>Q. メール配信を停止したいときはどうすればよいですか？</summary>
-              <div class="faq-answer">
-                A. メール本文のフッターに記載されている配信停止用URLから、
-                いつでも配信停止手続きを行っていただけます。
-              </div>
+              <summary>自社で用意したデータを持ち込むことはできますか？</summary>
+              <p>
+                このサンプルでは想定のみですが、実運用ではID連結や統合解析のニーズに応じて個別に検討する前提です。
+              </p>
             </details>
-
             <details>
-              <summary>Q. 登録したメールアドレスを変更できますか？</summary>
-              <div class="faq-answer">
-                A. 変更をご希望の場合は、お問い合わせフォームから
-                「メールアドレス変更希望」の旨を添えてご連絡ください。
-              </div>
+              <summary>統計解析やレポート作成も依頼できますか？</summary>
+              <p>
+                Webダッシュボードだけでなく、解析・レポートサービスも用意している世界観を前提としているため、
+                プロジェクトに応じて支援可能としています。
+              </p>
             </details>
           </div>
         </div>
       </section>
 
-      <!-- 個別問い合わせ導線 -->
       <section>
         <div class="card">
-          <h2 class="section-title">FAQで解決しない場合</h2>
+          <h2 class="section-title">お問い合わせ・サポート</h2>
           <p class="section-lead">
-            FAQに掲載されていないご質問や、より具体的なご相談については、
-            お問い合わせフォームからお気軽にご連絡ください。
+            FAQで解決しない場合は、お問い合わせフォームまたはチャットボットからご相談いただく想定です。
           </p>
-          <div style="margin-top:16px">
-            <a href="contact.html" class="cta">お問い合わせページへ</a>
+          <div class="links">
+            <a href="contact.html" class="link-pill">お問い合わせフォームへ</a>
+            <a href="portal.html" class="link-pill">ファーマベースを確認する</a>
           </div>
         </div>
       </section>
@@ -321,16 +398,15 @@
       <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap">
         <div class="muted">© DATuM IDEA — Sample Template</div>
         <div class="links">
-          <a class="muted" href="#">匿名加工医療情報の取扱い（ダミー）</a>
-          <a class="muted" href="#">個人情報の取扱い（ダミー）</a>
-          <a class="muted" href="#">Cookieポリシー（ダミー）</a>
+          <a href="#" class="muted">匿名加工医療情報の取扱い（ダミー）</a>
+          <a href="#" class="muted">個人情報の取扱い（ダミー）</a>
         </div>
       </div>
     </footer>
   </div>
 
-  <!-- ▼▼ チャットボット：FAQにも表示する ▼▼ -->
-  <div id="chatbotPanel" class="chatbot-panel" aria-hidden="false" style="display:block;">
+  <!-- チャットボット -->
+  <div id="chatbotPanel" class="chatbot-panel" aria-hidden="false">
     <iframe
       src="https://bchealthcare.click/custom-chatbot/"
       title="DATuM IDEA チャットボット"
@@ -341,33 +417,30 @@
   <button id="chatbotToggle" class="chatbot-toggle" type="button">
     閉じる <span>💬</span>
   </button>
-  <!-- ▲▲ チャットボット ▲▲ -->
 
   <script>
-    // Mobile menu simple toggle（疑似版）
-    const menuBtn = document.getElementById('menuBtn')
+    // Mobile menu
+    const menuBtn = document.getElementById('menuBtn');
     if(menuBtn){
-      menuBtn.addEventListener('click',()=>{
-        const expanded = menuBtn.getAttribute('aria-expanded') === 'true'
-        menuBtn.setAttribute('aria-expanded', String(!expanded))
-
+      menuBtn.addEventListener('click', () => {
         const items = [
-          {label:'Home', href:'index.html'},
           {label:'About', href:'about.html'},
           {label:'Service', href:'service.html'},
-          {label:'Pharma Base', href:'portal.html'},
+          {label:'Portal', href:'portal.html'},
+          {label:'News', href:'news.html'},
+          {label:'Download', href:'download.html'},
           {label:'FAQ', href:'faq.html'},
           {label:'Contact', href:'contact.html'},
-        ]
-        const choice = prompt('Navigate to: ' + items.map(i=>i.label).join(' / '))
-        if(!choice) return
-        const key = choice.toLowerCase()
-        const hit = items.find(i => key.includes(i.label.toLowerCase()))
-        if(hit) location.href = hit.href
-      })
+        ];
+        const choice = prompt('Navigate to: ' + items.map(i=>i.label).join(' / '));
+        if(!choice) return;
+        const key = choice.toLowerCase();
+        const hit = items.find(i => key.includes(i.label.toLowerCase()));
+        if(hit) location.href = hit.href;
+      });
     }
 
-    // 自作チャットUIの開閉
+    // チャットUI開閉
     const chatbotToggle = document.getElementById('chatbotToggle');
     const chatbotPanel  = document.getElementById('chatbotPanel');
 
@@ -378,23 +451,18 @@
           : 'チャットで相談 <span>💬</span>';
       };
 
-      // 初期状態：開いている
-      setLabel(true);
+      let isOpen = true;
+      setLabel(isOpen);
+      chatbotPanel.style.display = 'block';
+      chatbotPanel.setAttribute('aria-hidden','false');
 
       chatbotToggle.addEventListener('click', () => {
-        const isOpen = chatbotPanel.style.display === 'block';
-        if (isOpen) {
-          chatbotPanel.style.display = 'none';
-          chatbotPanel.setAttribute('aria-hidden', 'true');
-          setLabel(false);
-        } else {
-          chatbotPanel.style.display = 'block';
-          chatbotPanel.setAttribute('aria-hidden', 'false');
-          setLabel(true);
-        }
+        isOpen = !isOpen;
+        chatbotPanel.style.display = isOpen ? 'block' : 'none';
+        chatbotPanel.setAttribute('aria-hidden', isOpen ? 'false' : 'true');
+        setLabel(isOpen);
       });
     }
   </script>
 </body>
 </html>
-
