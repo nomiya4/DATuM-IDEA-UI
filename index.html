@@ -10,18 +10,17 @@
 
   <style>
     :root{
-      --bg:#e0f2fe;
-      --bg-soft:#eff6ff;
-      --card:#ffffff;
-      --muted:#6b7280;
-      --accent:#0ea5e9;
-      --accent-dark:#0284c7;
-      --border:#e5e7eb;
+      --bg:#e0f2fe;              /* 背景：青寄り */
+      --card:#ffffff;            /* カード背景 */
+      --muted:#6b7280;           /* 説明文用グレー */
+      --accent:#0ea5e9;          /* メインカラー（水色系ブルー） */
+      --accent-dark:#0284c7;     /* ホバー時 */
+      --border:#e5e7eb;          /* 枠線 */
       --maxw:1100px;
     }
 
     *{box-sizing:border-box;}
-    html,body{height:100%}
+    html,body{height:100%;}
     body{
       margin:0;
       font-family:'Noto Sans JP', system-ui,-apple-system,"Segoe UI",sans-serif;
@@ -209,14 +208,17 @@
         width:calc(100vw - 20px);
       }
     }
-
     /* === チャットポップアップ調整用 ===================== */
+
+    /* ポップアップのパネル全体を縦に並べる */
     .chat-panel,
     .chat-popup-panel {
       display: flex;
       flex-direction: column;
       height: min(80vh, 720px);
     }
+
+    /* スクロール領域の親要素をフレックス内で伸ばす */
     .chat-panel-body,
     .chat-popup-body {
       flex: 1;
@@ -458,8 +460,9 @@
 
   </div>
 
-  <!-- ===== チャットUI（FAQと同じ挙動） ===== -->
+  <!-- ===== チャットUI ===== -->
   <div id="chatbotPanel" class="chatbot-panel hidden" aria-hidden="true">
+    <!-- 自作UI版のエンドポイント -->
     <iframe src="https://bchealthcare.click/custom-chatbot/" title="DATuM IDEA チャットボット" loading="lazy"></iframe>
   </div>
 
@@ -468,7 +471,7 @@
   </button>
 
   <script>
-  // ===== モバイルナビ（FAQと同じJS） =====
+  // ===== モバイルナビ =====
   const menuBtn = document.getElementById('menuBtn');
   const headerNav = document.querySelector('header nav');
 
@@ -485,30 +488,31 @@
     });
   }
 
-  // ===== チャットポップアップ開閉（FAQ版を踏襲） =====
+  // ===== チャットポップアップ開閉（PC/スマホ共通） =====
   const chatbotPanel = document.getElementById('chatbotPanel');
   const chatbotToggle = document.getElementById('chatbotToggle');
 
   if (chatbotPanel && chatbotToggle) {
-    // 画面幅でモバイル判定（768px 以下をモバイル扱い）
-    const isMobile = window.matchMedia("(max-width: 768px)").matches;
+    // 念のため、初期状態を明示的にそろえる
+    chatbotPanel.classList.add('hidden');
+    chatbotPanel.setAttribute('aria-hidden', 'true');
 
-    // 初期状態：PC では開いておく / モバイルでは閉じておく
-    if (!isMobile) {
-      chatbotPanel.classList.remove('hidden');
-      chatbotPanel.setAttribute('aria-hidden', 'false');
-      chatbotToggle.textContent = '閉じる';
-    } else {
-      chatbotPanel.classList.add('hidden');
-      chatbotPanel.setAttribute('aria-hidden', 'true');
-      chatbotToggle.textContent = 'チャットで相談';
-    }
+    const setButtonLabel = (isHidden) => {
+      // 隠れているとき：チャットで相談 + アイコン
+      // 表示中：閉じる
+      chatbotToggle.innerHTML = isHidden
+        ? 'チャットで相談 <span>💬</span>'
+        : '閉じる';
+    };
+
+    // 初期ラベル
+    setButtonLabel(true);
 
     // ボタン押下でトグル
     chatbotToggle.addEventListener('click', () => {
       const isHidden = chatbotPanel.classList.toggle('hidden');
       chatbotPanel.setAttribute('aria-hidden', isHidden ? 'true' : 'false');
-      chatbotToggle.textContent = isHidden ? 'チャットで相談' : '閉じる';
+      setButtonLabel(isHidden);
     });
   }
   </script>
