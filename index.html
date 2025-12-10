@@ -10,11 +10,11 @@
 
   <style>
     :root{
-      --bg:#f3f4f8;              /* ページ全体の背景（ライト） */
-      --card:#ffffff;            /* カード背景（白） */
+      --bg:#e0f2fe;              /* 背景：青寄り */
+      --card:#ffffff;            /* カード背景 */
       --muted:#6b7280;           /* 説明文用グレー */
-      --accent:#0ea5e9;          /* メインカラー（水系ブルー） */
-      --accent-dark:#0284c7;
+      --accent:#0ea5e9;          /* メインカラー（水色系ブルー） */
+      --accent-dark:#0284c7;     /* ホバー時 */
       --border:#e5e7eb;          /* 枠線 */
       --maxw:1100px;
     }
@@ -24,8 +24,8 @@
     body{
       margin:0;
       font-family:'Noto Sans JP', system-ui;
-      background: linear-gradient(180deg, #eef2ff 0%, #f9fafb 60%);
-      color:#111827; /* 黒系 */
+      background: linear-gradient(180deg, #e0f2fe 0%, #eff6ff 45%, #f9fafb 100%);
+      color:#111827;
       -webkit-font-smoothing:antialiased;
       line-height:1.6;
     }
@@ -42,15 +42,16 @@
     }
     .logo{
       width:44px;height:44px;
-      background:linear-gradient(135deg,#38bdf8,#0ea5e9);
-      border-radius:8px;
+      background:linear-gradient(135deg,#0ea5e9,#38bdf8);
+      border-radius:12px;
       display:flex;align-items:center;justify-content:center;
       color:white;font-weight:700;
+      box-shadow:0 8px 20px rgba(37,99,235,0.25);
     }
 
     nav{display:flex;gap:20px;align-items:center}
     nav a{
-      color:#374151;
+      color:#1f2937;
       text-decoration:none;
       font-weight:500;
     }
@@ -61,32 +62,35 @@
     .cta{
       background:var(--accent);
       color:#ffffff;
-      padding:8px 12px;
-      border-radius:10px;
+      padding:8px 16px;
+      border-radius:999px;
       text-decoration:none;
       font-weight:700;
+      box-shadow:0 8px 18px rgba(14,165,233,0.35);
     }
     .cta:hover{
       background:var(--accent-dark);
     }
 
+    .mobile-nav{display:none}
+
     /* hero */
     .hero{
-      padding:56px 0;
+      padding:56px 0 40px;
       display:grid;
       grid-template-columns:1fr 420px;
       gap:36px;
       align-items:center;
     }
     .hero .eyebrow{
-      color:var(--accent);
+      color:#0ea5e9;
       font-weight:700;
-      letter-spacing:0.06em;
+      letter-spacing:0.08em;
     }
     .hero h1{
       margin:10px 0 8px;
-      font-size:clamp(28px,4.2vw,40px);
-      color:#1e293b;
+      font-size:clamp(30px,4.5vw,42px);
+      color:#0f172a;
     }
     .hero p{
       color:var(--muted);
@@ -97,25 +101,25 @@
       background:var(--card);
       border:1px solid var(--border);
       padding:22px;
-      border-radius:12px;
-      box-shadow:0 6px 20px rgba(0,0,0,0.06);
+      border-radius:16px;
+      box-shadow:0 12px 30px rgba(15,23,42,0.08);
     }
 
     .features{
       display:grid;
       grid-template-columns:repeat(3,1fr);
-      gap:18px;
+      gap:12px;
       margin-top:18px;
     }
     .feature{
-      padding:14px;
-      border-radius:10px;
-      background:#f9fafb;
-      border:1px solid #e2e8f0;
+      padding:12px;
+      border-radius:12px;
+      background:#eff6ff;
+      border:1px solid #bfdbfe;
     }
 
     /* sections */
-    section{padding:48px 0}
+    section{padding:32px 0}
     .grid{
       display:grid;
       grid-template-columns:repeat(3,1fr);
@@ -159,7 +163,7 @@
       font-weight: 700;
       background: var(--accent);
       color: #fff;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+      box-shadow: 0 10px 28px rgba(14,165,233,0.6);
       cursor: pointer;
     }
 
@@ -171,12 +175,12 @@
       max-width: calc(100vw - 40px);
       height: 40rem;
       max-height: calc(100vh - 120px);
-      border-radius: 16px;
+      border-radius: 20px;
       overflow: hidden;
       background: #ffffff;
       border:1px solid var(--border);
-      box-shadow: 0 12px 32px rgba(0,0,0,0.15);
-      display: none;
+      box-shadow: 0 14px 40px rgba(15,23,42,0.2);
+      display: block;          /* 初期表示：開いた状態 */
       z-index: 9998;
     }
     .chatbot-panel iframe{
@@ -213,7 +217,7 @@
         <a href="#contact" class="cta">Contact</a>
       </nav>
 
-      <div class="mobile-nav" style="display:none">
+      <div class="mobile-nav">
         <button 
           id="menuBtn"
           style="background:white;border:1px solid #d1d5db;padding:8px;border-radius:8px;color:#374151">
@@ -227,7 +231,7 @@
       <section class="hero">
         <div>
           <div class="eyebrow">Design • Data • Strategy</div>
-          <h1>人に寄り添うデータデザインとプロダクト開発</h1>
+          <h1>人に寄り添うデータデザインと<br>プロダクト開発</h1>
           <p>DATuM IDEAをイメージしたダミーページ。説明文を入れて事業概要を伝えます。</p>
 
           <div style="margin-top:20px;display:flex;gap:12px;align-items:center">
@@ -236,28 +240,28 @@
           </div>
 
           <!-- Hero card -->
-          <div class="card" style="margin-top:20px">
+          <div class="card" style="margin-top:22px">
             <div style="display:flex;justify-content:space-between;align-items:center">
               <div>
-                <div style="font-weight:700">最新のプロジェクト</div>
+                <div style="font-weight:700;color:#0f172a">最新のプロジェクト</div>
                 <div class="muted" style="font-size:13px">データ可視化とUXの刷新</div>
               </div>
-              <div style="padding:4px 10px;background:#e0f2fe;color:#0369a1;border-radius:6px;font-weight:700">
+              <div style="padding:4px 10px;background:#e0f2fe;color:#0369a1;border-radius:999px;font-weight:700">
                 Case Study
               </div>
             </div>
 
             <div class="features">
               <div class="feature">
-                <div style="font-weight:700;color:#1e293b">データ設計</div>
+                <div style="font-weight:700;color:#0f172a">データ設計</div>
                 <div class="muted" style="font-size:13px">収集・整形・利活用の基盤設計</div>
               </div>
               <div class="feature">
-                <div style="font-weight:700;color:#1e293b">UI/UX</div>
+                <div style="font-weight:700;color:#0f172a">UI/UX</div>
                 <div class="muted" style="font-size:13px">ユーザー中心のデザイン</div>
               </div>
               <div class="feature">
-                <div style="font-weight:700;color:#1e293b">プロトタイピング</div>
+                <div style="font-weight:700;color:#0f172a">プロトタイピング</div>
                 <div class="muted" style="font-size:13px">高速に価値を検証</div>
               </div>
             </div>
@@ -266,9 +270,9 @@
 
         <!-- hero-side -->
         <aside class="card">
-          <div style="height:260px;border-radius:8px;background:#f1f5f9;display:flex;align-items:center;justify-content:center;">
+          <div style="height:260px;border-radius:12px;background:#eff6ff;display:flex;align-items:center;justify-content:center;border:1px solid #dbeafe;">
             <div style="text-align:center;color:#475569">
-              <div style="font-weight:700;font-size:18px;color:#1e293b">Hero Image</div>
+              <div style="font-weight:700;font-size:18px;color:#0f172a">Hero Image</div>
               <div style="font-size:13px">画像差し替え用スペース</div>
             </div>
           </div>
@@ -278,17 +282,17 @@
       <!-- About -->
       <section id="about">
         <div class="card">
-          <h2 style="color:#1e293b">私たちについて</h2>
+          <h2 style="color:#0f172a">私たちについて</h2>
           <p class="muted">データとデザインを組み合わせ、ビジネスの意思決定を支えるプロダクトを作ります。</p>
 
           <div class="grid" style="margin-top:18px">
-            <div class="large card">
-              <h3 style="color:#1e293b">アプローチ</h3>
+            <div class="large card" style="background:linear-gradient(135deg,#eff6ff,#ffffff);border-color:#dbeafe;">
+              <h3 style="color:#0f172a">アプローチ</h3>
               <p class="muted">ユーザーリサーチを起点に、データ設計からUI/UX、運用まで伴走します。</p>
             </div>
 
             <div class="card">
-              <h3 style="color:#1e293b">主要領域</h3>
+              <h3 style="color:#0f172a">主要領域</h3>
               <ul class="muted">
                 <li>データ可視化</li>
                 <li>UXデザイン</li>
@@ -297,27 +301,46 @@
             </div>
 
             <div class="card">
-              <h3 style="color:#1e293b">採用・協業</h3>
+              <h3 style="color:#0f172a">採用・協業</h3>
               <p class="muted">外部パートナーとの協業も歓迎します。</p>
             </div>
           </div>
         </div>
       </section>
 
-      <!-- Works -->
-      <section id="works">
-        <h2 style="color:#1e293b">制作実績</h2>
+      <!-- Services（簡易的に About セクションを参照）-->
+      <section id="services">
+        <h2 style="color:#0f172a">サービス概要</h2>
         <div class="grid">
           <div class="card">
-            <h4 style="color:#1e293b">ダッシュボード刷新</h4>
+            <h4 style="color:#0f172a">データ可視化ダッシュボード</h4>
+            <p class="muted">KPIや患者数などを直感的に把握できるインターフェースを構築します。</p>
+          </div>
+          <div class="card">
+            <h4 style="color:#0f172a">医療データ設計支援</h4>
+            <p class="muted">電子カルテやレセプトなどのRWDを前提にしたデータ設計を支援します。</p>
+          </div>
+          <div class="card">
+            <h4 style="color:#0f172a">プロトタイピング</h4>
+            <p class="muted">小さく作って素早く検証し、プロダクトの方向性を見極めます。</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Works -->
+      <section id="works">
+        <h2 style="color:#0f172a">制作実績</h2>
+        <div class="grid">
+          <div class="card">
+            <h4 style="color:#0f172a">ダッシュボード刷新</h4>
             <p class="muted">KPIを明確にする情報設計。</p>
           </div>
           <div class="card">
-            <h4 style="color:#1e293b">モバイルアプリ設計</h4>
+            <h4 style="color:#0f172a">モバイルアプリ設計</h4>
             <p class="muted">行動データに基づくUX改善。</p>
           </div>
           <div class="card">
-            <h4 style="color:#1e293b">データパイプライン導入</h4>
+            <h4 style="color:#0f172a">データパイプライン導入</h4>
             <p class="muted">スケーラブルなデータ統合基盤を構築。</p>
           </div>
         </div>
@@ -326,7 +349,7 @@
       <!-- Contact -->
       <section id="contact">
         <div class="card">
-          <h2 style="color:#1e293b">お問い合わせ</h2>
+          <h2 style="color:#0f172a">お問い合わせ</h2>
           <p class="muted">案件のご相談は以下のメールアドレスまで（ダミー）</p>
           <p style="margin-top:12px">
             <a href="mailto:hello@example.com" class="cta">hello@example.com</a>
@@ -351,20 +374,24 @@
 
   <!-- ===== チャットUI ===== -->
   <div id="chatbotPanel" class="chatbot-panel">
-    <iframe src="https://bchealthcare.click/chatbot/" title="DATuM IDEA チャットボット"></iframe>
+    <!-- ★ 自作UI版のエンドポイント -->
+    <iframe src="https://bchealthcare.click/custom-chatbot/" title="DATuM IDEA チャットボット"></iframe>
   </div>
 
-  <button id="chatbotToggle" class="chatbot-toggle">チャットで相談 💬</button>
+  <button id="chatbotToggle" class="chatbot-toggle">閉じる</button>
 
   <script>
-    // チャット開閉
+    // チャット開閉（初期状態：開いている）
     const toggle = document.getElementById('chatbotToggle');
     const panel  = document.getElementById('chatbotPanel');
 
+    let isOpen = true;  // 初期オープン
+    toggle.textContent = '閉じる';
+
     toggle.onclick = () => {
-      const open = panel.style.display === 'block';
-      panel.style.display = open ? 'none' : 'block';
-      toggle.textContent = open ? 'チャットで相談 💬' : '閉じる';
+      isOpen = !isOpen;
+      panel.style.display = isOpen ? 'block' : 'none';
+      toggle.textContent = isOpen ? '閉じる' : 'チャットで相談 💬';
     };
   </script>
 
