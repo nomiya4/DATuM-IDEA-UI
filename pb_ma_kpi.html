@@ -166,26 +166,24 @@
   </div>
 
   <script>
-    const menuBtn = document.getElementById('menuBtn');
-    if(menuBtn){
-      menuBtn.addEventListener('click', () => {
-        const items = [
-          {label:'About',href:'about.html'},
-          {label:'Service',href:'service.html'},
-          {label:'Portal',href:'portal.html'},
-          {label:'News',href:'news.html'},
-          {label:'Download',href:'download.html'},
-          {label:'FAQ',href:'faq.html'},
-          {label:'Contact',href:'contact.html'},
-        ];
-        const choice = prompt('Navigate to: '+items.map(i=>i.label).join(' / '));
-        if(!choice) return;
-        const key = choice.toLowerCase();
-        const hit = items.find(i=>key.includes(i.label.toLowerCase()));
-        if(hit) location.href = hit.href;
+  const menuBtn = document.getElementById('menuBtn');
+  const headerNav = document.querySelector('header nav');
+
+  if (menuBtn && headerNav) {
+    menuBtn.addEventListener('click', () => {
+      headerNav.classList.toggle('open');
+    });
+
+    // メニュー内のリンクを押したらメニューを閉じる
+    headerNav.querySelectorAll('a').forEach(a => {
+      a.addEventListener('click', () => {
+        headerNav.classList.remove('open');
       });
-    }
-  </script>
+    });
+  }
+</script>
+
 </body>
 </html>
+
 
