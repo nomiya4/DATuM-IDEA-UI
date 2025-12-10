@@ -174,41 +174,52 @@
     .column-block ul{margin:0;padding-left:18px;}
     .column-block li{margin-bottom:2px;}
 
-    /* チャット共通 */
+    /* チャット共通：database に合わせて強調カード化 */
     .chat-section{
-      margin-top:20px;
+      margin-top:24px;
+      background:linear-gradient(135deg,#f9fafb,#eff6ff);
+      border-radius:22px;
+      box-shadow:
+        0 16px 34px rgba(15,23,42,0.18),
+        0 0 0 2px rgba(37,99,235,0.14);
+      border:none;
     }
     .chat-card-title{
-      display:flex;align-items:center;gap:8px;
-      font-size:15px;font-weight:600;margin-bottom:4px;
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      font-size:15px;
+      font-weight:600;
+      margin:0 0 6px;
+      padding:6px 12px;
+      border-radius:999px;
+      background:rgba(14,165,233,0.12);
+      color:#0f172a;
     }
     .chat-dot{
       width:8px;height:8px;border-radius:999px;background:#22c55e;
       box-shadow:0 0 0 4px rgba(34,197,94,0.25);
     }
-   /* iframeまわり：枠・影・背景を消して、カードと同じ幅にフィット */
-.chat-iframe-wrap{
-  margin-top:12px;
-  border-radius:18px;
-  overflow:hidden;
 
-  /* ここを全部オフにする */
-  border:none;
-  box-shadow:none;
-  background:transparent;
+    /* iframeまわり：枠・影・背景を消して、カードと同じ幅にフィット */
+    .chat-iframe-wrap{
+      margin-top:12px;
+      border-radius:18px;
+      overflow:hidden;
+      border:none;
+      box-shadow:none;
+      background:transparent;
+      max-width:100%;
+      margin-left:auto;
+      margin-right:auto;
+    }
 
-  max-width:100%;
-  margin-left:auto;
-  margin-right:auto;
-}
-
-.chat-iframe{
-  width:100%;
-  height:400px;   /* 初期表示でスクロール不要な高さ。足りなければここを少し増やす */
-  border:0;
-  display:block;
-}
-
+    .chat-iframe{
+      width:100%;
+      height:400px;
+      border:0;
+      display:block;
+    }
 
     /* 提供プロセス図っぽい枠 */
     .process-flow{
@@ -253,38 +264,38 @@
       header{align-items:flex-start;}
       .chat-iframe-wrap{max-width:100%;}
     }
-  /* === モバイル用ナビゲーション ==================== */
-@media (max-width: 720px) {
-  header {
-    position: relative;
-  }
 
-  header nav {
-    display: none;                  /* 初期は非表示 */
-    position: absolute;
-    top: 52px;
-    right: 16px;
-    left: 16px;
-    padding: 12px 16px;
-    border-radius: 14px;
-    background: #ffffff;
-    flex-direction: column;
-    gap: 10px;
-    box-shadow: 0 18px 40px rgba(15, 23, 42, 0.35);
-    border: 1px solid rgba(148, 163, 184, 0.35);
-    z-index: 40;
-  }
+    /* === モバイル用ナビゲーション ==================== */
+    @media (max-width: 720px) {
+      header {
+        position: relative;
+      }
 
-  header nav a {
-    padding: 4px 0;
-  }
+      header nav {
+        display: none;                  /* 初期は非表示 */
+        position: absolute;
+        top: 52px;
+        right: 16px;
+        left: 16px;
+        padding: 12px 16px;
+        border-radius: 14px;
+        background: #ffffff;
+        flex-direction: column;
+        gap: 10px;
+        box-shadow: 0 18px 40px rgba(15, 23, 42, 0.35);
+        border: 1px solid rgba(148, 163, 184, 0.35);
+        z-index: 40;
+      }
 
-  header nav.open {
-    display: flex;                  /* menu ボタンで open を付ける */
-  }
-}
+      header nav a {
+        padding: 4px 0;
+      }
 
-    
+      header nav.open {
+        display: flex;                  /* menu ボタンで open を付ける */
+      }
+    }
+
   </style>
 </head>
 <body>
@@ -547,28 +558,22 @@
   </div>
 
   <script>
-  const menuBtn = document.getElementById('menuBtn');
-  const headerNav = document.querySelector('header nav');
+    const menuBtn = document.getElementById('menuBtn');
+    const headerNav = document.querySelector('header nav');
 
-  if (menuBtn && headerNav) {
-    menuBtn.addEventListener('click', () => {
-      headerNav.classList.toggle('open');
-    });
-
-    // メニュー内のリンクを押したらメニューを閉じる
-    headerNav.querySelectorAll('a').forEach(a => {
-      a.addEventListener('click', () => {
-        headerNav.classList.remove('open');
+    if (menuBtn && headerNav) {
+      menuBtn.addEventListener('click', () => {
+        headerNav.classList.toggle('open');
       });
-    });
-  }
-</script>
+
+      // メニュー内のリンクを押したらメニューを閉じる
+      headerNav.querySelectorAll('a').forEach(a => {
+        a.addEventListener('click', () => {
+          headerNav.classList.remove('open');
+        });
+      });
+    }
+  </script>
 
 </body>
 </html>
-
-
-
-
-
-
