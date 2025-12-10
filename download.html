@@ -4,350 +4,211 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>資料ダウンロード | DATuM IDEA サンプル</title>
-  <meta name="description" content="DATuM IDEA風の疑似サイト — 製薬企業向け・アカデミア向けなどの資料ダウンロード一覧ページ。">
+  <meta name="description" content="DATuM IDEA風の疑似サイト — 資料ダウンロード（ダミー）。">
   <link rel="icon" href="/assets/favicon.png">
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;700&display=swap" rel="stylesheet">
   <style>
     :root{
-      --bg:#0f1724;
-      --card:#0b1220;
-      --muted:#9aa4b2;
-      --accent:#26a69a;
-      --glass: rgba(255,255,255,0.04);
+      --bg:#e0f2fe;
+      --bg-soft:#eff6ff;
+      --card:#ffffff;
+      --muted:#6b7280;
+      --accent:#0ea5e9;
+      --accent-dark:#0284c7;
+      --border:#e5e7eb;
+      --shadow:0 10px 30px rgba(148,163,184,0.35);
       --maxw:1100px;
-      color-scheme: dark;
     }
-    *{box-sizing:border-box}
-    html,body{height:100%}
+    *{box-sizing:border-box;}
+    html,body{height:100%;}
     body{
       margin:0;
-      font-family:'Noto Sans JP', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-      background: linear-gradient(180deg, #071022 0%, #071625 60%);
-      color:#e6eef6;
+      font-family:'Noto Sans JP', system-ui, -apple-system, "Segoe UI", sans-serif;
+      background:linear-gradient(180deg,var(--bg) 0%,var(--bg-soft) 55%,#f9fafb 100%);
+      color:#111827;
       -webkit-font-smoothing:antialiased;
-      -moz-osx-font-smoothing:grayscale;
-      line-height:1.5;
+      line-height:1.6;
     }
+    .wrap{max-width:var(--maxw);margin:0 auto;padding:24px;}
 
-    .wrap{max-width:var(--maxw);margin:0 auto;padding:24px}
-    header{display:flex;align-items:center;justify-content:space-between;padding:12px 0}
-    .brand{display:flex;gap:12px;align-items:center}
+    header{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+      padding:12px 0;
+    }
+    .brand-link{text-decoration:none;color:inherit;}
+    .brand{display:flex;align-items:center;gap:12px;}
     .logo{
       width:44px;height:44px;
-      background:linear-gradient(135deg,var(--accent),#2dd4bf);
-      border-radius:8px;
+      background:linear-gradient(135deg,#0ea5e9,#38bdf8);
+      border-radius:12px;
       display:flex;align-items:center;justify-content:center;
-      font-weight:700;color:#052025;
+      color:#f9fafb;font-weight:700;
+      box-shadow:0 10px 25px rgba(59,130,246,0.5);
+      flex-shrink:0;
     }
-    nav{display:flex;gap:20px;align-items:center;font-size:14px}
-    nav a{color:var(--muted);text-decoration:none;font-weight:500}
-    nav a:hover{color:#e5e7eb}
-    .cta{
-      background:var(--accent);
-      color:#022;
-      padding:8px 12px;
-      border-radius:10px;
-      text-decoration:none;
-      font-weight:700;
-    }
-    .mobile-nav{display:none}
+    .brand-title{font-weight:700;font-size:15px;}
+    .brand-sub{font-size:12px;color:var(--muted);}
 
-    section{padding:32px 0}
-    .page-hero{padding:40px 0 16px}
-    .pill{
-      display:inline-flex;align-items:center;gap:8px;
-      border-radius:999px;
-      padding:4px 12px;
-      background:rgba(148,163,184,0.12);
-      font-size:12px;color:var(--muted);
-    }
-    .pill-dot{width:8px;height:8px;border-radius:999px;background:var(--accent)}
-    .page-hero h1{margin:10px 0 8px;font-size:clamp(26px,4vw,34px)}
-    .page-hero p{color:var(--muted);max-width:60ch}
-
-    .card{
-      background:linear-gradient(180deg, rgba(255,255,255,0.02), var(--glass));
-      padding:22px;
-      border-radius:12px;
-      box-shadow:0 6px 20px rgba(2,6,23,0.6);
-    }
-    .muted{color:var(--muted)}
-
-    .section-title{font-size:20px;margin-bottom:6px}
-    .section-lead{color:var(--muted);max-width:60ch}
-
-    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
-    .grid-2{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
-    .large{grid-column:span 2}
-
-    .doc-card{
-      background:rgba(15,23,42,0.9);
-      border-radius:12px;
-      padding:16px;
-      border:1px solid rgba(148,163,184,0.5);
-      display:flex;
-      flex-direction:column;
-      gap:8px;
-    }
-
-    .doc-label{
-      font-size:11px;
-      padding:2px 8px;
-      border-radius:999px;
-      border:1px solid rgba(148,163,184,0.7);
-      color:var(--muted);
-      display:inline-block;
-    }
-
-    .doc-title{
-      font-size:15px;
-      font-weight:600;
-    }
-
-    .doc-meta{
-      font-size:12px;
-      color:var(--muted);
-    }
-
-    .doc-actions{
-      margin-top:4px;
+    nav{
       display:flex;
       flex-wrap:wrap;
-      gap:8px;
+      gap:14px;
       align-items:center;
+      font-size:13px;
+      justify-content:flex-end;
     }
-
-    .doc-button{
-      border:none;
+    nav a{
+      text-decoration:none;
+      color:#1f2937;
+      font-weight:500;
+      padding:4px 0;
+    }
+    nav a:hover{color:var(--accent-dark);}
+    nav a.cta-nav{
+      padding:6px 14px;
       border-radius:999px;
-      padding:6px 12px;
-      font-size:12px;
-      cursor:pointer;
       background:var(--accent);
-      color:#022;
-      font-weight:600;
+      color:#f9fafb;
+      box-shadow:0 6px 16px rgba(59,130,246,0.5);
+      font-size:13px;
     }
+    nav a.cta-nav:hover{background:var(--accent-dark);}
+    .mobile-nav{display:none;}
 
-    .doc-button.secondary{
-      background:transparent;
-      border:1px solid rgba(148,163,184,0.6);
+    section{padding:24px 0;}
+    .page-hero{padding:40px 0 16px;}
+    .section-title{
+      font-size:18px;
+      margin-bottom:6px;
+      color:#0f172a;
+    }
+    .section-lead{
+      font-size:14px;
+      color:var(--muted);
+      max-width:70ch;
+    }
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(3,minmax(0,1fr));
+      gap:18px;
+    }
+    .card{
+      background:var(--card);
+      border-radius:16px;
+      padding:18px 20px;
+      box-shadow:var(--shadow);
+      border:1px solid rgba(148,163,184,0.35);
+    }
+    .muted{color:var(--muted);font-size:13px;}
+
+    .btn-download{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding:8px 14px;
+      border-radius:999px;
+      border:none;
+      background:var(--accent);
+      color:#ffffff;
+      font-size:13px;
+      text-decoration:none;
+      margin-top:8px;
+    }
+    .btn-download:hover{background:var(--accent-dark);}
+
+    footer{
+      padding:24px 0 8px;
+      border-top:1px solid var(--border);
+      margin-top:16px;
+      font-size:12px;
       color:var(--muted);
     }
-
-    footer{padding:28px 0;border-top:1px solid rgba(255,255,255,0.03);color:var(--muted)}
-    .links{display:flex;gap:12px;flex-wrap:wrap}
+    footer .links a{
+      font-size:12px;
+      color:var(--muted);
+      text-decoration:none;
+    }
+    footer .links a:hover{text-decoration:underline;}
 
     @media (max-width:900px){
-      nav{display:none}
-      .mobile-nav{display:flex}
-      .grid,.grid-2{grid-template-columns:1fr}
-      .large{grid-column:span 1}
+      .grid{grid-template-columns:1fr;}
+    }
+    @media (max-width:720px){
+      nav{display:none;}
+      .mobile-nav{display:flex;}
+      header{align-items:flex-start;}
     }
   </style>
 </head>
 <body>
   <div class="wrap">
-    <!-- 共通ヘッダー -->
     <header>
-      <div class="brand">
-        <div class="logo">DI</div>
-        <div>
-          <div style="font-weight:700">DATuM IDEA — Sample</div>
-          <div class="muted" style="font-size:13px">疑似サイトテンプレート</div>
+      <a href="index.html" class="brand-link">
+        <div class="brand">
+          <div class="logo">DI</div>
+          <div>
+            <div class="brand-title">DATuM IDEA — Sample</div>
+            <div class="brand-sub">医療データ活用サービスの疑似サイト</div>
+          </div>
         </div>
-      </div>
+      </a>
 
       <nav>
-  <a href="index.html">Home</a>
-  <a href="about.html">DATuM IDEAについて</a>
-  <a href="service.html">提供サービス一覧</a>
-  <a href="medicalservice.html">製薬企業向けサービス</a>
-  <a href="academia.html">アカデミア・医療機関向けサービス</a>
-  <a href="database.html">データベースについて</a>
-  <a href="medicaldata.html">医療データについて</a>
-  <a href="webtool.html">Webツール</a>
-  <a href="report.html">解析・レポート</a>
-  <a href="dataset.html">データセット提供</a>
-  <a href="portal.html">ファーマベース</a>
-  <a href="pb_ma_kpi.html">基礎知識（MA KPI）</a>
-  <a href="news.html">お知らせ</a>
-  <a href="download.html">資料DL</a>
-  <a href="faq.html">FAQ</a>
-  <a href="contact.html" class="cta">お問い合わせ</a>
-</nav>
-
+        <a href="about.html">DATuM IDEAについて</a>
+        <a href="service.html">提供サービス一覧</a>
+        <a href="portal.html">ファーマベース</a>
+        <a href="news.html">お知らせ</a>
+        <a href="download.html">資料ダウンロード</a>
+        <a href="faq.html">よくあるご質問</a>
+        <a href="contact.html" class="cta-nav">お問い合わせ</a>
+      </nav>
 
       <div class="mobile-nav">
-        <button id="menuBtn" aria-expanded="false" aria-controls="mnav"
-          style="background:none;border:1px solid rgba(255,255,255,0.04);padding:8px;border-radius:8px;color:var(--muted);font-size:13px">
+        <button id="menuBtn"
+          style="background:#ffffff;border:1px solid var(--border);padding:6px 12px;border-radius:999px;font-size:13px;color:#374151">
           Menu
         </button>
       </div>
     </header>
 
     <main>
-      <!-- ページヒーロー -->
       <section class="page-hero">
-        <div class="pill">
-          <span class="pill-dot"></span>
-          <span>Download</span>
-        </div>
         <h1>資料ダウンロード</h1>
-        <p>
-          DATuM IDEAのサービス概要やWebツール画面イメージ、アカデミア向けパンフレットなど、
-          各種資料をダウンロードいただく想定のページです。本サイトではすべてダミーファイルへのリンクになっています。
-        </p>
-      </section>
-
-      <!-- 説明 -->
-      <section>
-        <div class="card">
-          <h2 class="section-title">資料の種類（イメージ）</h2>
-          <p class="section-lead">
-            製薬企業向け・アカデミア／医療機関向けなど、想定読者ごとに資料を整理しています。
-            実際には、フォーム入力後にダウンロードURLをメール送付するなどのフローを組み込む想定です。
-          </p>
-        </div>
-      </section>
-
-      <!-- 製薬企業向け資料 -->
-      <section>
-        <h2 class="section-title">製薬企業向け資料</h2>
         <p class="section-lead">
-          開発・メディカル・マーケティング部門の方向けに、DATuM IDEAの全体像や活用事例をまとめた資料のイメージです。
+          サービス紹介資料やデータベース概要資料などを掲載することを想定したダウンロードページです。
+          このサンプルではダミーのPDFリンクを配置しています。
         </p>
-
-        <div class="grid" style="margin-top:20px">
-          <div class="doc-card">
-            <span class="doc-label">製薬企業向け</span>
-            <div class="doc-title">DATuM IDEA サービス概要資料（ダミー）</div>
-            <div class="doc-meta">PDF / 約12ページ / サービス全体像・データベース概要・主なユースケース</div>
-            <p class="muted" style="font-size:13px">
-              DATuM IDEAのコンセプトや提供サービス一覧、利用イメージをコンパクトにまとめた総合カタログです。
-            </p>
-            <div class="doc-actions">
-              <button class="doc-button">ダウンロード（ダミー）</button>
-              <button class="doc-button secondary">内容を確認（ダミー）</button>
-            </div>
-          </div>
-
-          <div class="doc-card">
-            <span class="doc-label">製薬企業向け / Webツール</span>
-            <div class="doc-title">Webツール 画面イメージ集（ダミー）</div>
-            <div class="doc-meta">PDF / 約20ページ / 画面イメージ・主な機能一覧</div>
-            <p class="muted" style="font-size:13px">
-              患者抽出条件設定画面やグラフ表示画面など、Webツールのイメージをスクリーンショット風にまとめた資料です。
-            </p>
-            <div class="doc-actions">
-              <button class="doc-button">ダウンロード（ダミー）</button>
-              <a href="webtool.html" class="doc-button secondary" style="text-decoration:none;text-align:center;">
-                Webツールのページへ
-              </a>
-            </div>
-          </div>
-
-          <div class="doc-card">
-            <span class="doc-label">製薬企業向け / 解析</span>
-            <div class="doc-title">解析・レポート サービス事例集（ダミー）</div>
-            <div class="doc-meta">PDF / 約18ページ / 解析メニュー例・アウトプットイメージ</div>
-            <p class="muted" style="font-size:13px">
-              治療実態解析や製販後DB調査など、解析・レポートサービスの事例を紹介する想定の資料です。
-            </p>
-            <div class="doc-actions">
-              <button class="doc-button">ダウンロード（ダミー）</button>
-              <a href="report.html" class="doc-button secondary" style="text-decoration:none;text-align:center;">
-                解析・レポートのページへ
-              </a>
-            </div>
-          </div>
-        </div>
       </section>
 
-      <!-- アカデミア・医療機関向け資料 -->
       <section>
-        <h2 class="section-title">アカデミア・医療機関向け資料</h2>
-        <p class="section-lead">
-          研究者・医療機関の方向けに、研究シーズ探索やアウトカム分析の活用例をまとめた資料のイメージです。
-        </p>
-
-        <div class="grid-2" style="margin-top:20px">
-          <div class="doc-card">
-            <span class="doc-label">アカデミア・医療機関向け</span>
-            <div class="doc-title">アカデミア向けサービス紹介パンフレット（ダミー）</div>
-            <div class="doc-meta">PDF / 約10ページ / サービス紹介・利用フロー</div>
-            <p class="muted" style="font-size:13px">
-              研究シーズ探索ツールやアウトカム分析支援など、アカデミア向けサービスの概要を紹介するパンフレットです。
+        <div class="grid">
+          <div class="card">
+            <h2 class="section-title">サービス概要資料（ダミー）</h2>
+            <p class="muted">
+              DATuM IDEA サービス全体の概要をまとめた想定の資料です。
+              実際には、導入ステップや活用事例などが記載されます。
             </p>
-            <div class="doc-actions">
-              <button class="doc-button">ダウンロード（ダミー）</button>
-              <a href="medical.html" class="doc-button secondary" style="text-decoration:none;text-align:center;">
-                アカデミア向けサービスのページへ
-              </a>
-            </div>
+            <a href="#" class="btn-download">PDFをダウンロード（ダミー）</a>
           </div>
 
-          <div class="doc-card">
-            <span class="doc-label">共通</span>
-            <div class="doc-title">DATuM IDEA データベース概要（ダミー）</div>
-            <div class="doc-meta">PDF / 約8ページ / 対象施設・データ期間・対象疾患 など</div>
-            <p class="muted" style="font-size:13px">
-              データソースや対象施設、データ期間など、DATuM IDEAデータベースのスペックをまとめた技術概要資料です。
+          <div class="card">
+            <h2 class="section-title">データベース概要（ダミー）</h2>
+            <p class="muted">
+              収集対象施設やデータ項目、利用可能な分析例などを紹介するための資料を想定しています。
             </p>
-            <div class="doc-actions">
-              <button class="doc-button">ダウンロード（ダミー）</button>
-              <a href="database.html" class="doc-button secondary" style="text-decoration:none;text-align:center;">
-                データベースについて
-              </a>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- データセット提供・技術資料 -->
-      <section>
-        <h2 class="section-title">データセット提供・技術資料</h2>
-        <p class="section-lead">
-          データセット提供サービスの利用を検討される方向けに、テーブル定義やデータ例を掲載した資料のイメージです。
-        </p>
-
-        <div class="grid-2" style="margin-top:20px">
-          <div class="doc-card">
-            <span class="doc-label">製薬企業向け / 技術資料</span>
-            <div class="doc-title">データセット提供 テーブル定義サンプル（ダミー）</div>
-            <div class="doc-meta">PDF / 約15ページ / テーブル一覧・主な項目例</div>
-            <p class="muted" style="font-size:13px">
-              患者・傷病・薬剤・検査テーブルなど、代表的なテーブル構成と項目例をまとめた技術資料です。
-            </p>
-            <div class="doc-actions">
-              <button class="doc-button">ダウンロード（ダミー）</button>
-              <a href="dataset.html" class="doc-button secondary" style="text-decoration:none;text-align:center;">
-                データセット提供のページへ
-              </a>
-            </div>
+            <a href="#" class="btn-download">PDFをダウンロード（ダミー）</a>
           </div>
 
-          <div class="doc-card">
-            <span class="doc-label">共通</span>
-            <div class="doc-title">仮名加工・匿名加工医療情報に関する解説（ダミー）</div>
-            <div class="doc-meta">PDF / 約10ページ / 用語解説・参考情報</div>
-            <p class="muted" style="font-size:13px">
-              匿名加工医療情報や仮名加工医療情報に関する基本的な考え方をまとめた解説資料のイメージです。
+          <div class="card">
+            <h2 class="section-title">活用事例集（ダミー）</h2>
+            <p class="muted">
+              疾患領域ごとの活用イメージや、研究事例をまとめた資料を想定しています。
             </p>
-            <div class="doc-actions">
-              <button class="doc-button">ダウンロード（ダミー）</button>
-            </div>
+            <a href="#" class="btn-download">PDFをダウンロード（ダミー）</a>
           </div>
-        </div>
-      </section>
-
-      <!-- 注意書き -->
-      <section>
-        <div class="card">
-          <h2 class="section-title">ご利用上の注意（ダミー）</h2>
-          <p class="section-lead">
-            本疑似サイトに掲載されている資料リンクはすべてダミーです。
-            実際の運用では、利用規約や個人情報の取扱いへの同意、利用目的の確認などのプロセスを含める想定です。
-          </p>
         </div>
       </section>
     </main>
@@ -356,27 +217,21 @@
       <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap">
         <div class="muted">© DATuM IDEA — Sample Template</div>
         <div class="links">
-          <a class="muted" href="#">匿名加工医療情報の取扱い（ダミー）</a>
-          <a class="muted" href="#">個人情報の取扱い（ダミー）</a>
-          <a class="muted" href="#">Cookieポリシー（ダミー）</a>
+          <a href="#" class="muted">匿名加工医療情報の取扱い（ダミー）</a>
+          <a href="#" class="muted">個人情報の取扱い（ダミー）</a>
         </div>
       </div>
     </footer>
   </div>
 
   <script>
-    // Mobile menu simple toggle
     const menuBtn = document.getElementById('menuBtn');
     if(menuBtn){
-      menuBtn.addEventListener('click',()=>{
-        const expanded = menuBtn.getAttribute('aria-expanded') === 'true';
-        menuBtn.setAttribute('aria-expanded', String(!expanded));
-
+      menuBtn.addEventListener('click', () => {
         const items = [
-          {label:'Home', href:'index.html'},
           {label:'About', href:'about.html'},
           {label:'Service', href:'service.html'},
-          {label:'Pharma Base', href:'portal.html'},
+          {label:'Portal', href:'portal.html'},
           {label:'News', href:'news.html'},
           {label:'Download', href:'download.html'},
           {label:'FAQ', href:'faq.html'},
@@ -392,4 +247,3 @@
   </script>
 </body>
 </html>
-
