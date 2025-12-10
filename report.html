@@ -1,0 +1,346 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>解析・レポート | DATuM IDEA サンプル</title>
+  <meta name="description" content="DATuM IDEA風の疑似サイト — 解析・レポートサービスの概要と主なユースケースを紹介するページ。">
+  <link rel="icon" href="/assets/favicon.png">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#0f1724;
+      --card:#0b1220;
+      --muted:#9aa4b2;
+      --accent:#26a69a;
+      --glass: rgba(255,255,255,0.04);
+      --maxw:1100px;
+      color-scheme: dark;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:'Noto Sans JP', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      background: linear-gradient(180deg, #071022 0%, #071625 60%);
+      color:#e6eef6;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:1.5;
+    }
+
+    .wrap{max-width:var(--maxw);margin:0 auto;padding:24px}
+    header{display:flex;align-items:center;justify-content:space-between;padding:12px 0}
+    .brand{display:flex;gap:12px;align-items:center}
+    .logo{
+      width:44px;height:44px;
+      background:linear-gradient(135deg,var(--accent),#2dd4bf);
+      border-radius:8px;
+      display:flex;align-items:center;justify-content:center;
+      font-weight:700;color:#052025;
+    }
+    nav{display:flex;gap:20px;align-items:center;font-size:14px}
+    nav a{color:var(--muted);text-decoration:none;font-weight:500}
+    nav a:hover{color:#e5e7eb}
+    .cta{
+      background:var(--accent);
+      color:#022;
+      padding:8px 12px;
+      border-radius:10px;
+      text-decoration:none;
+      font-weight:700;
+    }
+    .mobile-nav{display:none}
+
+    section{padding:32px 0}
+    .page-hero{padding:40px 0 16px}
+    .pill{
+      display:inline-flex;align-items:center;gap:8px;
+      border-radius:999px;
+      padding:4px 12px;
+      background:rgba(148,163,184,0.12);
+      font-size:12px;color:var(--muted);
+    }
+    .pill-dot{width:8px;height:8px;border-radius:999px;background:var(--accent)}
+    .page-hero h1{margin:10px 0 8px;font-size:clamp(26px,4vw,34px)}
+    .page-hero p{color:var(--muted);max-width:60ch}
+
+    .card{
+      background:linear-gradient(180deg, rgba(255,255,255,0.02), var(--glass));
+      padding:22px;
+      border-radius:12px;
+      box-shadow:0 6px 20px rgba(2,6,23,0.6);
+    }
+    .muted{color:var(--muted)}
+
+    .section-title{font-size:20px;margin-bottom:6px}
+    .section-lead{color:var(--muted);max-width:60ch}
+
+    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+    .grid-2{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
+    .large{grid-column:span 2}
+
+    .tag-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+    .tag{
+      font-size:11px;
+      padding:4px 10px;
+      border-radius:999px;
+      border:1px solid rgba(148,163,184,0.4);
+      color:var(--muted);
+      background:rgba(15,23,42,0.6);
+    }
+
+    .point-list{margin-top:10px;padding-left:18px;font-size:13px;color:var(--muted)}
+    .point-list li{margin-bottom:4px}
+
+    footer{padding:28px 0;border-top:1px solid rgba(255,255,255,0.03);color:var(--muted)}
+    .links{display:flex;gap:12px;flex-wrap:wrap}
+
+    @media (max-width:900px){
+      nav{display:none}
+      .mobile-nav{display:flex}
+      .grid,.grid-2{grid-template-columns:1fr}
+      .large{grid-column:span 1}
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <!-- 共通ヘッダー -->
+    <header>
+      <div class="brand">
+        <div class="logo">DI</div>
+        <div>
+          <div style="font-weight:700">DATuM IDEA — Sample</div>
+          <div class="muted" style="font-size:13px">疑似サイトテンプレート</div>
+        </div>
+      </div>
+
+      <nav>
+        <a href="index.html">Home</a>
+        <a href="about.html">DATuM IDEAについて</a>
+        <a href="service.html">提供サービス一覧</a>
+        <a href="portal.html">ファーマベース</a>
+        <a href="news.html">お知らせ</a>
+        <a href="download.html">資料DL</a>
+        <a href="faq.html">よくあるご質問</a>
+        <a href="contact.html" class="cta">お問い合わせ</a>
+      </nav>
+
+      <div class="mobile-nav">
+        <button id="menuBtn" aria-expanded="false" aria-controls="mnav"
+          style="background:none;border:1px solid rgba(255,255,255,0.04);padding:8px;border-radius:8px;color:var(--muted);font-size:13px">
+          Menu
+        </button>
+      </div>
+    </header>
+
+    <main>
+      <!-- ページヒーロー -->
+      <section class="page-hero">
+        <div class="pill">
+          <span class="pill-dot"></span>
+          <span>Analysis & Report</span>
+        </div>
+        <h1>解析・レポート</h1>
+        <p>
+          市場分析からエビデンス創出まで、幅広いニーズに対応するオーダーメイド型の解析支援サービスです。
+          患者の経過や診療フローを時系列に可視化し、リアルワールドデータに基づいた示唆をレポートとしてご提供することを想定しています。
+        </p>
+      </section>
+
+      <!-- 概要 -->
+      <section>
+        <div class="card">
+          <h2 class="section-title">サービス概要</h2>
+          <p class="section-lead">
+            DATuM IDEAのデータとアナリストの知見を組み合わせ、
+            分析テーマの整理から解析計画の設計、結果の解釈までを一貫して支援するサービスです。
+            「Webツールだけでは対応しきれない深い分析」や「製販後DB調査」などに活用いただくことを想定しています。
+          </p>
+          <div class="tag-row">
+            <span class="tag">オーダーメイド解析</span>
+            <span class="tag">RWE</span>
+            <span class="tag">製販後DB調査</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- 提供内容 -->
+      <section>
+        <h2 class="section-title">提供内容のイメージ</h2>
+        <p class="section-lead">
+          解析・レポートサービスでは、次のような分析メニューを組み合わせて、
+          プロジェクトごとに最適な設計を行う想定です。
+        </p>
+
+        <div class="grid">
+          <div class="card">
+            <h3>時系列での患者経過分析</h3>
+            <p class="muted">
+              診断から治療開始、その後の治療変更やイベント発生までを時系列で追跡し、
+              典型的な経過パターンや、治療スイッチのタイミングを分析します。
+            </p>
+            <ul class="point-list">
+              <li>診断日／初回投与日を起点とした経過把握</li>
+              <li>レジメン変更や中止のタイミング分析</li>
+              <li>検査値推移と治療イベントの関係検討</li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <h3>診療フロー分析</h3>
+            <p class="muted">
+              診療科の受診順序や治療レジメンの流れなど、診療フローを可視化し、
+              現場で実際に行われている診療パターンを把握します。
+            </p>
+            <ul class="point-list">
+              <li>初診〜紹介〜専門医受診の流れ</li>
+              <li>一次治療・二次治療・三次治療の遷移</li>
+              <li>検査・処置・入院の順序の可視化</li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <h3>治療実態・市場分析</h3>
+            <p class="muted">
+              薬剤別の患者数や投与回数、併用パターンなどを分析し、
+              市場規模やポジショニングの把握に役立つ情報を整理します。
+            </p>
+            <ul class="point-list">
+              <li>薬剤別の利用患者数・処方件数</li>
+              <li>併用薬・前治療・後治療のパターン</li>
+              <li>施設種別や地域別の分析</li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <h3>製販後DB調査の支援</h3>
+            <p class="muted">
+              電子カルテと医科レセプトを連結したデータベースを用いて、
+              実臨床下での有効性・安全性評価を行う製販後DB調査を支援します。
+            </p>
+            <ul class="point-list">
+              <li>対象患者定義・解析計画の検討</li>
+              <li>アウトカム・安全性指標の設定</li>
+              <li>レポート案の作成・レビュー</li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <h3>エビデンス創出・論文化支援</h3>
+            <p class="muted">
+              学会発表や論文化を見据えた解析を行い、結果の解釈や図表案の作成などを通じて、
+              エビデンス発信を後押しします。
+            </p>
+            <ul class="point-list">
+              <li>統計解析手法の検討</li>
+              <li>図表案・サマリー作成</li>
+              <li>ドラフト原稿のレビュー（イメージ）</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- プロジェクトの進め方 -->
+      <section>
+        <div class="card">
+          <h2 class="section-title">プロジェクトの進め方（例）</h2>
+          <p class="section-lead">
+            実際のプロジェクトでは、お客様のニーズを起点に、次のようなステップで分析を進めることを想定しています。
+          </p>
+          <ol class="point-list">
+            <li>課題・ニーズのヒアリング（例：乳がんの実臨床を把握したい等）</li>
+            <li>対象患者定義・アウトカムの整理</li>
+            <li>解析計画（デザイン・指標・統計手法など）の立案</li>
+            <li>データ抽出・加工・解析の実施</li>
+            <li>結果の確認・解釈ディスカッション</li>
+            <li>レポート納品・社内共有・外部発信の検討</li>
+          </ol>
+        </div>
+      </section>
+
+      <!-- 実績イメージ -->
+      <section>
+        <div class="card">
+          <h2 class="section-title">解析実績のイメージ</h2>
+          <p class="section-lead">
+            公式情報では乳がん患者の治療実態解析などの事例が紹介されていますが、
+            本ページではそのような事例があることをイメージとして記載するにとどめています。
+          </p>
+          <div class="grid-2" style="margin-top:16px">
+            <div class="card">
+              <h3>がん領域の治療実態解析</h3>
+              <p class="muted">
+                電子カルテデータを用いた解析により、治療レジメンごとの有害事象発生率や、
+                検査値の推移を詳細に捉えることで、実臨床におけるリスクとベネフィットのバランスを検討することができます。
+              </p>
+            </div>
+            <div class="card">
+              <h3>生活習慣病など慢性疾患領域</h3>
+              <p class="muted">
+                長期フォローが必要な疾患において、治療継続状況や併用薬、合併症の発生を分析し、
+                アドヒアランスの向上や重症化予防の観点から示唆を得る、といった活用も想定されます。
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 資料DL・問い合わせ -->
+      <section>
+        <div class="card">
+          <h2 class="section-title">資料ダウンロード・お問い合わせ</h2>
+          <p class="section-lead">
+            具体的な事例紹介や料金体系、実際のレポートイメージなどについては、
+            資料ダウンロードやお問い合わせを通じてご案内する想定です。
+          </p>
+          <div style="margin-top:16px;display:flex;flex-wrap:wrap;gap:8px">
+            <a href="download.html" class="cta" style="background:transparent;border:1px solid rgba(148,163,184,0.6);color:var(--muted);padding-inline:14px">
+              解析・レポートの資料をダウンロード（ダミー）
+            </a>
+            <a href="contact.html" class="cta">お問い合わせページへ</a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap">
+        <div class="muted">© DATuM IDEA — Sample Template</div>
+        <div class="links">
+          <a class="muted" href="#">匿名加工医療情報の取扱い（ダミー）</a>
+          <a class="muted" href="#">個人情報の取扱い（ダミー）</a>
+          <a class="muted" href="#">Cookieポリシー（ダミー）</a>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    // Mobile menu simple toggle
+    const menuBtn = document.getElementById('menuBtn')
+    if(menuBtn){
+      menuBtn.addEventListener('click',()=>{
+        const expanded = menuBtn.getAttribute('aria-expanded') === 'true'
+        menuBtn.setAttribute('aria-expanded', String(!expanded))
+
+        const items = [
+          {label:'Home', href:'index.html'},
+          {label:'About', href:'about.html'},
+          {label:'Service', href:'service.html'},
+          {label:'Pharma Base', href:'portal.html'},
+          {label:'Pharma Service', href:'pharma.html'},
+          {label:'FAQ', href:'faq.html'},
+          {label:'Contact', href:'contact.html'},
+        ]
+        const choice = prompt('Navigate to: ' + items.map(i=>i.label).join(' / '))
+        if(!choice) return
+        const key = choice.toLowerCase()
+        const hit = items.find(i => key.includes(i.label.toLowerCase()))
+        if(hit) location.href = hit.href
+      })
+    }
+  </script>
+</body>
+</html>
