@@ -31,7 +31,6 @@
     }
     .wrap{max-width:var(--maxw);margin:0 auto;padding:24px;}
 
-    /* header/nav 共通 */
     header{
       display:flex;align-items:center;justify-content:space-between;
       gap:16px;padding:12px 0;
@@ -175,7 +174,7 @@
     .column-block ul{margin:0;padding-left:18px;}
     .column-block li{margin-bottom:2px;}
 
-    /* チャットカード共通 */
+    /* チャット共通 */
     .chat-section{
       margin-top:20px;
     }
@@ -194,10 +193,13 @@
       border:1px solid rgba(148,163,184,0.8);
       box-shadow:0 12px 28px rgba(15,23,42,0.55);
       background:#020617;
+      max-width:960px;
+      margin-left:auto;
+      margin-right:auto;
     }
     .chat-iframe{
       width:100%;
-      height:430px;
+      height:640px;
       border:0;
       display:block;
     }
@@ -243,6 +245,7 @@
       nav{display:none;}
       .mobile-nav{display:flex;}
       header{align-items:flex-start;}
+      .chat-iframe-wrap{max-width:100%;}
     }
   </style>
 </head>
@@ -337,7 +340,7 @@
         </div>
       </section>
 
-      <!-- データセットカラム例 + チャットボット（1つ目） -->
+      <!-- データセットカラム例 + 上側チャット -->
       <section id="dataset-columns">
         <div class="card">
           <h2 class="section-title">データセットカラム例</h2>
@@ -346,7 +349,6 @@
             本番サイトでは青枠の図で表現されている部分を、CSS で再現しています。
           </p>
 
-          <!-- 青枠ヘッダー部分 -->
           <div class="column-section">
             <div class="column-header">
               <span>テーブル例：</span>
@@ -361,7 +363,6 @@
               <span class="column-tag">検査／検体／死亡／イベント など</span>
             </div>
 
-            <!-- カラム例本体 -->
             <div class="column-body">
               <div class="column-grid">
                 <div class="column-block">
@@ -426,11 +427,11 @@
             </div>
           </div>
 
-          <!-- ▼ カラム例のすぐ下：コンテンツ型チャットボット（1つ目） ▼ -->
+          <!-- 上側チャット -->
           <div class="card chat-section" style="margin-top:18px;">
             <div class="chat-card-title">
               <span class="chat-dot"></span>
-              <span>カラム仕様についてチャットで確認（デモ）</span>
+              <span>AIチャットボットにカラムの詳細について聞いてみる？？</span>
             </div>
             <p class="muted">
               「どのテーブルにどの項目が入る想定か」「この研究ならどのカラムが必要か」などの相談を、
@@ -472,12 +473,12 @@
         </div>
       </section>
 
-      <!-- ページ最下部：独立したチャットボット（2つ目） -->
+      <!-- 下側チャット（独立コンテンツ） -->
       <section>
         <div class="card chat-section">
           <div class="chat-card-title">
             <span class="chat-dot"></span>
-            <span>データセット提供についてチャットで相談（デモ）</span>
+            <span>AIチャットボットにデータセット提供について相談してみる？？</span>
           </div>
           <p class="muted">
             クライアント向けデモでは、このエリアを使って
