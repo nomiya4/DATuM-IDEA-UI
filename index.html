@@ -443,21 +443,25 @@ iframe[src*="custom-chatbot"] {
   <button id="chatbotToggle" class="chatbot-toggle">閉じる</button>
 
   <script>
-    // チャット開閉（初期状態：開いている）
-    const toggle = document.getElementById('chatbotToggle');
-    const panel  = document.getElementById('chatbotPanel');
+  const menuBtn = document.getElementById('menuBtn');
+  const headerNav = document.querySelector('header nav');
 
-    let isOpen = true;  // 初期オープン
-    toggle.textContent = '閉じる';
+  if (menuBtn && headerNav) {
+    menuBtn.addEventListener('click', () => {
+      headerNav.classList.toggle('open');
+    });
 
-    toggle.onclick = () => {
-      isOpen = !isOpen;
-      panel.style.display = isOpen ? 'block' : 'none';
-      toggle.textContent = isOpen ? '閉じる' : 'チャットで相談 💬';
-    };
-  </script>
+    // メニュー内のリンクを押したらメニューを閉じる
+    headerNav.querySelectorAll('a').forEach(a => {
+      a.addEventListener('click', () => {
+        headerNav.classList.remove('open');
+      });
+    });
+  }
+</script>
 
 </body>
 </html>
+
 
 
