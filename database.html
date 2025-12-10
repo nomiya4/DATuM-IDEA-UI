@@ -184,24 +184,29 @@
       width:8px;height:8px;border-radius:999px;background:#22c55e;
       box-shadow:0 0 0 4px rgba(34,197,94,0.25);
     }
-    .chat-iframe-wrap{
+   /* iframeまわり：枠・影・背景を消して、カードと同じ幅にフィット */
+.chat-iframe-wrap{
   margin-top:12px;
   border-radius:18px;
   overflow:hidden;
-  /* 枠＆影＆濃紺の背景をオフにする */
+
+  /* ここを全部オフにする */
   border:none;
   box-shadow:none;
   background:transparent;
-      max-width:960px;
-      margin-left:auto;
-      margin-right:auto;
-    }
-    .chat-iframe{
-      width:100%;
-      height:640px;
-      border:0;
-      display:block;
-    }
+
+  max-width:100%;
+  margin-left:auto;
+  margin-right:auto;
+}
+
+.chat-iframe{
+  width:100%;
+  height:640px;   /* 初期表示でスクロール不要な高さ。足りなければここを少し増やす */
+  border:0;
+  display:block;
+}
+
 
     footer{
       padding:24px 0 8px;border-top:1px solid var(--border);
@@ -441,4 +446,5 @@
   </script>
 </body>
 </html>
+
 
