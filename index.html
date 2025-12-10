@@ -10,12 +10,13 @@
 
   <style>
     :root{
-      --bg:#e0f2fe;              /* 背景：青寄り */
-      --card:#ffffff;            /* カード背景 */
-      --muted:#6b7280;           /* 説明文用グレー */
-      --accent:#0ea5e9;          /* メインカラー（水色系ブルー） */
-      --accent-dark:#0284c7;     /* ホバー時 */
-      --border:#e5e7eb;          /* 枠線 */
+      --bg:#e0f2fe;
+      --bg-soft:#eff6ff;
+      --card:#ffffff;
+      --muted:#6b7280;
+      --accent:#0ea5e9;
+      --accent-dark:#0284c7;
+      --border:#e5e7eb;
       --maxw:1100px;
     }
 
@@ -23,7 +24,7 @@
     html,body{height:100%}
     body{
       margin:0;
-      font-family:'Noto Sans JP', system-ui;
+      font-family:'Noto Sans JP', system-ui,-apple-system,"Segoe UI",sans-serif;
       background: linear-gradient(180deg, #e0f2fe 0%, #eff6ff 45%, #f9fafb 100%);
       color:#111827;
       -webkit-font-smoothing:antialiased;
@@ -32,11 +33,13 @@
 
     .wrap{max-width:var(--maxw);margin:0 auto;padding:24px}
 
-    /* header */
+    /* ===== header ===== */
     header{
       display:flex;align-items:center;justify-content:space-between;
+      gap:16px;
       padding:12px 0;
     }
+    .brand-link{text-decoration:none;color:inherit;}
     .brand{
       display:flex;align-items:center;gap:12px;
     }
@@ -46,33 +49,40 @@
       border-radius:12px;
       display:flex;align-items:center;justify-content:center;
       color:white;font-weight:700;
-      box-shadow:0 8px 20px rgba(37,99,235,0.25);
+      box-shadow:0 10px 25px rgba(59,130,246,0.5);
+      flex-shrink:0;
     }
+    .brand-title{font-weight:700;font-size:15px;}
+    .brand-sub{font-size:12px;color:var(--muted);}
 
     nav{
       display:flex;
+      flex-wrap:wrap;
       gap:18px;
       align-items:center;
-      font-size:14px;
+      font-size:13px;
+      justify-content:flex-end;
     }
     nav a{
       color:#1f2937;
       text-decoration:none;
       font-weight:500;
       white-space:nowrap;
+      padding:4px 0;
     }
     nav a:hover{
-      color:var(--accent);
+      color:var(--accent-dark);
     }
 
     .cta-nav{
       background:var(--accent);
       color:#ffffff !important;
-      padding:8px 16px;
+      padding:6px 14px;
       border-radius:999px;
       text-decoration:none;
       font-weight:700;
-      box-shadow:0 8px 18px rgba(14,165,233,0.35);
+      box-shadow:0 6px 16px rgba(14,165,233,0.5);
+      font-size:13px;
     }
     .cta-nav:hover{
       background:var(--accent-dark);
@@ -80,7 +90,7 @@
 
     .mobile-nav{display:none}
 
-    /* hero */
+    /* ===== hero & layout ===== */
     .hero{
       padding:56px 0 40px;
       display:grid;
@@ -92,6 +102,8 @@
       color:#0ea5e9;
       font-weight:700;
       letter-spacing:0.08em;
+      font-size:11px;
+      text-transform:uppercase;
     }
     .hero h1{
       margin:10px 0 8px;
@@ -101,6 +113,7 @@
     .hero p{
       color:var(--muted);
       max-width:56ch;
+      font-size:14px;
     }
 
     .card{
@@ -124,7 +137,6 @@
       border:1px solid #bfdbfe;
     }
 
-    /* sections */
     section{padding:32px 0}
     .grid{
       display:grid;
@@ -138,26 +150,14 @@
       border-top:1px solid #e5e7eb;
       color:var(--muted);
       margin-top:40px;
+      font-size:12px;
     }
 
     .links{
       display:flex;gap:12px;flex-wrap:wrap;
     }
 
-    /* responsive */
-    @media (max-width:980px){
-      nav{display:none}
-      .mobile-nav{display:flex}
-    }
-    @media (max-width:900px){
-      .hero{grid-template-columns:1fr;}
-      .features{grid-template-columns:repeat(2,1fr)}
-      .grid{grid-template-columns:1fr}
-      .large{grid-column:span 1}
-    }
-    @media (max-width:520px){
-      .features{grid-template-columns:1fr}
-    }
+    .muted{color:var(--muted);}
 
     /* ===== チャットUI ===== */
     .chatbot-toggle {
@@ -175,6 +175,10 @@
       box-shadow: 0 10px 28px rgba(14,165,233,0.6);
       cursor: pointer;
     }
+    .chatbot-toggle span{
+      margin-left:4px;
+      font-size:16px;
+    }
 
     .chatbot-panel {
       position: fixed;
@@ -189,8 +193,10 @@
       background: #ffffff;
       border:1px solid var(--border);
       box-shadow: 0 14px 40px rgba(15,23,42,0.2);
-      display: block;          /* 初期表示：開いた状態 */
       z-index: 9998;
+    }
+    .chatbot-panel.hidden{
+      display:none;
     }
     .chatbot-panel iframe{
       width:100%;height:100%;border:none;
@@ -203,64 +209,84 @@
         width:calc(100vw - 20px);
       }
     }
+
     /* === チャットポップアップ調整用 ===================== */
+    .chat-panel,
+    .chat-popup-panel {
+      display: flex;
+      flex-direction: column;
+      height: min(80vh, 720px);
+    }
+    .chat-panel-body,
+    .chat-popup-body {
+      flex: 1;
+      min-height: 0;
+      padding: 0;
+      background: transparent;
+    }
+    .chat-panel-body iframe,
+    .chat-popup-body iframe,
+    iframe[src*="custom-chatbot"] {
+      width: 100%;
+      height: 100%;
+      border: 0;
+      display: block;
+    }
 
-/* ポップアップのパネル全体を縦に並べる */
-.chat-panel,
-.chat-popup-panel {
-  display: flex;
-  flex-direction: column;
-  height: min(80vh, 720px);  /* お好みで調整 */
-}
+    /* ===== responsive ===== */
+    @media (max-width:900px){
+      .hero{grid-template-columns:1fr;}
+      .features{grid-template-columns:repeat(2,1fr)}
+      .grid{grid-template-columns:1fr}
+      .large{grid-column:span 1}
+    }
+    @media (max-width:520px){
+      .features{grid-template-columns:1fr}
+    }
 
-/* iframe を入れている「中身」の部分（class 名は実ファイルに合わせてOK） */
-.chat-panel-body,
-.chat-popup-body {
-  flex: 1;
-  min-height: 0;
-  padding: 0;              /* 余白をゼロにして iframe にぴったりくっつける */
-  background: transparent;
-}
+    /* === モバイル用ナビゲーション（FAQと同じ挙動） ===== */
+    @media (max-width: 720px) {
+      header {
+        position: relative;
+        align-items:flex-start;
+      }
 
-/* 中の iframe を「高さ100%・枠なし」にする */
-.chat-panel-body iframe,
-.chat-popup-body iframe,
-iframe[src*="custom-chatbot"] {
-  width: 100%;
-  height: 100%;
-  border: 0;
-  display: block;
-}
-/* === モバイル用ナビゲーション ==================== */
-@media (max-width: 720px) {
-  header {
-    position: relative;
-  }
+      header nav {
+        display: none;                  /* 初期は非表示 */
+        position: absolute;
+        top: 52px;
+        right: 16px;
+        left: 16px;
+        padding: 12px 16px;
+        border-radius: 14px;
+        background: #ffffff;
+        flex-direction: column;
+        gap: 10px;
+        box-shadow: 0 18px 40px rgba(15, 23, 42, 0.35);
+        border: 1px solid rgba(148, 163, 184, 0.35);
+        z-index: 40;
+      }
 
-  header nav {
-    display: none;                  /* 初期は非表示 */
-    position: absolute;
-    top: 52px;
-    right: 16px;
-    left: 16px;
-    padding: 12px 16px;
-    border-radius: 14px;
-    background: #ffffff;
-    flex-direction: column;
-    gap: 10px;
-    box-shadow: 0 18px 40px rgba(15, 23, 42, 0.35);
-    border: 1px solid rgba(148, 163, 184, 0.35);
-    z-index: 40;
-  }
+      header nav a {
+        padding: 4px 0;
+      }
 
-  header nav a {
-    padding: 4px 0;
-  }
+      header nav.open {
+        display: flex;                  /* menu ボタンで open を付ける */
+      }
 
-  header nav.open {
-    display: flex;                  /* menu ボタンで open を付ける */
-  }
-}
+      nav{ /* PCナビは消してモバイルに切り替え */
+        font-size:13px;
+      }
+      .mobile-nav{
+        display:flex;
+      }
+    }
+
+    @media (min-width:721px){
+      nav{display:flex;}
+      .mobile-nav{display:none;}
+    }
 
   </style>
 </head>
@@ -270,17 +296,16 @@ iframe[src*="custom-chatbot"] {
 
     <!-- header -->
     <header>
-      <div class="brand">
-        <a href="index.html" style="text-decoration:none;display:flex;align-items:center;gap:12px;color:inherit">
+      <a href="index.html" class="brand-link">
+        <div class="brand">
           <div class="logo">DI</div>
           <div>
-            <div style="font-weight:700;font-size:15px">DATuM IDEA — Sample</div>
-            <div style="font-size:13px;color:var(--muted)">疑似サイトテンプレート</div>
+            <div class="brand-title">DATuM IDEA — Sample</div>
+            <div class="brand-sub">医療データ活用サービスの疑似サイト</div>
           </div>
-        </a>
-      </div>
+        </div>
+      </a>
 
-      <!-- ★本番サイトと同じ構成のナビ（項目を限定） -->
       <nav>
         <a href="about.html">DATuM IDEAについて</a>
         <a href="service.html">提供サービス一覧</a>
@@ -291,11 +316,10 @@ iframe[src*="custom-chatbot"] {
         <a href="contact.html" class="cta-nav">お問い合わせ</a>
       </nav>
 
-      <!-- モバイル用は簡易ボタンだけ（必要なら後でちゃんと実装） -->
       <div class="mobile-nav">
         <button 
           id="menuBtn"
-          style="background:white;border:1px solid #d1d5db;padding:8px;border-radius:8px;color:#374151">
+          style="background:#ffffff;border:1px solid #d1d5db;padding:8px 12px;border-radius:999px;color:#374151;font-size:13px">
           Menu
         </button>
       </div>
@@ -309,34 +333,34 @@ iframe[src*="custom-chatbot"] {
           <h1>人に寄り添うデータデザインと<br>プロダクト開発</h1>
           <p>DATuM IDEAをイメージしたダミーページ。説明文を入れて事業概要を伝えます。</p>
 
-          <div style="margin-top:20px;display:flex;gap:12px;align-items:center">
+          <div style="margin-top:20px;display:flex;gap:12px;align-items:center;flex-wrap:wrap">
             <a href="contact.html" class="cta-nav" style="box-shadow:none;">案件の相談</a>
-            <a href="service.html" style="color:var(--accent);text-decoration:underline">提供サービスを見る</a>
+            <a href="service.html" style="color:var(--accent);text-decoration:underline;font-size:13px">提供サービスを見る</a>
           </div>
 
           <!-- Hero card -->
           <div class="card" style="margin-top:22px">
-            <div style="display:flex;justify-content:space-between;align-items:center">
+            <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap">
               <div>
                 <div style="font-weight:700;color:#0f172a">最新のプロジェクト</div>
                 <div class="muted" style="font-size:13px">データ可視化とUXの刷新</div>
               </div>
-              <div style="padding:4px 10px;background:#e0f2fe;color:#0369a1;border-radius:999px;font-weight:700">
+              <div style="padding:4px 10px;background:#e0f2fe;color:#0369a1;border-radius:999px;font-weight:700;font-size:12px">
                 Case Study
               </div>
             </div>
 
             <div class="features">
               <div class="feature">
-                <div style="font-weight:700;color:#0f172a">データ設計</div>
+                <div style="font-weight:700;color:#0f172a;font-size:14px">データ設計</div>
                 <div class="muted" style="font-size:13px">収集・整形・利活用の基盤設計</div>
               </div>
               <div class="feature">
-                <div style="font-weight:700;color:#0f172a">UI/UX</div>
+                <div style="font-weight:700;color:#0f172a;font-size:14px">UI/UX</div>
                 <div class="muted" style="font-size:13px">ユーザー中心のデザイン</div>
               </div>
               <div class="feature">
-                <div style="font-weight:700;color:#0f172a">プロトタイピング</div>
+                <div style="font-weight:700;color:#0f172a;font-size:14px">プロトタイピング</div>
                 <div class="muted" style="font-size:13px">高速に価値を検証</div>
               </div>
             </div>
@@ -357,12 +381,12 @@ iframe[src*="custom-chatbot"] {
       <!-- About（トップ内の簡易説明）-->
       <section>
         <div class="card">
-          <h2 style="color:#0f172a">私たちについて</h2>
-          <p class="muted">データとデザインを組み合わせ、ビジネスの意思決定を支えるプロダクトを作ります。</p>
+          <h2 style="color:#0f172a;font-size:20px;margin:0 0 6px;">私たちについて</h2>
+          <p class="muted" style="margin:0;">データとデザインを組み合わせ、ビジネスの意思決定を支えるプロダクトを作ります。</p>
 
           <div class="grid" style="margin-top:18px">
             <div class="large card" style="background:linear-gradient(135deg,#eff6ff,#ffffff);border-color:#dbeafe;">
-              <h3 style="color:#0f172a">アプローチ</h3>
+              <h3 style="color:#0f172a;margin-top:0;">アプローチ</h3>
               <p class="muted">ユーザーリサーチを起点に、データ設計からUI/UX、運用まで伴走します。</p>
               <a href="about.html" style="display:inline-block;margin-top:8px;font-size:13px;color:var(--accent);text-decoration:underline;">
                 DATuM IDEAについて詳しく見る
@@ -370,8 +394,8 @@ iframe[src*="custom-chatbot"] {
             </div>
 
             <div class="card">
-              <h3 style="color:#0f172a">主要領域</h3>
-              <ul class="muted">
+              <h3 style="color:#0f172a;margin-top:0;">主要領域</h3>
+              <ul class="muted" style="padding-left:18px;margin-top:4px;">
                 <li>データ可視化</li>
                 <li>UXデザイン</li>
                 <li>プロダクト開発</li>
@@ -379,7 +403,7 @@ iframe[src*="custom-chatbot"] {
             </div>
 
             <div class="card">
-              <h3 style="color:#0f172a">採用・協業</h3>
+              <h3 style="color:#0f172a;margin-top:0;">採用・協業</h3>
               <p class="muted">外部パートナーとの協業も歓迎します。</p>
             </div>
           </div>
@@ -388,20 +412,20 @@ iframe[src*="custom-chatbot"] {
 
       <!-- Services 概要 -->
       <section>
-        <h2 style="color:#0f172a">提供サービスのイメージ</h2>
+        <h2 style="color:#0f172a;font-size:20px;margin:0 0 12px;">提供サービスのイメージ</h2>
         <div class="grid">
           <div class="card">
-            <h4 style="color:#0f172a">Webツール</h4>
+            <h4 style="color:#0f172a;margin-top:0;">Webツール</h4>
             <p class="muted">KPIや患者数などを直感的に把握できるダッシュボード（イメージ）。</p>
             <a href="webtool.html" style="font-size:13px;color:var(--accent);text-decoration:underline;">Webツールの詳細</a>
           </div>
           <div class="card">
-            <h4 style="color:#0f172a">解析・レポート</h4>
+            <h4 style="color:#0f172a;margin-top:0;">解析・レポート</h4>
             <p class="muted">専任アナリストによる統計解析・レポート提供（イメージ）。</p>
             <a href="report.html" style="font-size:13px;color:var(--accent);text-decoration:underline;">解析・レポートの詳細</a>
           </div>
           <div class="card">
-            <h4 style="color:#0f172a">データセット提供</h4>
+            <h4 style="color:#0f172a;margin-top:0;">データセット提供</h4>
             <p class="muted">匿名加工データをデータセットとして提供（イメージ）。</p>
             <a href="dataset.html" style="font-size:13px;color:var(--accent);text-decoration:underline;">データセット提供の詳細</a>
           </div>
@@ -411,8 +435,8 @@ iframe[src*="custom-chatbot"] {
       <!-- Contact -->
       <section>
         <div class="card">
-          <h2 style="color:#0f172a">お問い合わせ</h2>
-          <p class="muted">案件のご相談は以下のメールアドレスまで（ダミー）</p>
+          <h2 style="color:#0f172a;font-size:20px;margin:0 0 6px;">お問い合わせ</h2>
+          <p class="muted" style="margin:0;">案件のご相談は以下のメールアドレスまで（ダミー）</p>
           <p style="margin-top:12px">
             <a href="mailto:hello@example.com" class="cta-nav" style="box-shadow:none;">hello@example.com</a>
           </p>
@@ -423,7 +447,7 @@ iframe[src*="custom-chatbot"] {
 
     <!-- footer -->
     <footer>
-      <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap">
+      <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px">
         <div class="muted">© DATuM IDEA — Sample Template</div>
         <div class="links">
           <a class="muted" href="#">Privacy</a>
@@ -434,15 +458,17 @@ iframe[src*="custom-chatbot"] {
 
   </div>
 
-  <!-- ===== チャットUI ===== -->
-  <div id="chatbotPanel" class="chatbot-panel">
-    <!-- 自作UI版のエンドポイント -->
-    <iframe src="https://bchealthcare.click/custom-chatbot/" title="DATuM IDEA チャットボット"></iframe>
+  <!-- ===== チャットUI（FAQと同じ挙動） ===== -->
+  <div id="chatbotPanel" class="chatbot-panel hidden" aria-hidden="true">
+    <iframe src="https://bchealthcare.click/custom-chatbot/" title="DATuM IDEA チャットボット" loading="lazy"></iframe>
   </div>
 
-  <button id="chatbotToggle" class="chatbot-toggle">閉じる</button>
+  <button id="chatbotToggle" class="chatbot-toggle" type="button">
+    チャットで相談 <span>💬</span>
+  </button>
 
   <script>
+  // ===== モバイルナビ（FAQと同じJS） =====
   const menuBtn = document.getElementById('menuBtn');
   const headerNav = document.querySelector('header nav');
 
@@ -458,10 +484,34 @@ iframe[src*="custom-chatbot"] {
       });
     });
   }
-</script>
+
+  // ===== チャットポップアップ開閉（FAQ版を踏襲） =====
+  const chatbotPanel = document.getElementById('chatbotPanel');
+  const chatbotToggle = document.getElementById('chatbotToggle');
+
+  if (chatbotPanel && chatbotToggle) {
+    // 画面幅でモバイル判定（768px 以下をモバイル扱い）
+    const isMobile = window.matchMedia("(max-width: 768px)").matches;
+
+    // 初期状態：PC では開いておく / モバイルでは閉じておく
+    if (!isMobile) {
+      chatbotPanel.classList.remove('hidden');
+      chatbotPanel.setAttribute('aria-hidden', 'false');
+      chatbotToggle.textContent = '閉じる';
+    } else {
+      chatbotPanel.classList.add('hidden');
+      chatbotPanel.setAttribute('aria-hidden', 'true');
+      chatbotToggle.textContent = 'チャットで相談';
+    }
+
+    // ボタン押下でトグル
+    chatbotToggle.addEventListener('click', () => {
+      const isHidden = chatbotPanel.classList.toggle('hidden');
+      chatbotPanel.setAttribute('aria-hidden', isHidden ? 'true' : 'false');
+      chatbotToggle.textContent = isHidden ? 'チャットで相談' : '閉じる';
+    });
+  }
+  </script>
 
 </body>
 </html>
-
-
-
