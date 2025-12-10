@@ -1,0 +1,321 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>DATuM IDEAについて | DATuM IDEA サンプル</title>
+  <meta name="description" content="医療情報分析・提供サービス DATuM IDEA のコンセプトや特徴を紹介する疑似ページです。">
+  <link rel="icon" href="/assets/favicon.png">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#0f1724;
+      --card:#0b1220;
+      --muted:#9aa4b2;
+      --accent:#26a69a;
+      --glass: rgba(255,255,255,0.04);
+      --maxw:1100px;
+      color-scheme: dark;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:'Noto Sans JP', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      background: linear-gradient(180deg, #071022 0%, #071625 60%);
+      color:#e6eef6;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:1.5;
+    }
+
+    .wrap{max-width:var(--maxw);margin:0 auto;padding:24px}
+    header{display:flex;align-items:center;justify-content:space-between;padding:12px 0}
+    .brand{display:flex;gap:12px;align-items:center}
+    .logo{
+      width:44px;height:44px;
+      background:linear-gradient(135deg,var(--accent),#2dd4bf);
+      border-radius:8px;
+      display:flex;align-items:center;justify-content:center;
+      font-weight:700;color:#052025;
+    }
+    nav{display:flex;gap:20px;align-items:center;font-size:14px}
+    nav a{color:var(--muted);text-decoration:none;font-weight:500}
+    nav a:hover{color:#e5e7eb}
+    .cta{
+      background:var(--accent);
+      color:#022;
+      padding:8px 12px;
+      border-radius:10px;
+      text-decoration:none;
+      font-weight:700;
+    }
+    .mobile-nav{display:none}
+
+    section{padding:32px 0}
+    .page-hero{padding:40px 0 10px}
+    .pill{
+      display:inline-flex;align-items:center;gap:8px;
+      border-radius:999px;
+      padding:4px 12px;
+      background:rgba(148,163,184,0.12);
+      font-size:12px;color:var(--muted);
+    }
+    .pill-dot{width:8px;height:8px;border-radius:999px;background:var(--accent)}
+    .page-hero h1{margin:10px 0 8px;font-size:clamp(26px,4vw,34px)}
+    .page-hero p{color:var(--muted);max-width:60ch}
+
+    .card{
+      background:linear-gradient(180deg, rgba(255,255,255,0.02), var(--glass));
+      padding:22px;
+      border-radius:12px;
+      box-shadow:0 6px 20px rgba(2,6,23,0.6);
+    }
+    .muted{color:var(--muted)}
+    .section-title{font-size:20px;margin-bottom:6px}
+    .section-lead{color:var(--muted);max-width:60ch}
+
+    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+    .grid-2{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
+
+    .badge-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+    .badge{
+      font-size:11px;
+      padding:4px 10px;
+      border-radius:999px;
+      border:1px solid rgba(148,163,184,0.5);
+      color:var(--muted);
+    }
+
+    ul.point{
+      margin-top:8px;
+      padding-left:18px;
+      font-size:13px;
+      color:var(--muted);
+    }
+    ul.point li{margin-bottom:4px}
+
+    footer{padding:28px 0;border-top:1px solid rgba(255,255,255,0.03);color:var(--muted)}
+    .links{display:flex;gap:12px;flex-wrap:wrap}
+
+    @media (max-width:900px){
+      nav{display:none}
+      .mobile-nav{display:flex}
+      .grid,.grid-2{grid-template-columns:1fr}
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <!-- 共通ヘッダー -->
+    <header>
+      <div class="brand">
+        <div class="logo">DI</div>
+        <div>
+          <div style="font-weight:700">DATuM IDEA — Sample</div>
+          <div class="muted" style="font-size:13px">疑似サイトテンプレート</div>
+        </div>
+      </div>
+
+      <nav>
+        <a href="index.html">Home</a>
+        <a href="about.html">DATuM IDEAについて</a>
+        <a href="service.html">提供サービス一覧</a>
+        <a href="portal.html">ファーマベース</a>
+        <a href="news.html">お知らせ</a>
+        <a href="download.html">資料DL</a>
+        <a href="faq.html">よくあるご質問</a>
+        <a href="contact.html" class="cta">お問い合わせ</a>
+      </nav>
+
+      <div class="mobile-nav">
+        <button id="menuBtn" aria-expanded="false" aria-controls="mnav"
+          style="background:none;border:1px solid rgba(255,255,255,0.04);padding:8px;border-radius:8px;color:var(--muted);font-size:13px">
+          Menu
+        </button>
+      </div>
+    </header>
+
+    <main>
+      <!-- ヒーロー -->
+      <section class="page-hero">
+        <div class="pill">
+          <span class="pill-dot"></span>
+          <span>About DATuM IDEA</span>
+        </div>
+        <h1>DATuM IDEAについて</h1>
+        <p>
+          DATuM IDEAは、次世代医療基盤法に基づき収集された医療現場由来のリアルワールドデータを活用し、
+          製薬企業やアカデミア・医療機関の医療情報分析を支援するサービスをイメージした疑似サイトです。
+        </p>
+      </section>
+
+      <!-- サービス概要 -->
+      <section>
+        <div class="card">
+          <h2 class="section-title">サービスのコンセプト</h2>
+          <p class="section-lead">
+            「データをつなぐ。そして新しい価値へ。」というコンセプトのもと、
+            電子カルテやレセプトなどの医療データを統合し、直感的な分析やエビデンス創出を支えることを目指したサービスです。
+          </p>
+          <div class="badge-row">
+            <span class="badge">リアルワールドデータ</span>
+            <span class="badge">医療情報分析</span>
+            <span class="badge">次世代医療基盤法</span>
+          </div>
+          <ul class="point">
+            <li>医療機関から収集された匿名加工医療情報を安全に利活用</li>
+            <li>製薬企業・アカデミア・医療機関の多様なニーズに対応</li>
+            <li>治療実態の可視化からエビデンス創出までを一気通貫でサポート</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- データソース -->
+      <section>
+        <h2 class="section-title">扱うデータのイメージ</h2>
+        <p class="section-lead">
+          実サービスでは、次世代医療基盤法にもとづき認定事業者が収集した医療データを、
+          匿名加工・仮名加工したうえで利活用しています。本疑似サイトでは、代表的なデータソースのみを紹介しています。
+        </p>
+
+        <div class="grid" style="margin-top:20px">
+          <div class="card">
+            <h3>電子カルテデータ</h3>
+            <p class="muted">
+              診断名、処方、検査値、処置など、診療録に記録される情報を基盤としたデータです。
+              時系列の治療実態やアウトカム分析に活用されます。
+            </p>
+          </div>
+          <div class="card">
+            <h3>医科レセプトデータ</h3>
+            <p class="muted">
+              診療報酬請求に用いられるレセプト情報をもとに、コストや医療資源の利用状況を把握します。
+              電子カルテデータと連結することで、費用対効果の検討にもつながります。
+            </p>
+          </div>
+          <div class="card">
+            <h3>その他のデータソース</h3>
+            <p class="muted">
+              DPCデータや健診データなど、研究目的に応じて活用可能なデータソースを組み合わせるイメージです。
+              実際の構成はサービス仕様に依存します。
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- サービスラインナップ -->
+      <section>
+        <h2 class="section-title">提供サービスラインナップ（イメージ）</h2>
+        <p class="section-lead">
+          DATuM IDEAでは、同じデータベースを基盤にしながら、利用者のニーズに応じて複数の利用形態を想定しています。
+        </p>
+
+        <div class="grid-2" style="margin-top:20px">
+          <div class="card">
+            <h3>Webツール（ダッシュボード）</h3>
+            <p class="muted">
+              ブラウザ上で患者数や検査値の分布・推移を直感的に確認できるインタラクティブなツールです。
+              フィジビリティ検討や日常的な分析に適した利用イメージです。
+            </p>
+            <a href="webtool.html" style="display:inline-block;margin-top:8px;font-size:13px;color:var(--accent);text-decoration:none;">
+              Webツールの詳細へ
+            </a>
+          </div>
+
+          <div class="card">
+            <h3>解析・レポート</h3>
+            <p class="muted">
+              専門アナリストが、時系列の患者経過や診療フローなどの高度な分析を設計・実施し、
+              レポートとして提供するサービスです。製販後DB調査や論文化支援などを想定しています。
+            </p>
+            <a href="report.html" style="display:inline-block;margin-top:8px;font-size:13px;color:var(--accent);text-decoration:none;">
+              解析・レポートの詳細へ
+            </a>
+          </div>
+
+          <div class="card">
+            <h3>データセット提供</h3>
+            <p class="muted">
+              匿名加工された医療データをテーブル形式のデータセットとして提供し、
+              お客さま自身の解析環境（SAS・R・Python等）で自由に分析いただく利用形態です。
+            </p>
+            <a href="dataset.html" style="display:inline-block;margin-top:8px;font-size:13px;color:var(--accent);text-decoration:none;">
+              データセット提供の詳細へ
+            </a>
+          </div>
+
+          <div class="card">
+            <h3>アカデミア・医療機関向けツール</h3>
+            <p class="muted">
+              研究者や医療機関のニーズに合わせて、研究シーズ探索や患者集団の可視化を支援する分析ツールを提供するイメージです。
+            </p>
+            <a href="medical.html" style="display:inline-block;margin-top:8px;font-size:13px;color:var(--accent);text-decoration:none;">
+              アカデミア・医療機関向けサービスへ
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- 目指す世界 -->
+      <section>
+        <div class="card">
+          <h2 class="section-title">目指す世界</h2>
+          <p class="section-lead">
+            DATuM IDEAは、医療ビッグデータの利活用を通じて、健康長寿の延伸と効率的な創薬、
+            そして一人ひとりの患者に合った医療の実現に貢献することを目指している――
+            という世界観をイメージしたサービスです。
+          </p>
+          <ul class="point">
+            <li>実臨床における治療実態を可視化し、未充足の医療ニーズを明らかにする</li>
+            <li>リアルワールドエビデンスの創出を通じて、医療技術の価値評価を支える</li>
+            <li>データと知見をつなぎ、医療現場・研究現場の意思決定を後押しする</li>
+          </ul>
+          <p class="muted" style="font-size:12px;margin-top:10px">
+            ※ 本ページの内容は、実際のサービスサイトを参考にした疑似コンテンツであり、
+            仕様・数値・表現は一部簡略化・再構成されています。
+          </p>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap">
+        <div class="muted">© DATuM IDEA — Sample Template</div>
+        <div class="links">
+          <a class="muted" href="#">匿名加工医療情報の取扱い（ダミー）</a>
+          <a class="muted" href="#">個人情報の取扱い（ダミー）</a>
+          <a class="muted" href="#">Cookieポリシー（ダミー）</a>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    // Mobile menu simple toggle
+    const menuBtn = document.getElementById('menuBtn');
+    if(menuBtn){
+      menuBtn.addEventListener('click',()=>{
+        const expanded = menuBtn.getAttribute('aria-expanded') === 'true';
+        menuBtn.setAttribute('aria-expanded', String(!expanded));
+
+        const items = [
+          {label:'Home', href:'index.html'},
+          {label:'About', href:'about.html'},
+          {label:'Service', href:'service.html'},
+          {label:'Pharma Base', href:'portal.html'},
+          {label:'News', href:'news.html'},
+          {label:'Download', href:'download.html'},
+          {label:'FAQ', href:'faq.html'},
+          {label:'Contact', href:'contact.html'},
+        ];
+        const choice = prompt('Navigate to: ' + items.map(i=>i.label).join(' / '));
+        if(!choice) return;
+        const key = choice.toLowerCase();
+        const hit = items.find(i => key.includes(i.label.toLowerCase()));
+        if(hit) location.href = hit.href;
+      });
+    }
+  </script>
+</body>
+</html>
