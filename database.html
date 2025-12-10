@@ -1,0 +1,362 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>データベースについて | DATuM IDEA サンプル</title>
+  <meta name="description" content="DATuM IDEA風の疑似サイト — 電子カルテデータと医科レセプトデータを基盤としたデータベースの概要と特徴を紹介するページ。">
+  <link rel="icon" href="/assets/favicon.png">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#0f1724;
+      --card:#0b1220;
+      --muted:#9aa4b2;
+      --accent:#26a69a;
+      --glass: rgba(255,255,255,0.04);
+      --maxw:1100px;
+      color-scheme: dark;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:'Noto Sans JP', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      background: linear-gradient(180deg, #071022 0%, #071625 60%);
+      color:#e6eef6;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:1.5;
+    }
+
+    .wrap{max-width:var(--maxw);margin:0 auto;padding:24px}
+    header{display:flex;align-items:center;justify-content:space-between;padding:12px 0}
+    .brand{display:flex;gap:12px;align-items:center}
+    .logo{
+      width:44px;height:44px;
+      background:linear-gradient(135deg,var(--accent),#2dd4bf);
+      border-radius:8px;
+      display:flex;align-items:center;justify-content:center;
+      font-weight:700;color:#052025;
+    }
+    nav{display:flex;gap:20px;align-items:center;font-size:14px}
+    nav a{color:var(--muted);text-decoration:none;font-weight:500}
+    nav a:hover{color:#e5e7eb}
+    .cta{
+      background:var(--accent);
+      color:#022;
+      padding:8px 12px;
+      border-radius:10px;
+      text-decoration:none;
+      font-weight:700;
+    }
+    .mobile-nav{display:none}
+
+    section{padding:32px 0}
+    .page-hero{padding:40px 0 16px}
+    .pill{
+      display:inline-flex;align-items:center;gap:8px;
+      border-radius:999px;
+      padding:4px 12px;
+      background:rgba(148,163,184,0.12);
+      font-size:12px;color:var(--muted);
+    }
+    .pill-dot{width:8px;height:8px;border-radius:999px;background:var(--accent)}
+    .page-hero h1{margin:10px 0 8px;font-size:clamp(26px,4vw,34px)}
+    .page-hero p{color:var(--muted);max-width:60ch}
+
+    .card{
+      background:linear-gradient(180deg, rgba(255,255,255,0.02), var(--glass));
+      padding:22px;
+      border-radius:12px;
+      box-shadow:0 6px 20px rgba(2,6,23,0.6);
+    }
+    .muted{color:var(--muted)}
+
+    .section-title{font-size:20px;margin-bottom:6px}
+    .section-lead{color:var(--muted);max-width:60ch}
+
+    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+    .grid-2{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
+    .large{grid-column:span 2}
+
+    .tag-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+    .tag{
+      font-size:11px;
+      padding:4px 10px;
+      border-radius:999px;
+      border:1px solid rgba(148,163,184,0.4);
+      color:var(--muted);
+      background:rgba(15,23,42,0.6);
+    }
+
+    table{
+      width:100%;
+      border-collapse:collapse;
+      margin-top:14px;
+      font-size:13px;
+    }
+    th,td{
+      padding:8px 10px;
+      border-bottom:1px solid rgba(148,163,184,0.3);
+    }
+    th{
+      text-align:left;
+      width:35%;
+      color:#cbd5f5;
+      background:rgba(15,23,42,0.8);
+    }
+    tr:nth-child(even) td{
+      background:rgba(15,23,42,0.5);
+    }
+
+    footer{padding:28px 0;border-top:1px solid rgba(255,255,255,0.03);color:var(--muted)}
+    .links{display:flex;gap:12px;flex-wrap:wrap}
+
+    @media (max-width:900px){
+      nav{display:none}
+      .mobile-nav{display:flex}
+      .grid,.grid-2{grid-template-columns:1fr}
+      .large{grid-column:span 1}
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <!-- 共通ヘッダー -->
+    <header>
+      <div class="brand">
+        <div class="logo">DI</div>
+        <div>
+          <div style="font-weight:700">DATuM IDEA — Sample</div>
+          <div class="muted" style="font-size:13px">疑似サイトテンプレート</div>
+        </div>
+      </div>
+
+      <nav>
+        <a href="index.html">Home</a>
+        <a href="about.html">DATuM IDEAについて</a>
+        <a href="service.html">提供サービス一覧</a>
+        <a href="portal.html">ファーマベース</a>
+        <a href="news.html">お知らせ</a>
+        <a href="download.html">資料DL</a>
+        <a href="faq.html">よくあるご質問</a>
+        <a href="contact.html" class="cta">お問い合わせ</a>
+      </nav>
+
+      <div class="mobile-nav">
+        <button id="menuBtn" aria-expanded="false" aria-controls="mnav"
+          style="background:none;border:1px solid rgba(255,255,255,0.04);padding:8px;border-radius:8px;color:var(--muted);font-size:13px">
+          Menu
+        </button>
+      </div>
+    </header>
+
+    <main>
+      <!-- ページヒーロー -->
+      <section class="page-hero">
+        <div class="pill">
+          <span class="pill-dot"></span>
+          <span>Database</span>
+        </div>
+        <h1>データベースについて</h1>
+        <p>
+          DATuM IDEAのデータベースは、電子カルテデータと医科レセプトデータを基盤とした
+          医療現場由来のリアルワールドデータベースです。がんや希少疾患を含む幅広い領域の
+          治療実態を、横断的かつ時系列に捉えることができます。:contentReference[oaicite:1]{index=1}
+        </p>
+      </section>
+
+      <!-- 概要＋スペック -->
+      <section>
+        <div class="card">
+          <h2 class="section-title">DATuM IDEA データベース概要</h2>
+          <p class="section-lead">
+            次世代医療基盤法に基づき、認定事業者から匿名加工された医療情報を受け取り、
+            TOPPANが分析・提供するためのデータベースとして構築されています。
+            下記は 2025年10月時点の構成イメージです（数値は本家サイトの情報をもとにした参考値）。:contentReference[oaicite:2]{index=2}
+          </p>
+
+          <table aria-label="DATuM IDEA データベース情報（参考値）">
+            <tbody>
+              <tr>
+                <th>データソース</th>
+                <td>電子カルテデータ／医科レセプトデータ</td>
+              </tr>
+              <tr>
+                <th>対象施設</th>
+                <td>57施設前後（うち国立病院機構が大半を占める想定）</td>
+              </tr>
+              <tr>
+                <th>対象地域</th>
+                <td>全国30都道府県以上の医療機関から収集（地域網羅性の高さが特徴）:contentReference[oaicite:3]{index=3}</td>
+              </tr>
+              <tr>
+                <th>登録患者数</th>
+                <td>約154万人（参考値）</td>
+              </tr>
+              <tr>
+                <th>データ期間</th>
+                <td>2019年1月～2025年3月頃までの約6年強（更新により変動）:contentReference[oaicite:4]{index=4}</td>
+              </tr>
+              <tr>
+                <th>主な対象疾患</th>
+                <td>がん・希少疾患をはじめとした幅広い領域（がん拠点病院からのデータを多数含む）:contentReference[oaicite:5]{index=5}</td>
+              </tr>
+              <tr>
+                <th>利用主体</th>
+                <td>製薬企業／アカデミア／医療機関 など</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <p class="muted" style="margin-top:10px;font-size:12px">
+            ※本ページは疑似サイトであり、上記の値はサービス理解のためのイメージです。最新情報は公式サイトをご確認ください。
+          </p>
+        </div>
+      </section>
+
+      <!-- 特徴 -->
+      <section>
+        <h2 class="section-title">データベースの主な特徴</h2>
+        <p class="section-lead">
+          DATuM IDEAのデータベースは、「網羅性」「疾患の解像度」「検査情報の豊富さ」
+          「データソース連結」の4つの観点で特徴づけられます。:contentReference[oaicite:6]{index=6}
+        </p>
+
+        <div class="grid" style="margin-top:20px">
+          <div class="card">
+            <h3>網羅性の高いデータ</h3>
+            <p class="muted">
+              日本各地の医療機関から収集したデータを統合することで、
+              地域や年齢層に偏りの少ない患者分布を実現しています。
+              後期高齢者の治療実態も含めた検討が可能です。:contentReference[oaicite:7]{index=7}
+            </p>
+          </div>
+
+          <div class="card">
+            <h3>実態に即した疾患情報</h3>
+            <p class="muted">
+              電子カルテ側の診療情報を活用することで、疾患名や臨床所見を
+              より現場の実態に近い形で把握できます。レセプトだけでは見えにくい
+              症例についても、分析の視野に入れやすくなります。:contentReference[oaicite:8]{index=8}
+            </p>
+          </div>
+
+          <div class="card">
+            <h3>専門性の高い検査情報</h3>
+            <p class="muted">
+              検体検査や画像検査など、診療プロセスの中で取得される検査情報を
+              時系列で追跡できる点も特長のひとつです。アウトカムの評価や
+              治療前後の変化の把握に活用できます。:contentReference[oaicite:9]{index=9}
+            </p>
+          </div>
+
+          <div class="card">
+            <h3>電子カルテ×医科レセプトの連結</h3>
+            <p class="muted">
+              電子カルテ由来の詳細な臨床情報と、医科レセプト由来の受診・請求情報を
+              組み合わせた連結データベースにより、治療の流れとアウトカムを一体で
+              捉えることが可能です。:contentReference[oaicite:10]{index=10}
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- 提供サービスとの関係 -->
+      <section>
+        <div class="card">
+          <h2 class="section-title">提供サービスとの関係</h2>
+          <p class="section-lead">
+            このデータベースをもとに、製薬企業向け・アカデミア／医療機関向けの
+            各種サービスが提供されています。利用主体ごとに、利用できるデータ項目や
+            期間などが一部異なる場合があります。詳細は個別にご相談いただく想定です。:contentReference[oaicite:11]{index=11}
+          </p>
+
+          <div class="grid-2" style="margin-top:18px">
+            <div class="card">
+              <h3>製薬企業向け</h3>
+              <p class="muted">
+                開発初期のフィジビリティ検討から製販後DB調査まで、
+                電子カルテ＋医科レセプトの連結データを活用した
+                分析・データ提供サービスを展開しています。:contentReference[oaicite:12]{index=12}
+              </p>
+              <a href="pharma.html" class="cta" style="margin-top:8px;display:inline-block">
+                製薬企業向けサービスを見る
+              </a>
+            </div>
+
+            <div class="card">
+              <h3>アカデミア・医療機関向け</h3>
+              <p class="muted">
+                研究シーズ探索やアウトカム分析、論文化など、
+                研究者・医師の視点に合わせたツールや解析支援メニューを
+                提供しています。:contentReference[oaicite:13]{index=13}
+              </p>
+              <a href="medical.html" class="cta" style="margin-top:8px;display:inline-block">
+                アカデミア向けサービスを見る
+              </a>
+            </div>
+          </div>
+
+          <p class="muted" style="margin-top:12px;font-size:12px">
+            ※アカデミア・医療機関向けサービスでは、一部データ構成や利用条件が
+            製薬企業向けと異なる場合があります。
+          </p>
+        </div>
+      </section>
+
+      <!-- 医療データについてへの導線 -->
+      <section>
+        <div class="card">
+          <h2 class="section-title">医療データの詳細仕様について</h2>
+          <p class="section-lead">
+            個々のテーブル構成（傷病・診療行為・薬剤・検査など）や、
+            データ収集フロー、次世代医療基盤法との関係など、
+            もう一段深い技術的な内容は「医療データについて」のページで紹介する想定です。
+          </p>
+          <div style="margin-top:16px">
+            <a href="data.html" class="cta">医療データについて（疑似ページ）</a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap">
+        <div class="muted">© DATuM IDEA — Sample Template</div>
+        <div class="links">
+          <a class="muted" href="#">匿名加工医療情報の取扱い（ダミー）</a>
+          <a class="muted" href="#">個人情報の取扱い（ダミー）</a>
+          <a class="muted" href="#">Cookieポリシー（ダミー）</a>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    // Mobile menu simple toggle
+    const menuBtn = document.getElementById('menuBtn')
+    if(menuBtn){
+      menuBtn.addEventListener('click',()=>{
+        const expanded = menuBtn.getAttribute('aria-expanded') === 'true'
+        menuBtn.setAttribute('aria-expanded', String(!expanded))
+
+        const items = [
+          {label:'Home', href:'index.html'},
+          {label:'About', href:'about.html'},
+          {label:'Service', href:'service.html'},
+          {label:'Pharma Base', href:'portal.html'},
+          {label:'FAQ', href:'faq.html'},
+          {label:'Contact', href:'contact.html'},
+        ]
+        const choice = prompt('Navigate to: ' + items.map(i=>i.label).join(' / '))
+        if(!choice) return
+        const key = choice.toLowerCase()
+        const hit = items.find(i => key.includes(i.label.toLowerCase()))
+        if(hit) location.href = hit.href
+      })
+    }
+  </script>
+</body>
+</html>
