@@ -4,278 +4,218 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>お知らせ | DATuM IDEA サンプル</title>
-  <meta name="description" content="DATuM IDEA風の疑似サイト — セミナー情報やサービス更新などのお知らせ一覧ページ。">
+  <meta name="description" content="DATuM IDEA風の疑似サイト — お知らせ一覧（ダミー）。">
   <link rel="icon" href="/assets/favicon.png">
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;700&display=swap" rel="stylesheet">
   <style>
     :root{
-      --bg:#0f1724;
-      --card:#0b1220;
-      --muted:#9aa4b2;
-      --accent:#26a69a;
-      --glass: rgba(255,255,255,0.04);
+      --bg:#e0f2fe;
+      --bg-soft:#eff6ff;
+      --card:#ffffff;
+      --muted:#6b7280;
+      --accent:#0ea5e9;
+      --accent-dark:#0284c7;
+      --border:#e5e7eb;
+      --shadow:0 10px 30px rgba(148,163,184,0.35);
       --maxw:1100px;
-      color-scheme: dark;
     }
-    *{box-sizing:border-box}
-    html,body{height:100%}
+    *{box-sizing:border-box;}
+    html,body{height:100%;}
     body{
       margin:0;
-      font-family:'Noto Sans JP', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-      background: linear-gradient(180deg, #071022 0%, #071625 60%);
-      color:#e6eef6;
+      font-family:'Noto Sans JP', system-ui, -apple-system, "Segoe UI", sans-serif;
+      background:linear-gradient(180deg,var(--bg) 0%,var(--bg-soft) 55%,#f9fafb 100%);
+      color:#111827;
       -webkit-font-smoothing:antialiased;
-      -moz-osx-font-smoothing:grayscale;
-      line-height:1.5;
+      line-height:1.6;
     }
+    .wrap{max-width:var(--maxw);margin:0 auto;padding:24px;}
 
-    .wrap{max-width:var(--maxw);margin:0 auto;padding:24px}
-    header{display:flex;align-items:center;justify-content:space-between;padding:12px 0}
-    .brand{display:flex;gap:12px;align-items:center}
-    .logo{
-      width:44px;height:44px;
-      background:linear-gradient(135deg,var(--accent),#2dd4bf);
-      border-radius:8px;
-      display:flex;align-items:center;justify-content:center;
-      font-weight:700;color:#052025;
-    }
-    nav{display:flex;gap:20px;align-items:center;font-size:14px}
-    nav a{color:var(--muted);text-decoration:none;font-weight:500}
-    nav a:hover{color:#e5e7eb}
-    .cta{
-      background:var(--accent);
-      color:#022;
-      padding:8px 12px;
-      border-radius:10px;
-      text-decoration:none;
-      font-weight:700;
-    }
-    .mobile-nav{display:none}
-
-    section{padding:32px 0}
-    .page-hero{padding:40px 0 16px}
-    .pill{
-      display:inline-flex;align-items:center;gap:8px;
-      border-radius:999px;
-      padding:4px 12px;
-      background:rgba(148,163,184,0.12);
-      font-size:12px;color:var(--muted);
-    }
-    .pill-dot{width:8px;height:8px;border-radius:999px;background:var(--accent)}
-    .page-hero h1{margin:10px 0 8px;font-size:clamp(26px,4vw,34px)}
-    .page-hero p{color:var(--muted);max-width:60ch}
-
-    .card{
-      background:linear-gradient(180deg, rgba(255,255,255,0.02), var(--glass));
-      padding:22px;
-      border-radius:12px;
-      box-shadow:0 6px 20px rgba(2,6,23,0.6);
-    }
-    .muted{color:var(--muted)}
-
-    .section-title{font-size:20px;margin-bottom:6px}
-    .section-lead{color:var(--muted);max-width:60ch}
-
-    .news-year{
-      margin-top:16px;
-      font-weight:700;
-      font-size:18px;
-      border-left:3px solid var(--accent);
-      padding-left:10px;
-    }
-
-    .news-list{
-      margin-top:12px;
-      display:flex;
-      flex-direction:column;
-      gap:10px;
-    }
-
-    .news-item{
-      display:flex;
-      flex-direction:column;
-      gap:6px;
-      padding:12px 14px;
-      border-radius:10px;
-      background:rgba(15,23,42,0.85);
-      border:1px solid rgba(148,163,184,0.4);
-    }
-
-    .news-meta{
+    header{
       display:flex;
       align-items:center;
-      gap:10px;
-      font-size:12px;
-      color:var(--muted);
+      justify-content:space-between;
+      gap:16px;
+      padding:12px 0;
     }
-
-    .news-tag{
-      padding:2px 8px;
-      border-radius:999px;
-      border:1px solid rgba(148,163,184,0.5);
-      font-size:11px;
+    .brand-link{text-decoration:none;color:inherit;}
+    .brand{display:flex;align-items:center;gap:12px;}
+    .logo{
+      width:44px;height:44px;
+      background:linear-gradient(135deg,#0ea5e9,#38bdf8);
+      border-radius:12px;
+      display:flex;align-items:center;justify-content:center;
+      color:#f9fafb;font-weight:700;
+      box-shadow:0 10px 25px rgba(59,130,246,0.5);
+      flex-shrink:0;
     }
+    .brand-title{font-weight:700;font-size:15px;}
+    .brand-sub{font-size:12px;color:var(--muted);}
 
-    .news-title{
-      font-size:15px;
-      font-weight:600;
-    }
-
-    .news-body{
+    nav{
+      display:flex;
+      flex-wrap:wrap;
+      gap:14px;
+      align-items:center;
       font-size:13px;
+      justify-content:flex-end;
+    }
+    nav a{
+      text-decoration:none;
+      color:#1f2937;
+      font-weight:500;
+      padding:4px 0;
+    }
+    nav a:hover{color:var(--accent-dark);}
+    nav a.cta-nav{
+      padding:6px 14px;
+      border-radius:999px;
+      background:var(--accent);
+      color:#f9fafb;
+      box-shadow:0 6px 16px rgba(59,130,246,0.5);
+      font-size:13px;
+    }
+    nav a.cta-nav:hover{background:var(--accent-dark);}
+    .mobile-nav{display:none;}
+
+    section{padding:24px 0;}
+    .page-hero{padding:40px 0 16px;}
+    .section-title{
+      font-size:18px;
+      margin-bottom:6px;
+      color:#0f172a;
+    }
+    .section-lead{
+      font-size:14px;
+      color:var(--muted);
+      max-width:70ch;
+    }
+    .card{
+      background:var(--card);
+      border-radius:16px;
+      padding:18px 20px;
+      box-shadow:var(--shadow);
+      border:1px solid rgba(148,163,184,0.35);
+    }
+    .muted{color:var(--muted);font-size:13px;}
+
+    .news-list{
+      margin-top:16px;
+      border-top:1px solid var(--border);
+    }
+    .news-item{
+      padding:12px 0;
+      border-bottom:1px solid var(--border);
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px 16px;
+      align-items:baseline;
+    }
+    .news-date{
+      width:90px;
+      font-size:12px;
+      color:var(--muted);
+      flex-shrink:0;
+    }
+    .news-label{
+      font-size:11px;
+      padding:2px 6px;
+      border-radius:999px;
+      background:#dbeafe;
+      color:#1d4ed8;
+      margin-right:6px;
+    }
+    .news-title{
+      font-size:14px;
+    }
+
+    footer{
+      padding:24px 0 8px;
+      border-top:1px solid var(--border);
+      margin-top:16px;
+      font-size:12px;
       color:var(--muted);
     }
-
-    .news-link{
+    footer .links a{
       font-size:12px;
-      margin-top:2px;
-    }
-
-    .news-link a{
-      color:var(--accent);
+      color:var(--muted);
       text-decoration:none;
     }
-    .news-link a:hover{
-      text-decoration:underline;
-    }
+    footer .links a:hover{text-decoration:underline;}
 
-    footer{padding:28px 0;border-top:1px solid rgba(255,255,255,0.03);color:var(--muted)}
-    .links{display:flex;gap:12px;flex-wrap:wrap}
-
-    @media (max-width:900px){
-      nav{display:none}
-      .mobile-nav{display:flex}
+    @media (max-width:720px){
+      nav{display:none;}
+      .mobile-nav{display:flex;}
+      header{align-items:flex-start;}
+      .news-item{flex-direction:column;}
+      .news-date{width:auto;}
     }
   </style>
 </head>
 <body>
   <div class="wrap">
-    <!-- 共通ヘッダー -->
     <header>
-      <div class="brand">
-        <div class="logo">DI</div>
-        <div>
-          <div style="font-weight:700">DATuM IDEA — Sample</div>
-          <div class="muted" style="font-size:13px">疑似サイトテンプレート</div>
+      <a href="index.html" class="brand-link">
+        <div class="brand">
+          <div class="logo">DI</div>
+          <div>
+            <div class="brand-title">DATuM IDEA — Sample</div>
+            <div class="brand-sub">医療データ活用サービスの疑似サイト</div>
+          </div>
         </div>
-      </div>
+      </a>
 
       <nav>
-  <a href="index.html">Home</a>
-  <a href="about.html">DATuM IDEAについて</a>
-  <a href="service.html">提供サービス一覧</a>
-  <a href="medicalservice.html">製薬企業向けサービス</a>
-  <a href="academia.html">アカデミア・医療機関向けサービス</a>
-  <a href="database.html">データベースについて</a>
-  <a href="medicaldata.html">医療データについて</a>
-  <a href="webtool.html">Webツール</a>
-  <a href="report.html">解析・レポート</a>
-  <a href="dataset.html">データセット提供</a>
-  <a href="portal.html">ファーマベース</a>
-  <a href="pb_ma_kpi.html">基礎知識（MA KPI）</a>
-  <a href="news.html">お知らせ</a>
-  <a href="download.html">資料DL</a>
-  <a href="faq.html">FAQ</a>
-  <a href="contact.html" class="cta">お問い合わせ</a>
-</nav>
-
+        <a href="about.html">DATuM IDEAについて</a>
+        <a href="service.html">提供サービス一覧</a>
+        <a href="portal.html">ファーマベース</a>
+        <a href="news.html">お知らせ</a>
+        <a href="download.html">資料ダウンロード</a>
+        <a href="faq.html">よくあるご質問</a>
+        <a href="contact.html" class="cta-nav">お問い合わせ</a>
+      </nav>
 
       <div class="mobile-nav">
-        <button id="menuBtn" aria-expanded="false" aria-controls="mnav"
-          style="background:none;border:1px solid rgba(255,255,255,0.04);padding:8px;border-radius:8px;color:var(--muted);font-size:13px">
+        <button id="menuBtn"
+          style="background:#ffffff;border:1px solid var(--border);padding:6px 12px;border-radius:999px;font-size:13px;color:#374151">
           Menu
         </button>
       </div>
     </header>
 
     <main>
-      <!-- ページヒーロー -->
       <section class="page-hero">
-        <div class="pill">
-          <span class="pill-dot"></span>
-          <span>News</span>
-        </div>
         <h1>お知らせ</h1>
-        <p>
-          セミナー情報やサービスアップデート、資料公開などの情報を掲載する想定のページです。
-          本サイトではダミーの情報を掲載しています。
+        <p class="section-lead">
+          リリース情報やイベント登壇、資料更新などのお知らせを掲載することを想定したダミーページです。
         </p>
       </section>
 
-      <!-- お知らせ一覧 -->
       <section>
         <div class="card">
-          <h2 class="section-title">最新のお知らせ</h2>
-          <p class="section-lead">
-            年ごとにお知らせを整理したシンプルな一覧レイアウトです。
-            実際にはそれぞれの詳細ページへリンクさせる構成も想定できます。
-          </p>
-
-          <!-- 2025 -->
-          <div class="news-year">2025年</div>
+          <h2 class="section-title">最新情報（サンプル）</h2>
           <div class="news-list">
-            <article class="news-item">
-              <div class="news-meta">
-                <span>2025.10.01</span>
-                <span class="news-tag">セミナー</span>
+            <div class="news-item">
+              <div class="news-date">2025-04-01</div>
+              <div>
+                <span class="news-label">News</span>
+                <span class="news-title">ファーマベース UI 改修のお知らせ（ダミー）</span>
               </div>
-              <div class="news-title">DATuM IDEA ウェビナー「電子カルテデータを活用したRWE創出（仮）」開催のお知らせ</div>
-              <div class="news-body">
-                オンラインにて、電子カルテデータを用いたリアルワールドエビデンス創出のポイントをご紹介する
-                製薬企業様向けウェビナーを開催予定です。（内容ダミー）
+            </div>
+            <div class="news-item">
+              <div class="news-date">2025-03-15</div>
+              <div>
+                <span class="news-label">Event</span>
+                <span class="news-title">◯◯学会にてDATuM IDEAの取り組みを紹介（ダミー）</span>
               </div>
-              <div class="news-link">
-                <a href="#">詳細・お申し込みはこちら（ダミー）</a>
+            </div>
+            <div class="news-item">
+              <div class="news-date">2025-02-10</div>
+              <div>
+                <span class="news-label">Update</span>
+                <span class="news-title">解析レポートテンプレートをアップデートしました（ダミー）</span>
               </div>
-            </article>
-
-            <article class="news-item">
-              <div class="news-meta">
-                <span>2025.08.20</span>
-                <span class="news-tag">アップデート</span>
-              </div>
-              <div class="news-title">Webツールにアウトカム分析の新グラフ機能を追加（ダミー）</div>
-              <div class="news-body">
-                治療レジメン別の検査値推移を比較できるグラフ機能を追加しました。
-                詳細は、Webツールの画面イメージ資料をご確認ください。（ダミー）
-              </div>
-              <div class="news-link">
-                <a href="webtool.html">Webツールのページへ</a>
-              </div>
-            </article>
-          </div>
-
-          <!-- 2024 -->
-          <div class="news-year" style="margin-top:24px;">2024年</div>
-          <div class="news-list">
-            <article class="news-item">
-              <div class="news-meta">
-                <span>2024.12.05</span>
-                <span class="news-tag">お知らせ</span>
-              </div>
-              <div class="news-title">「アカデミア・医療機関向け提供サービス」のページを公開（ダミー）</div>
-              <div class="news-body">
-                研究者・医療機関向けのサービス構成や利用イメージをまとめた紹介ページを公開しました。（ダミー）
-              </div>
-              <div class="news-link">
-                <a href="medical.html">アカデミア向けサービスを見る</a>
-              </div>
-            </article>
-
-            <article class="news-item">
-              <div class="news-meta">
-                <span>2024.09.10</span>
-                <span class="news-tag">プレス</span>
-              </div>
-              <div class="news-title">DATuM IDEA データベースの対象施設拡大について（ダミー）</div>
-              <div class="news-body">
-                新たに複数の医療機関が参加し、データベースのカバレッジが拡大しました。
-                詳細は「データベースについて」のページをご参照ください。（ダミー）
-              </div>
-              <div class="news-link">
-                <a href="database.html">データベースについて</a>
-              </div>
-            </article>
+            </div>
           </div>
         </div>
       </section>
@@ -285,27 +225,21 @@
       <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap">
         <div class="muted">© DATuM IDEA — Sample Template</div>
         <div class="links">
-          <a class="muted" href="#">匿名加工医療情報の取扱い（ダミー）</a>
-          <a class="muted" href="#">個人情報の取扱い（ダミー）</a>
-          <a class="muted" href="#">Cookieポリシー（ダミー）</a>
+          <a href="#" class="muted">匿名加工医療情報の取扱い（ダミー）</a>
+          <a href="#" class="muted">個人情報の取扱い（ダミー）</a>
         </div>
       </div>
     </footer>
   </div>
 
   <script>
-    // Mobile menu simple toggle
     const menuBtn = document.getElementById('menuBtn');
     if(menuBtn){
-      menuBtn.addEventListener('click',()=>{
-        const expanded = menuBtn.getAttribute('aria-expanded') === 'true';
-        menuBtn.setAttribute('aria-expanded', String(!expanded));
-
+      menuBtn.addEventListener('click', () => {
         const items = [
-          {label:'Home', href:'index.html'},
           {label:'About', href:'about.html'},
           {label:'Service', href:'service.html'},
-          {label:'Pharma Base', href:'portal.html'},
+          {label:'Portal', href:'portal.html'},
           {label:'News', href:'news.html'},
           {label:'Download', href:'download.html'},
           {label:'FAQ', href:'faq.html'},
@@ -321,4 +255,3 @@
   </script>
 </body>
 </html>
-
