@@ -1,0 +1,386 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>基礎知識｜メディカルアフェアーズにおけるKPIの現状 | DATuM IDEA サンプル</title>
+  <meta name="description" content="メディカルアフェアーズ（MA）領域におけるKPIの現状と、活動量ベースKPIの課題について解説する疑似コンテンツです。">
+  <link rel="icon" href="/assets/favicon.png">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#0f1724;
+      --card:#0b1220;
+      --muted:#9aa4b2;
+      --accent:#26a69a;
+      --glass: rgba(255,255,255,0.04);
+      --maxw:1100px;
+      color-scheme: dark;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:'Noto Sans JP', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      background: linear-gradient(180deg, #071022 0%, #071625 60%);
+      color:#e6eef6;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:1.5;
+    }
+
+    .wrap{max-width:var(--maxw);margin:0 auto;padding:24px}
+    header{display:flex;align-items:center;justify-content:space-between;padding:12px 0}
+    .brand{display:flex;gap:12px;align-items:center}
+    .logo{
+      width:44px;height:44px;
+      background:linear-gradient(135deg,var(--accent),#2dd4bf);
+      border-radius:8px;
+      display:flex;align-items:center;justify-content:center;
+      font-weight:700;color:#052025;
+    }
+    nav{display:flex;gap:20px;align-items:center;font-size:14px}
+    nav a{color:var(--muted);text-decoration:none;font-weight:500}
+    nav a:hover{color:#e5e7eb}
+    .cta{
+      background:var(--accent);
+      color:#022;
+      padding:8px 12px;
+      border-radius:10px;
+      text-decoration:none;
+      font-weight:700;
+    }
+    .mobile-nav{display:none}
+
+    main{display:grid;grid-template-columns:3fr 1.1fr;gap:26px}
+    section{padding:24px 0}
+    .page-hero{padding:26px 0 6px}
+    .pill{
+      display:inline-flex;align-items:center;gap:8px;
+      border-radius:999px;
+      padding:4px 12px;
+      background:rgba(148,163,184,0.12);
+      font-size:12px;color:var(--muted);
+    }
+    .pill-dot{width:8px;height:8px;border-radius:999px;background:var(--accent)}
+    .page-hero h1{margin:10px 0 8px;font-size:clamp(22px,3vw,30px)}
+    .page-hero p{color:var(--muted);max-width:60ch;font-size:14px}
+
+    .breadcrumbs{
+      font-size:11px;
+      color:var(--muted);
+      margin-bottom:6px;
+    }
+    .breadcrumbs a{color:var(--muted);text-decoration:none}
+    .breadcrumbs a:hover{text-decoration:underline}
+
+    .card{
+      background:linear-gradient(180deg, rgba(255,255,255,0.02), var(--glass));
+      padding:22px;
+      border-radius:12px;
+      box-shadow:0 6px 20px rgba(2,6,23,0.6);
+    }
+    .muted{color:var(--muted)}
+    .section-title{font-size:20px;margin-bottom:6px}
+    .section-lead{color:var(--muted);max-width:60ch}
+
+    .meta-row{
+      display:flex;
+      flex-wrap:wrap;
+      gap:12px;
+      font-size:12px;
+      color:var(--muted);
+      margin-top:10px;
+    }
+    .meta-tag{
+      padding:2px 8px;
+      border-radius:999px;
+      border:1px solid rgba(148,163,184,0.6);
+      font-size:11px;
+    }
+
+    article h2{
+      font-size:18px;
+      margin:24px 0 8px;
+    }
+    article p{
+      font-size:14px;
+      margin:6px 0;
+      color:#e5e7eb;
+    }
+    article ul{
+      font-size:14px;
+      color:var(--muted);
+      padding-left:20px;
+    }
+    article li{margin-bottom:4px}
+
+    .side-section-title{
+      font-size:14px;
+      margin-bottom:8px;
+      font-weight:600;
+    }
+    .side-list{
+      list-style:none;
+      padding:0;
+      margin:0;
+      font-size:13px;
+    }
+    .side-list li{
+      padding:8px 0;
+      border-bottom:1px solid rgba(148,163,184,0.25);
+    }
+    .side-list a{
+      color:#e5e7eb;
+      text-decoration:none;
+    }
+    .side-list small{
+      display:block;
+      font-size:11px;
+      color:var(--muted);
+      margin-top:2px;
+    }
+
+    footer{margin-top:32px;padding:28px 0;border-top:1px solid rgba(255,255,255,0.03);color:var(--muted)}
+    .links{display:flex;gap:12px;flex-wrap:wrap}
+
+    @media (max-width:900px){
+      nav{display:none}
+      .mobile-nav{display:flex}
+      main{grid-template-columns:1fr}
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <!-- 共通ヘッダー -->
+    <header>
+      <div class="brand">
+        <div class="logo">DI</div>
+        <div>
+          <div style="font-weight:700">DATuM IDEA — Sample</div>
+          <div class="muted" style="font-size:13px">疑似サイトテンプレート</div>
+        </div>
+      </div>
+
+      <nav>
+        <a href="index.html">Home</a>
+        <a href="about.html">DATuM IDEAについて</a>
+        <a href="service.html">提供サービス一覧</a>
+        <a href="portal.html">ファーマベース</a>
+        <a href="news.html">お知らせ</a>
+        <a href="download.html">資料DL</a>
+        <a href="faq.html">よくあるご質問</a>
+        <a href="contact.html" class="cta">お問い合わせ</a>
+      </nav>
+
+      <div class="mobile-nav">
+        <button id="menuBtn" aria-expanded="false" aria-controls="mnav"
+          style="background:none;border:1px solid rgba(255,255,255,0.04);padding:8px;border-radius:8px;color:var(--muted);font-size:13px">
+          Menu
+        </button>
+      </div>
+    </header>
+
+    <main>
+      <!-- 記事本体 -->
+      <div>
+        <section class="page-hero">
+          <div class="breadcrumbs">
+            <a href="portal.html">ファーマベース</a> ｜ <a href="portal.html#basic">基礎知識</a> ｜ メディカルアフェアーズにおけるKPIの現状
+          </div>
+          <div class="pill">
+            <span class="pill-dot"></span>
+            <span>基礎知識</span>
+          </div>
+          <h1>メディカルアフェアーズにおけるKPIの現状</h1>
+          <p>
+            本ページは、メディカルアフェアーズ（MA）におけるKPI（重要業績評価指標）の考え方と、
+            活動量ベースの指標が持つ課題を整理した疑似コンテンツです。
+          </p>
+          <div class="meta-row">
+            <span>カテゴリ：メディカルアフェアーズ</span>
+            <span>想定読了時間：約5分</span>
+            <span class="meta-tag">#KPI設定</span>
+            <span class="meta-tag">#メディカルアフェアーズ</span>
+          </div>
+        </section>
+
+        <section>
+          <article class="card">
+            <!-- KPIとは -->
+            <h2>1. KPIとは何か</h2>
+            <p>
+              KPI（Key Performance Indicator）は、組織や部門の目標に対して、
+              どの程度達成に近づいているかを継続的に確認するための“ものさし”です。
+            </p>
+            <p>
+              重要なのは、「KPIを達成すること」が目的ではなく、
+              <strong>組織の目的を達成するために役立つ指標かどうか</strong>という点です。
+              定期的にモニタリングすることで、ギャップがあれば活動内容を修正できることが求められます。
+            </p>
+
+            <!-- MAにおけるKPIの難しさ -->
+            <h2>2. MAにおけるKPI設定が難しい理由</h2>
+            <p>
+              メディカルアフェアーズは、営業部門から独立した中立的な立場で医学・科学的活動を行うことが求められます。
+              このため「売上」や「処方拡大」といった、営業活動に直結する指標をKPIとして用いることは適切ではありません。
+            </p>
+            <p>
+              その結果、多くの組織では、
+              <strong>「活動量」ベースの指標（訪問回数や発表件数など）</strong>をKPIとして設定しているのが現状とされています。
+            </p>
+
+            <!-- 活動量KPIの例 -->
+            <h2>3. 活動量を評価するKPIの例</h2>
+            <p>
+              MAの代表的な活動として、キーオピニオンリーダー（KOL）との面談、エビデンス創出、
+              医学・科学的情報の発信などが挙げられます。これらの活動量を測るKPIの例として、次のようなものがよく用いられます。
+            </p>
+            <ul>
+              <li>KOL訪問回数・面談件数</li>
+              <li>面談を通じて得られたインサイト（洞察）の件数</li>
+              <li>論文投稿数・学会発表数・学会共催企画の実施件数</li>
+              <li>アドバイザリーボードやラウンドテーブルの開催回数</li>
+              <li>作成・改訂したメディカルマテリアルの件数　など</li>
+            </ul>
+            <p>
+              これらは活動のボリュームを把握するうえでは有用ですが、
+              MA組織の価値をどこまで反映できているかは慎重に考える必要があります。
+            </p>
+
+            <!-- 活動量KPIの問題点 -->
+            <h2>4. 活動量KPIの問題点</h2>
+            <p>
+              KPIの定義に立ち返ると、活動量のみをKPIとすることにはいくつかの課題があります。
+              最も大きな点は、<strong>「活動量が増えても、必ずしもMA本来の目的達成につながっているとは限らない」</strong>ことです。
+            </p>
+            <p>
+              たとえば、KOL訪問回数や発表件数などは、あくまで「手段」です。
+              UMN（アンメット・メディカル・ニーズ）の把握やエビデンス創出、
+              ステークホルダーとの適切なコミュニケーションなどの<strong>目的</strong>とは区別して考える必要があります。
+            </p>
+            <p>
+              活動量を重視しすぎると、次のようなリスクも想定されます。
+            </p>
+            <ul>
+              <li>件数達成が目的化し、質的なアウトカムが置き去りになる</li>
+              <li>現場のインサイトを丁寧に深掘りするよりも、「数を稼ぎやすい活動」が優先される</li>
+              <li>長期的なメディカルプランとの整合性が見えにくくなる</li>
+            </ul>
+
+            <!-- これからのKPI設計の方向性（イメージ） -->
+            <h2>5. 今後求められるKPIの方向性（イメージ）</h2>
+            <p>
+              では、MAにおけるKPIはどのように設計していくのがよいのでしょうか。
+              一つの方向性として、<strong>活動量指標と「質・アウトカム」を示す指標を組み合わせる</strong>考え方が挙げられます。
+            </p>
+            <p>
+              例えば、次のような観点が考えられます（あくまで疑似例です）。
+            </p>
+            <ul>
+              <li>
+                アンメット・メディカル・ニーズの特定につながったインサイトの件数や、
+                重要度評価（メディカルプランへの反映状況 など）
+              </li>
+              <li>
+                エビデンス創出計画の立案・完遂状況（計画した研究が期限内に完了したか 等）
+              </li>
+              <li>
+                作成したメディカルマテリアルの活用状況（社内外での利用度合い、フィードバック など）
+              </li>
+            </ul>
+            <p>
+              こうした指標は定量化が難しい一方で、
+              MAの目的である「医学・科学的観点からの価値提供」にどれだけ貢献できたかを、
+              より直接的にとらえる助けになると考えられます。
+            </p>
+
+            <h2>6. まとめ</h2>
+            <p>
+              MAにおけるKPIは、「売上」のような分かりやすい指標をそのまま使えないがゆえに、
+              活動量に偏りがちです。しかし、KPI本来の役割を踏まえると、
+              <strong>目的から逆算して指標を設計すること</strong>が不可欠です。
+            </p>
+            <p>
+              本ページの内容はあくまで疑似コンテンツですが、
+              自社のメディカルプランやUMNの特定プロセスを振り返りつつ、
+              KPIの在り方を議論する際のきっかけとしてご活用いただくイメージです。
+            </p>
+          </article>
+        </section>
+      </div>
+
+      <!-- サイドバー -->
+      <aside>
+        <section class="card">
+          <div class="side-section-title">カテゴリー</div>
+          <ul class="side-list">
+            <li><a href="portal.html#basic">基礎知識</a></li>
+            <li><a href="portal.html#umn">アンメットメディカルニーズ</a></li>
+            <li><a href="portal.html#plan">メディカルプラン作成</a></li>
+            <li><a href="portal.html#evidence">エビデンス創出</a></li>
+            <li><a href="portal.html#communication">医学・科学的情報の発信・提供</a></li>
+          </ul>
+        </section>
+
+        <section class="card" style="margin-top:18px">
+          <div class="side-section-title">おすすめ記事（ダミー）</div>
+          <ul class="side-list">
+            <li>
+              <a href="#">メディカルアフェアーズ機能への期待と役割（ダミー）</a>
+              <small>#メディカルアフェアーズの活動</small>
+            </li>
+            <li>
+              <a href="#">メディカルプランの手法①－UMNの特定（ダミー）</a>
+              <small>#メディカルプラン #UMN</small>
+            </li>
+            <li>
+              <a href="#">個人情報保護法と次世代医療基盤法（ダミー）</a>
+              <small>#個人情報保護法 #次世代医療基盤法</small>
+            </li>
+          </ul>
+        </section>
+      </aside>
+    </main>
+
+    <footer>
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap">
+        <div class="muted">© DATuM IDEA — Sample Template</div>
+        <div class="links">
+          <a class="muted" href="#">匿名加工医療情報の取扱い（ダミー）</a>
+          <a class="muted" href="#">個人情報の取扱い（ダミー）</a>
+          <a class="muted" href="#">Cookieポリシー（ダミー）</a>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    // Mobile menu simple toggle
+    const menuBtn = document.getElementById('menuBtn');
+    if(menuBtn){
+      menuBtn.addEventListener('click',()=>{
+        const expanded = menuBtn.getAttribute('aria-expanded') === 'true';
+        menuBtn.setAttribute('aria-expanded', String(!expanded));
+
+        const items = [
+          {label:'Home', href:'index.html'},
+          {label:'About', href:'about.html'},
+          {label:'Service', href:'service.html'},
+          {label:'Pharma Base', href:'portal.html'},
+          {label:'News', href:'news.html'},
+          {label:'Download', href:'download.html'},
+          {label:'FAQ', href:'faq.html'},
+          {label:'Contact', href:'contact.html'},
+        ];
+        const choice = prompt('Navigate to: ' + items.map(i=>i.label).join(' / '));
+        if(!choice) return;
+        const key = choice.toLowerCase();
+        const hit = items.find(i => key.includes(i.label.toLowerCase()));
+        if(hit) location.href = hit.href;
+      });
+    }
+  </script>
+</body>
+</html>
