@@ -4,253 +4,141 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>データセット提供 | DATuM IDEA サンプル</title>
-  <meta name="description" content="DATuM IDEAの疑似サイト：匿名加工医療情報のデータセット提供に関する概要ページ。">
+  <meta name="description" content="DATuM IDEA風の疑似サイト — データセット提供サービスのイメージページ（ライトテーマ）。">
   <link rel="icon" href="/assets/favicon.png">
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;700&display=swap" rel="stylesheet">
-
   <style>
-    :root{
-      --bg:#e0f2fe;
-      --card:#ffffff;
-      --muted:#6b7280;
-      --accent:#0ea5e9;
-      --accent-dark:#0284c7;
-      --border:#e5e7eb;
-      --maxw:1100px;
-    }
-    *{box-sizing:border-box}
-    html,body{height:100%}
-    body{
-      margin:0;
-      font-family:'Noto Sans JP', system-ui;
-      background: linear-gradient(180deg,#e0f2fe 0%,#eff6ff 45%,#f9fafb 100%);
-      color:#111827;
-      -webkit-font-smoothing:antialiased;
-      line-height:1.6;
-    }
-    .wrap{max-width:var(--maxw);margin:0 auto;padding:24px}
+    :root{--bg:#e0f2fe;--bg-soft:#eff6ff;--card:#ffffff;--muted:#6b7280;--accent:#0ea5e9;--accent-dark:#0284c7;--border:#e5e7eb;--shadow:0 10px 30px rgba(148,163,184,0.35);--maxw:1100px;}
+    *{box-sizing:border-box;}
+    html,body{height:100%;}
+    body{margin:0;font-family:'Noto Sans JP',system-ui,-apple-system,"Segoe UI",sans-serif;background:linear-gradient(180deg,var(--bg) 0%,var(--bg-soft) 55%,#f9fafb 100%);color:#111827;-webkit-font-smoothing:antialiased;line-height:1.6;}
+    .wrap{max-width:var(--maxw);margin:0 auto;padding:24px;}
+    header{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:12px 0;}
+    .brand-link{text-decoration:none;color:inherit;}
+    .brand{display:flex;align-items:center;gap:12px;}
+    .logo{width:44px;height:44px;border-radius:12px;background:linear-gradient(135deg,#0ea5e9,#38bdf8);display:flex;align-items:center;justify-content:center;color:#f9fafb;font-weight:700;box-shadow:0 10px 25px rgba(59,130,246,0.5);flex-shrink:0;}
+    .brand-title{font-weight:700;font-size:15px;}
+    .brand-sub{font-size:12px;color:var(--muted);}
+    nav{display:flex;flex-wrap:wrap;gap:14px;align-items:center;font-size:13px;justify-content:flex-end;}
+    nav a{text-decoration:none;color:#1f2937;font-weight:500;padding:4px 0;}
+    nav a:hover{color:var(--accent-dark);}
+    nav a.cta-nav{padding:6px 14px;border-radius:999px;background:var(--accent);color:#f9fafb;box-shadow:0 6px 16px rgba(59,130,246,0.5);font-size:13px;}
+    nav a.cta-nav:hover{background:var(--accent-dark);}
+    .mobile-nav{display:none;}
 
-    header{
-      display:flex;align-items:center;justify-content:space-between;
-      padding:12px 0;
-    }
-    .brand{display:flex;gap:12px;align-items:center}
-    .logo{
-      width:44px;height:44px;
-      background:linear-gradient(135deg,#0ea5e9,#38bdf8);
-      border-radius:12px;
-      display:flex;align-items:center;justify-content:center;
-      box-shadow:0 8px 20px rgba(14,165,233,0.25);
-      font-weight:700;color:white;
-    }
+    section{padding:24px 0;}
+    .page-hero{padding:40px 0 16px;}
+    .section-title{font-size:18px;margin-bottom:6px;color:#0f172a;}
+    .section-lead{font-size:14px;color:var(--muted);max-width:70ch;}
+    .card{background:var(--card);border-radius:16px;padding:18px 20px;box-shadow:var(--shadow);border:1px solid rgba(148,163,184,0.35);}
+    .muted{color:var(--muted);font-size:13px;}
+    .grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;}
 
-    nav{display:flex;gap:18px;font-size:14px}
-    nav a{text-decoration:none;color:#1f2937}
-    nav a:hover{color:var(--accent)}
-    .cta{
-      background:var(--accent);color:white;text-decoration:none;
-      padding:8px 16px;border-radius:999px;font-weight:700;
-      box-shadow:0 8px 18px rgba(14,165,233,0.35);
-    }
-    .cta:hover{background:var(--accent-dark)}
-    .mobile-nav{display:none}
+    footer{padding:24px 0 8px;border-top:1px solid var(--border);margin-top:16px;font-size:12px;color:var(--muted);}
+    footer .links a{font-size:12px;color:var(--muted);text-decoration:none;}
+    footer .links a:hover{text-decoration:underline;}
 
-    section{padding:32px 0}
-    .page-hero{padding:40px 0 16px}
-    .pill{
-      display:inline-flex;align-items:center;gap:6px;
-      padding:4px 12px;border-radius:999px;
-      background:rgba(14,165,233,0.15);
-      color:#0369a1;font-size:12px;
-    }
-    .pill-dot{
-      width:8px;height:8px;border-radius:50%;
-      background:var(--accent);
-    }
-    h1{font-size:clamp(28px,4vw,36px);margin:10px 0 8px;color:#0f172a}
-    p{color:var(--muted);max-width:70ch}
-
-    .card{
-      background:white;
-      border-radius:16px;
-      border:1px solid var(--border);
-      padding:22px;
-      box-shadow:0 10px 28px rgba(15,23,42,0.08);
-    }
-
-    .grid{
-      display:grid;
-      grid-template-columns:repeat(2,1fr);
-      gap:20px;
-    }
-    @media(max-width:900px){
-      nav{display:none}
-      .mobile-nav{display:flex}
-      .grid{grid-template-columns:1fr}
-    }
-
-    h2{color:#0f172a;margin-bottom:8px}
-    h3{color:#0f172a;margin-bottom:6px}
-    ul{padding-left:18px;color:var(--muted)}
-
-    footer{
-      padding:28px 0;margin-top:20px;
-      border-top:1px solid #e5e7eb;color:var(--muted);
-    }
-    .links{display:flex;gap:12px;flex-wrap:wrap}
+    @media (max-width:960px){.grid{grid-template-columns:1fr;}}
+    @media (max-width:720px){nav{display:none;}.mobile-nav{display:flex;}header{align-items:flex-start;}}
   </style>
 </head>
 <body>
   <div class="wrap">
-
-    <!-- HEADER -->
     <header>
-      <div class="brand">
-        <div class="logo">DI</div>
-        <div>
-          <div style="font-weight:700">DATuM IDEA — Sample</div>
-          <div style="font-size:13px;color:var(--muted)">疑似サイトテンプレート</div>
+      <a href="index.html" class="brand-link">
+        <div class="brand">
+          <div class="logo">DI</div>
+          <div>
+            <div class="brand-title">DATuM IDEA — Sample</div>
+            <div class="brand-sub">医療データ活用サービスの疑似サイト</div>
+          </div>
         </div>
-      </div>
+      </a>
 
-      <!-- 共通ナビ（あなたの GitHub 版に合わせて修正済み） -->
       <nav>
-        <a href="index.html">Home</a>
         <a href="about.html">DATuM IDEAについて</a>
         <a href="service.html">提供サービス一覧</a>
-        <a href="medicalservice.html">製薬企業向けサービス</a>
-        <a href="academia.html">アカデミア・医療機関向けサービス</a>
-        <a href="database.html">データベースについて</a>
-        <a href="medicaldata.html">医療データについて</a>
-        <a href="webtool.html">Webツール</a>
-        <a href="report.html">解析・レポート</a>
-        <a href="dataset.html">データセット提供</a>
         <a href="portal.html">ファーマベース</a>
-        <a href="pb_ma_kpi.html">基礎知識（MA KPI）</a>
         <a href="news.html">お知らせ</a>
-        <a href="download.html">資料DL</a>
-        <a href="faq.html">FAQ</a>
-        <a href="contact.html" class="cta">お問い合わせ</a>
+        <a href="download.html">資料ダウンロード</a>
+        <a href="faq.html">よくあるご質問</a>
+        <a href="contact.html" class="cta-nav">お問い合わせ</a>
       </nav>
+
+      <div class="mobile-nav">
+        <button id="menuBtn"
+          style="background:#ffffff;border:1px solid var(--border);padding:6px 12px;border-radius:999px;font-size:13px;color:#374151">
+          Menu
+        </button>
+      </div>
     </header>
 
-    <!-- HERO -->
-    <section class="page-hero">
-      <div class="pill"><span class="pill-dot"></span> Dataset</div>
-      <h1>データセット提供</h1>
-      <p>
-        DATuM IDEAで取り扱う匿名加工医療情報を、分析用途に応じたデータセットとしてご提供するイメージです。
-        電子カルテデータと医科レセプトデータを組み合わせた豊富なデータを柔軟に活用できます。
-      </p>
-    </section>
-
-    <!-- WHAT IS DATASET -->
-    <section>
-      <div class="card">
-        <h2>データセット提供とは</h2>
-        <p>
-          認定事業者により匿名加工された医療情報を、特定疾患・特定領域などのテーマに沿って抽出し、
-          研究・分析・モデリング用途に利用できるよう整備したものです。
+    <main>
+      <section class="page-hero">
+        <h1 class="section-title">データセット提供</h1>
+        <p class="section-lead">
+          解析用に加工済みのデータセットを提供することを想定したサービス紹介ページです。
         </p>
-        <ul style="margin-top:10px">
-          <li>電子カルテデータ（診療記録・検査値・診断・処置など）を含む</li>
-          <li>医科レセプトデータ（請求情報・薬剤・点数など）との統合</li>
-          <li>長期縦断データとしての利用も想定</li>
-          <li>疾患毎・治療毎などカスタマイズ抽出が可能（イメージ）</li>
-        </ul>
-      </div>
-    </section>
+      </section>
 
-    <!-- DATASET TYPES -->
-    <section>
-      <h2>データセットの主な構成例</h2>
-      <div class="grid" style="margin-top:18px">
-        <div class="card">
-          <h3>患者属性</h3>
-          <p class="muted">性別・年齢・居住地域など、分析の基本となる情報。</p>
+      <section>
+        <div class="grid">
+          <div class="card">
+            <h2 class="section-title">ベースラインデータセット</h2>
+            <p class="muted">
+              指定疾患における患者背景や治療概要を把握するための、
+              比較的軽量なデータセットをイメージしています。
+            </p>
+          </div>
+          <div class="card">
+            <h2 class="section-title">アウトカムフォーカスデータセット</h2>
+            <p class="muted">
+              イベント情報やフォローアップ情報を詳細に含む、
+              アウトカム解析向けデータセットを想定しています。
+            </p>
+          </div>
+          <div class="card">
+            <h2 class="section-title">カスタムデータセット</h2>
+            <p class="muted">
+              研究目的や解析手法に応じて変数定義・集計単位を調整した、
+              個別設計のデータセットをイメージしたメニューです。
+            </p>
+          </div>
         </div>
-        <div class="card">
-          <h3>診断情報</h3>
-          <p class="muted">主病名・併存疾患・転帰など、疾病推移を追跡するための情報。</p>
-        </div>
-        <div class="card">
-          <h3>検査値</h3>
-          <p class="muted">血液検査・生化学・腫瘍マーカーなど構造化された検査結果。</p>
-        </div>
-        <div class="card">
-          <h3>処置・手術・治療情報</h3>
-          <p class="muted">治療内容の推移や転帰を分析する上で重要な項目です。</p>
-        </div>
-        <div class="card">
-          <h3>薬剤情報（レセプト）</h3>
-          <p class="muted">用量・用法・日数など、薬剤使用の状況が把握できます。</p>
-        </div>
-        <div class="card">
-          <h3>請求情報（レセプト）</h3>
-          <p class="muted">保険情報や請求点数など、利用状況の全体像を把握可能。</p>
-        </div>
-      </div>
-    </section>
+      </section>
+    </main>
 
-    <!-- USECASE -->
-    <section>
-      <div class="card">
-        <h2>活用ユースケース（例）</h2>
-        <ul>
-          <li>リアルワールドデータを用いた疫学研究</li>
-          <li>患者数推計・治療実態の把握</li>
-          <li>検査値を含む多変量解析によるアウトカム予測</li>
-          <li>薬剤・診療パスの傾向分析</li>
-          <li>医療機関別の傾向比較（匿名加工前提）</li>
-        </ul>
-      </div>
-    </section>
-
-    <!-- SECURITY -->
-    <section>
-      <div class="card">
-        <h2>データ品質・セキュリティ</h2>
-        <p>
-          データはすべて匿名加工済みであり、個人が識別される情報は含まれません。
-          また、分析結果の取り扱いにもルールを適用し、プライバシー保護と品質確保を両立しています。
-        </p>
-        <ul style="margin-top:10px">
-          <li>匿名加工医療情報のみを利用</li>
-          <li>外部提供時の集計基準を適用（セル抑制など）</li>
-          <li>データ品質の継続的チェック</li>
-        </ul>
-      </div>
-    </section>
-
-    <!-- RELATED LINKS -->
-    <section>
-      <h2>関連ページ</h2>
-      <div class="grid" style="margin-top:16px">
-        <div class="card">
-          <h3>医療データについて</h3>
-          <p class="muted">データソースや匿名加工の概要はこちら。</p>
-          <a href="medicaldata.html" class="cta" style="margin-top:8px;display:inline-block">医療データについて</a>
-        </div>
-        <div class="card">
-          <h3>解析・レポート</h3>
-          <p class="muted">データを活用した解析サービスの概要。</p>
-          <a href="report.html" class="cta" style="margin-top:8px;display:inline-block">解析・レポートへ</a>
-        </div>
-      </div>
-    </section>
-
-    <!-- FOOTER -->
     <footer>
-      <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap">
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap">
         <div class="muted">© DATuM IDEA — Sample Template</div>
         <div class="links">
-          <a class="muted" href="#">匿名加工医療情報の取扱い（ダミー）</a>
-          <a class="muted" href="#">個人情報の取扱い（ダミー）</a>
-          <a class="muted" href="#">Cookieポリシー（ダミー）</a>
+          <a href="#" class="muted">匿名加工医療情報の取扱い（ダミー）</a>
+          <a href="#" class="muted">個人情報の取扱い（ダミー）</a>
         </div>
       </div>
     </footer>
-
   </div>
+
+  <script>
+    const menuBtn = document.getElementById('menuBtn');
+    if(menuBtn){
+      menuBtn.addEventListener('click', () => {
+        const items = [
+          {label:'About',href:'about.html'},
+          {label:'Service',href:'service.html'},
+          {label:'Portal',href:'portal.html'},
+          {label:'News',href:'news.html'},
+          {label:'Download',href:'download.html'},
+          {label:'FAQ',href:'faq.html'},
+          {label:'Contact',href:'contact.html'},
+        ];
+        const choice = prompt('Navigate to: '+items.map(i=>i.label).join(' / '));
+        if(!choice) return;
+        const key = choice.toLowerCase();
+        const hit = items.find(i=>key.includes(i.label.toLowerCase()));
+        if(hit) location.href = hit.href;
+      });
+    }
+  </script>
 </body>
 </html>
